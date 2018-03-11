@@ -1,15 +1,18 @@
 package ManejadorDeLaApp;
 
 import CodigoEstructuras.ListaSimple;
+import java.util.Random;
 
 public class Pelicula {
     
     private String nombre, idioma, genero;
+    private Sala sala;
     private int fun;
-    private ListaSimple funciones;
+    private ListaSimple funciones = new ListaSimple();
     
-    public Pelicula(String nombre, String idioma, String genero, int fun){
+    public Pelicula(String nombre, String idioma, String genero, int fun, Sala sala){
         
+        this.sala = sala;
         this.nombre = nombre;
         this.idioma = idioma;
         this.genero = genero;

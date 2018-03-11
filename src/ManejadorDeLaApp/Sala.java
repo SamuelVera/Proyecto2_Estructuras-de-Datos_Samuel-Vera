@@ -1,20 +1,22 @@
 package ManejadorDeLaApp;
 
-import CodigoEstructuras.Cola;
-import CodigoEstructuras.ListaSimple;
+import CodigoEstructuras.*;
 
 public abstract class Sala {
     
+    protected Sucursal sucursal;
     protected int numero;
     protected Cola peliculas;
     protected ListaSimple ticketsVendidosDia;
     protected double venta = 0;
 
-    public Sala(int numero, Cola peliculas) {
+    public Sala(int numero, Sucursal sucursal) {
         this.numero = numero;
-        this.peliculas = peliculas;
+        this.sucursal = sucursal;
+        MenuInicio.estructura.agregar(this, this.sucursal.getCodigo(), this.numero);
     }
     
+    public abstract int getNumero();
     public abstract void agregarTicketVendido();
     public abstract void ventas();
     public abstract void agregarPelicula(Pelicula pelicula);

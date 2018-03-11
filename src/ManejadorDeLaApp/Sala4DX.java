@@ -4,8 +4,8 @@ import CodigoEstructuras.Cola;
 
 public class Sala4DX extends Sala{
 
-    public Sala4DX(int numero, Cola peliculas) {
-        super(numero, peliculas);
+    public Sala4DX(int numero, Sucursal sucursal) {
+        super(numero, sucursal);
     }
 
     @Override
@@ -26,5 +26,10 @@ public class Sala4DX extends Sala{
     @Override
     public void agregarTicketVendido() {
         this.ticketsVendidosDia.insertPrimero(1);
+    }
+    
+    @Override
+    public int getNumero() {
+        return this.numero;
     }
 }
