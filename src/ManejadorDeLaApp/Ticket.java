@@ -14,12 +14,14 @@ public class Ticket {
     private boolean pagado = false;
 
     public Ticket(int id, double precio2D, double precio3D, double precio4D, Sucursal sucursal, Sala sala, Pelicula pelicula, Cliente cliente, Date fecha) {
+        
         this.id = id;
         this.sucursal = sucursal;
         this.sala = sala;
         this.pelicula = pelicula;
         this.cliente = cliente;
         this.fecha = fecha;
+        
     }
 
     public static void setPrecio2D(double precio2D) {

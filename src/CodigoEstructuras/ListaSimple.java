@@ -80,6 +80,7 @@ public class ListaSimple <T>{
             NodoSimple<T> aux = this.cabeza;
             while(aux != null){
                 cont++;
+                aux = aux.getProximo();
             }
             return cont;
         }

@@ -5,10 +5,11 @@ import java.util.Random;
 
 public class MenuInicio <T> extends javax.swing.JFrame {
 
-    public static Arbol estructura = new Arbol();
-    public static MenuInicio exe;
+    protected static MenuInicio exe;
+    public static ListaSimple sucursales = new ListaSimple();
     
     public MenuInicio() {
+        
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -19,24 +20,26 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         precio2D.setText("Ticket 2D: "+Ticket.getPrecio2D());
         precio3D.setText("Ticket 3D: "+Ticket.getPrecio3D());
         precio4D.setText("Ticket 4DX: "+Ticket.getPrecio4D());
-        MenuInicio.estructura.agregar(this, ABORT, 0);
+        
         int dd = 0, ddd = 0, dx = 0;
-        Sucursal aux = this.incializarSucursal("Carcas", dd, ddd, dx);
-        MenuInicio.estructura.agregar(aux, 0, aux.getCodigo());
+        
+        Sucursal aux = this.incializarSucursal("Caracas", dd, ddd, dx);
+        MenuInicio.sucursales.insertPrimero(aux);
         aux = this.incializarSucursal("Maracaibo", dd, ddd, dx);
-        MenuInicio.estructura.agregar(aux, 0, aux.getCodigo());
+        MenuInicio.sucursales.insertPrimero(aux);
         aux = this.incializarSucursal("Barcelona", dd, ddd, dx);
-        MenuInicio.estructura.agregar(aux, 0, aux.getCodigo());
+        MenuInicio.sucursales.insertPrimero(aux);
+        
     }
 
         //Inicializar Sucursal por defecto
     public Sucursal incializarSucursal(String direccion, int dd, int ddd, int dx){
-        
+    
         Random rand = new Random();
+    
+        int cont = 0;
         
-        int codigo = 0, cont = 0;
-        
-        Sucursal aux = new Sucursal(codigo, direccion);
+        Sucursal aux = new Sucursal(direccion);
         
             //Agregar salas por defecto
         while(cont != 5){
@@ -78,14 +81,17 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         return aux;
     }
     
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buscar = new javax.swing.JButton();
+        verSucursales = new javax.swing.JButton();
         agregarCliente = new javax.swing.JButton();
         salir = new javax.swing.JButton();
+        buscarPelicula = new javax.swing.JButton();
+        buscarCliente = new javax.swing.JButton();
+        agregarSala = new javax.swing.JButton();
+        agregarPelicula = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
         precio2D = new javax.swing.JLabel();
         precio3D = new javax.swing.JLabel();
@@ -97,18 +103,18 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buscar.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        buscar.setText("Buscar");
-        buscar.addActionListener(new java.awt.event.ActionListener() {
+        verSucursales.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        verSucursales.setText("Ver Sucursales");
+        verSucursales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarActionPerformed(evt);
+                verSucursalesActionPerformed(evt);
             }
         });
-        getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 170, 40));
+        getContentPane().add(verSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 180, 40));
 
         agregarCliente.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         agregarCliente.setText("Nuevo Cliente");
-        getContentPane().add(agregarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 170, 40));
+        getContentPane().add(agregarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 180, 40));
 
         salir.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         salir.setText("Salir");
@@ -119,27 +125,47 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         });
         getContentPane().add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, -1, 20));
 
+        buscarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        buscarPelicula.setText("Buscar Película");
+        getContentPane().add(buscarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 180, 40));
+
+        buscarCliente.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        buscarCliente.setText("Buscar Cliente");
+        getContentPane().add(buscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 180, 40));
+
+        agregarSala.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        agregarSala.setText("Agregar Sala");
+        getContentPane().add(agregarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 180, 40));
+
+        agregarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        agregarPelicula.setText("Agregar Película");
+        getContentPane().add(agregarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 180, 40));
+
         logo.setText("Logo feo que deberias cambiar luego");
         getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
         precio2D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(precio2D, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 170, 30));
+        getContentPane().add(precio2D, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 170, 30));
 
         precio3D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(precio3D, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, 30));
+        getContentPane().add(precio3D, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 170, 30));
 
         precio4D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(precio4D, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 170, 30));
+        getContentPane().add(precio4D, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 170, 30));
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarActionPerformed
+    private void verSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSucursalesActionPerformed
+        
+        VerSucursalInfo aux = new VerSucursalInfo();
+        
+    }//GEN-LAST:event_verSucursalesActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        
+        System.exit(0);
         
     }//GEN-LAST:event_salirActionPerformed
 
@@ -155,22 +181,33 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-        exe = new MenuInicio();
+        
+        MenuInicio.exe = new MenuInicio();
         
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
-    private javax.swing.JButton buscar;
+    private javax.swing.JButton agregarPelicula;
+    private javax.swing.JButton agregarSala;
+    private javax.swing.JButton buscarCliente;
+    private javax.swing.JButton buscarPelicula;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel precio2D;
     private javax.swing.JLabel precio3D;
     private javax.swing.JLabel precio4D;
     private javax.swing.JButton salir;
+    private javax.swing.JButton verSucursales;
     // End of variables declaration//GEN-END:variables
 }

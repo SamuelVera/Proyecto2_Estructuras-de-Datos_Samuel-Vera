@@ -5,7 +5,6 @@ public class NodoArbol <T>{
     private T dato;
     private int acceso;
     private NodoArbol<T> padre;
-    private ListaSimple<NodoArbol> hijos;
     
     public NodoArbol(T dato, int acceso){
         this.dato = dato;
@@ -16,9 +15,9 @@ public class NodoArbol <T>{
         return this.padre == null;
     }
     
-    public boolean isHoja(){
+    /*public boolean isHoja(){
         return this.hijos.isVacio();
-    }
+    }*/
     
     public T getDato() {
         return dato;
@@ -36,9 +35,9 @@ public class NodoArbol <T>{
         this.padre = padre;
     }
 
-    public void setHijo(T dato, int acceso) {
+    /*public void setHijo(T dato, int acceso) {
         this.hijos.insertPrimero(new NodoArbol(dato,acceso));
-    }
+    }*/
 
     public int getAcceso() {
         return acceso;

@@ -11,9 +11,10 @@ public abstract class Sala {
     protected double venta = 0;
 
     public Sala(int numero, Sucursal sucursal) {
+        
         this.numero = numero;
         this.sucursal = sucursal;
-        MenuInicio.estructura.agregar(this, this.sucursal.getCodigo(), this.numero);
+        
     }
     
     public abstract int getNumero();

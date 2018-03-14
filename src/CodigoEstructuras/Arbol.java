@@ -16,15 +16,9 @@ public class Arbol <T>{
         
     }
     
-    public void agregar(T dato, int accesoPadre, int acceso){
+    public void agregar(){
         
-        if(this.isVacio()){
-            this.raiz = new NodoArbol(dato,acceso);
-        }else{
-            
-            
-            
-        }
+        
         
     }
     
