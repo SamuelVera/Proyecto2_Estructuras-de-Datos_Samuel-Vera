@@ -64,16 +64,34 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         
         NodoSimple<T> temp = aux.getSalas().getCabeza();
         
+        int i;
         while(temp != null){
-            
-            if(temp.getDato() instanceof Sala2D){
-                ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala2D)temp.getDato())));
-            }else if(temp.getDato() instanceof Sala3D){
-                ((Sala3D)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala3D)temp.getDato())));
-            }else if(temp.getDato() instanceof Sala4DX){
-                ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Accion",((Sala4DX)temp.getDato())));
+            i = rand.nextInt(3);
+            if(i == 0){
+                if(temp.getDato() instanceof Sala2D){
+                    ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala2D)temp.getDato())));
+                }else if(temp.getDato() instanceof Sala3D){
+                    ((Sala3D)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala3D)temp.getDato())));
+                }else if(temp.getDato() instanceof Sala4DX){
+                    ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala4DX)temp.getDato())));
+                }
+            }else if(i == 1){
+                if(temp.getDato() instanceof Sala2D){
+                    ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala2D)temp.getDato())));
+                }else if(temp.getDato() instanceof Sala3D){
+                    ((Sala3D)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala3D)temp.getDato())));
+                }else if(temp.getDato() instanceof Sala4DX){
+                    ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala4DX)temp.getDato())));
+                }
+            }else{
+                if(temp.getDato() instanceof Sala2D){
+                    ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Guerra",((Sala2D)temp.getDato())));
+                }else if(temp.getDato() instanceof Sala3D){
+                    ((Sala3D)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Guerra",((Sala3D)temp.getDato())));
+                }else if(temp.getDato() instanceof Sala4DX){
+                    ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Guerra",((Sala4DX)temp.getDato())));
+                }
             }
-            
             temp = temp.getProximo();
             
         }
@@ -87,7 +105,6 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
         verSucursales = new javax.swing.JButton();
         agregarCliente = new javax.swing.JButton();
-        salir = new javax.swing.JButton();
         buscarPelicula = new javax.swing.JButton();
         buscarCliente = new javax.swing.JButton();
         agregarSala = new javax.swing.JButton();
@@ -99,7 +116,6 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -114,16 +130,12 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
         agregarCliente.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         agregarCliente.setText("Nuevo Cliente");
-        getContentPane().add(agregarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 180, 40));
-
-        salir.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
-        salir.setText("Salir");
-        salir.addActionListener(new java.awt.event.ActionListener() {
+        agregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirActionPerformed(evt);
+                agregarClienteActionPerformed(evt);
             }
         });
-        getContentPane().add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, -1, 20));
+        getContentPane().add(agregarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 180, 40));
 
         buscarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         buscarPelicula.setText("Buscar Película");
@@ -168,17 +180,13 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         
     }//GEN-LAST:event_verSucursalesActionPerformed
 
-    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        
-        System.exit(0);
-        
-    }//GEN-LAST:event_salirActionPerformed
-
     private void buscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPeliculaActionPerformed
-        
         BuscarPelicula aux = new BuscarPelicula();
-        
     }//GEN-LAST:event_buscarPeliculaActionPerformed
+
+    private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
+        AgregarCliente aux = new AgregarCliente();
+    }//GEN-LAST:event_agregarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,7 +226,6 @@ public class MenuInicio <T> extends javax.swing.JFrame {
     private javax.swing.JLabel precio2D;
     private javax.swing.JLabel precio3D;
     private javax.swing.JLabel precio4D;
-    private javax.swing.JButton salir;
     private javax.swing.JButton verSucursales;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,12 +6,14 @@ import CodigoEstructuras.NodoSimple;
 public class Cliente {
     
     private int ci, telefono;
+    private String nombre;
     private ListaSimple tickets;
     private boolean solvente;
     
-    public Cliente(int ci, int telefono){   //Constructor con datos del cliente
+    public Cliente(int ci, int telefono, String nombre){   //Constructor con datos del cliente
         this.ci = ci;
         this.telefono = telefono;
+        this.nombre = nombre;
     }
     
         //Agregar n tickets al carrito

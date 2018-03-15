@@ -5,17 +5,55 @@ import javax.swing.*;
 
 public class BuscarPelicula extends javax.swing.JFrame {
 
+    
+    private String[] peliculas; 
+            
     public BuscarPelicula() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.setTitle("Buscar Película");
         MenuInicio.exe.setVisible(false);
         this.generos.setVisible(false);
         this.idiomas.setVisible(false);
         this.texto3.setVisible(false);
         this.texto4.setVisible(false);
+        this.mostrarPredeterminados();
     }
+    
+    public void mostrarPredeterminados(){
+        Arbol arbol = new Arbol();
+        NodoSimple aux = MenuInicio.sucursales.getCabeza();
+        NodoSimple aux2;
+        while(aux!=null){
+            aux2 = ((Sucursal)aux.getDato()).getSalas().getCabeza();
+            while(aux2!=null){
+                if(aux2.getDato() instanceof Sala2D){
+                    arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala2D)aux2.getDato()).getPelicula().getNombre()));
+                }else if(aux2.getDato() instanceof Sala3D){
+                    arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala3D)aux2.getDato()).getPelicula().getNombre()));
+                }else{
+                    arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala4DX)aux2.getDato()).getPelicula().getNombre()));
+                }
+                aux2 = aux2.getProximo();
+            }
+            aux = aux.getProximo();
+        }
+        
+        this.peliculas = new String[arbol.contar(arbol.getRaiz())];
+        recorrer(this.peliculas,arbol.getRaiz(),0);
+        DefaultListModel<String> aux3 = new DefaultListModel<>();
+        aux3.removeAllElements();
+        
+        for(int j=0;j<this.peliculas.length;j++){
+            aux3.addElement(this.peliculas[j]);
+        }
+        
+        this.ordenados.setModel(aux3);
+    }
+    
     public Arbol primerFiltro(boolean auxiliar){
+        
         Arbol arbol = new Arbol();
         NodoSimple aux = MenuInicio.sucursales.getCabeza();
         NodoSimple aux2;
@@ -47,8 +85,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
     }
     
     public void segundoFiltro(String comparativa, boolean auxiliar){
-         
-        String[] peliculas;
+        
         Arbol temp = new Arbol();
         NodoSimple aux = MenuInicio.sucursales.getCabeza();
         NodoSimple aux2;
@@ -89,8 +126,8 @@ public class BuscarPelicula extends javax.swing.JFrame {
             }
             aux = aux.getProximo();
         }
-        peliculas = new String[temp.contar(temp.getRaiz())];
-        recorrer(peliculas,temp.getRaiz(),0);
+        this.peliculas = new String[temp.contar(temp.getRaiz())];
+        recorrer(this.peliculas,temp.getRaiz(),0);
         DefaultListModel<String> aux3 = new DefaultListModel<>();
         aux3.removeAllElements();
         
@@ -117,8 +154,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        filtro = new javax.swing.ButtonGroup();
-        ordenar = new javax.swing.ButtonGroup();
+        filtroYFiltro = new javax.swing.ButtonGroup();
         texto1 = new javax.swing.JLabel();
         texto2 = new javax.swing.JLabel();
         texto4 = new javax.swing.JLabel();
@@ -135,7 +171,6 @@ public class BuscarPelicula extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -155,7 +190,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         texto3.setText("Géneros:");
         getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 70, 20));
 
-        filtro.add(filtrarGenero);
+        filtroYFiltro.add(filtrarGenero);
         filtrarGenero.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         filtrarGenero.setText("Género");
         filtrarGenero.addActionListener(new java.awt.event.ActionListener() {
@@ -165,7 +200,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         });
         getContentPane().add(filtrarGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
-        filtro.add(filtrarIdioma);
+        filtroYFiltro.add(filtrarIdioma);
         filtrarIdioma.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         filtrarIdioma.setText("Idioma");
         filtrarIdioma.addActionListener(new java.awt.event.ActionListener() {
@@ -197,12 +232,17 @@ public class BuscarPelicula extends javax.swing.JFrame {
         });
         getContentPane().add(generos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 230, -1));
 
-        ordenar.add(odenarAlfabetico);
+        filtroYFiltro.add(odenarAlfabetico);
         odenarAlfabetico.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         odenarAlfabetico.setText("Alfabeticamente");
+        odenarAlfabetico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                odenarAlfabeticoActionPerformed(evt);
+            }
+        });
         getContentPane().add(odenarAlfabetico, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
 
-        ordenar.add(odenarInverso);
+        filtroYFiltro.add(odenarInverso);
         odenarInverso.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         odenarInverso.setText("Inversamente");
         odenarInverso.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +266,27 @@ public class BuscarPelicula extends javax.swing.JFrame {
 
     private void odenarInversoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odenarInversoActionPerformed
         
+        String aux;
+        for(int i=0;i<this.peliculas.length;i++){
+            int c = i;
+            for(int j=c;j<this.peliculas.length;j++){
+                int comp = this.peliculas[i].compareTo(this.peliculas[j]);
+                if(comp < 0){
+                    aux = this.peliculas[i];
+                    this.peliculas[i] = this.peliculas[j];
+                    this.peliculas[j] = aux;
+                }
+            }
+        }
+        
+        DefaultListModel<String> aux3 = new DefaultListModel<>();
+        aux3.removeAllElements();
+        
+        for(int j=0;j<peliculas.length;j++){
+            aux3.addElement(peliculas[j]);
+        }
+        
+        this.ordenados.setModel(aux3);
     }//GEN-LAST:event_odenarInversoActionPerformed
 
     private void filtrarIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrarIdiomaActionPerformed
@@ -269,20 +330,44 @@ public class BuscarPelicula extends javax.swing.JFrame {
     }//GEN-LAST:event_generosActionPerformed
 
     private void idiomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idiomasActionPerformed
-        
         this.segundoFiltro(this.idiomas.getSelectedItem().toString(),true);
-        
     }//GEN-LAST:event_idiomasActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         this.dispose();
         MenuInicio.exe.setVisible(true);
     }//GEN-LAST:event_volverActionPerformed
+
+    private void odenarAlfabeticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odenarAlfabeticoActionPerformed
+        
+        String aux;
+        for(int i=0;i<this.peliculas.length;i++){
+            int c = i;
+            for(int j=c;j<this.peliculas.length;j++){
+                int comp = this.peliculas[i].compareTo(this.peliculas[j]);
+                if(comp > 0){
+                    aux = this.peliculas[i];
+                    this.peliculas[i] = this.peliculas[j];
+                    this.peliculas[j] = aux;
+                }
+            }
+        }
+        
+        DefaultListModel<String> aux3 = new DefaultListModel<>();
+        aux3.removeAllElements();
+        
+        for(int j=0;j<peliculas.length;j++){
+            aux3.addElement(peliculas[j]);
+        }
+        
+        this.ordenados.setModel(aux3);
+        
+    }//GEN-LAST:event_odenarAlfabeticoActionPerformed
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton filtrarGenero;
     private javax.swing.JRadioButton filtrarIdioma;
-    private javax.swing.ButtonGroup filtro;
+    private javax.swing.ButtonGroup filtroYFiltro;
     private javax.swing.JLabel fondo;
     private javax.swing.JComboBox<String> generos;
     private javax.swing.JComboBox<String> idiomas;
@@ -290,7 +375,6 @@ public class BuscarPelicula extends javax.swing.JFrame {
     private javax.swing.JRadioButton odenarAlfabetico;
     private javax.swing.JRadioButton odenarInverso;
     private javax.swing.JList<String> ordenados;
-    private javax.swing.ButtonGroup ordenar;
     private javax.swing.JLabel texto1;
     private javax.swing.JLabel texto2;
     private javax.swing.JLabel texto3;

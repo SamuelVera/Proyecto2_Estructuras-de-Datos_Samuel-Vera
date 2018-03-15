@@ -14,6 +14,7 @@ public class VerSucursalInfo<T> extends javax.swing.JFrame {
         MenuInicio.exe.setVisible(false);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setTitle("Información de Sucursales");
         
         sucur = new String[MenuInicio.sucursales.contarElementos()];
         NodoSimple n = MenuInicio.sucursales.getCabeza();
