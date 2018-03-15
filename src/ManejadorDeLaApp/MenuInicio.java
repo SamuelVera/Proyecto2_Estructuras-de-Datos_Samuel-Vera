@@ -9,7 +9,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
     public static ListaSimple sucursales = new ListaSimple();
     
     public MenuInicio() {
-        
+
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -62,21 +62,21 @@ public class MenuInicio <T> extends javax.swing.JFrame {
             
         }
         
-        /*NodoSimple<T> temp = aux.getSalas().getCabeza();
+        NodoSimple<T> temp = aux.getSalas().getCabeza();
         
         while(temp != null){
             
             if(temp.getDato() instanceof Sala2D){
-                ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("","","",5,((Sala2D)temp.getDato())));
+                ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala2D)temp.getDato())));
             }else if(temp.getDato() instanceof Sala3D){
-                ((Sala3D)temp.getDato()).agregarPelicula(new Pelicula("","","",5,((Sala3D)temp.getDato())));
+                ((Sala3D)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala3D)temp.getDato())));
             }else if(temp.getDato() instanceof Sala4DX){
-                ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("","","",5,((Sala4DX)temp.getDato())));
+                ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Accion",((Sala4DX)temp.getDato())));
             }
             
             temp = temp.getProximo();
             
-        }*/
+        }
         
         return aux;
     }
@@ -127,6 +127,11 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
         buscarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         buscarPelicula.setText("Buscar Película");
+        buscarPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarPeliculaActionPerformed(evt);
+            }
+        });
         getContentPane().add(buscarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 180, 40));
 
         buscarCliente.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
@@ -168,6 +173,12 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         System.exit(0);
         
     }//GEN-LAST:event_salirActionPerformed
+
+    private void buscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPeliculaActionPerformed
+        
+        BuscarPelicula aux = new BuscarPelicula();
+        
+    }//GEN-LAST:event_buscarPeliculaActionPerformed
 
     /**
      * @param args the command line arguments

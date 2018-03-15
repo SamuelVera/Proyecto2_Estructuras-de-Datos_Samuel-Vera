@@ -6,7 +6,7 @@ public abstract class Sala {
     
     protected Sucursal sucursal;
     protected int numero;
-    protected Cola peliculas;
+    protected Cola peliculas = new Cola();
     protected ListaSimple ticketsVendidosDia;
     protected double venta = 0;
 
@@ -17,6 +17,7 @@ public abstract class Sala {
         
     }
     
+    public abstract Pelicula getPelicula();
     public abstract int getNumero();
     public abstract void agregarTicketVendido();
     public abstract void ventas();

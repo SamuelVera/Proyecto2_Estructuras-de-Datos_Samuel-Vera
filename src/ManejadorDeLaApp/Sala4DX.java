@@ -32,4 +32,9 @@ public class Sala4DX extends Sala{
     public int getNumero() {
         return this.numero;
     }
+    
+    @Override
+    public Pelicula getPelicula() {
+        return (Pelicula)this.peliculas.getPrimeroEnCola();
+    } 
 }

@@ -3,45 +3,45 @@ package CodigoEstructuras;
 public class NodoArbol <T>{
     
     private T dato;
-    private int acceso;
-    private NodoArbol<T> padre;
+    private NodoArbol<T> padre, HijoI, HijoD;
     
-    public NodoArbol(T dato, int acceso){
+    public NodoArbol(T dato){
         this.dato = dato;
-        this.acceso = acceso;
     }
 
     public boolean isRaiz(){
         return this.padre == null;
     }
     
-    /*public boolean isHoja(){
-        return this.hijos.isVacio();
-    }*/
+    public boolean isHoja(){
+        return this.HijoI == null && this.HijoD == null;
+    }
     
     public T getDato() {
-        return dato;
-    }
-
-    public void setDato(T dato) {
-        this.dato = dato;
+        return this.dato;
     }
 
     public NodoArbol<T> getPadre() {
-        return padre;
+        return this.padre;
+    }
+    
+    public NodoArbol<T> getHijoI() {
+        return this.HijoI;
+    }
+    
+    public NodoArbol<T> getHijoD() {
+        return this.HijoD;
     }
 
     public void setPadre(NodoArbol<T> padre) {
         this.padre = padre;
-    }
-
-    /*public void setHijo(T dato, int acceso) {
-        this.hijos.insertPrimero(new NodoArbol(dato,acceso));
-    }*/
-
-    public int getAcceso() {
-        return acceso;
+    }    
+    
+    public void setHijoI(NodoArbol<T> n) {
+        this.HijoI = n;
     }
     
-    
+    public void setHijoD(NodoArbol<T> n) {
+        this.HijoD = n;
+    }
 }
