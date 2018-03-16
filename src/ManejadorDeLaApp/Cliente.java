@@ -83,6 +83,9 @@ public class Cliente {
             }
             pos++;
         }
-        
+    }
+    
+    public int getCi(){
+        return this.ci;
     }
 }

@@ -1,5 +1,8 @@
 package ManejadorDeLaApp;
 
+import CodigoEstructuras.*;
+import javax.swing.JOptionPane;
+
 public class AgregarCliente extends javax.swing.JFrame {
 
     public AgregarCliente() {
@@ -7,11 +10,10 @@ public class AgregarCliente extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
-        MenuInicio.exe.setVisible(false);
         this.setTitle("Agregar Cliente");
         
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,12 +38,27 @@ public class AgregarCliente extends javax.swing.JFrame {
                 cedulaActionPerformed(evt);
             }
         });
+        cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cedulaKeyTyped(evt);
+            }
+        });
         getContentPane().add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 260, -1));
 
         nombre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
         getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 260, -1));
 
         telefono.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                telefonoKeyTyped(evt);
+            }
+        });
         getContentPane().add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 260, -1));
 
         jButton1.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
@@ -51,10 +68,15 @@ public class AgregarCliente extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 70, 20));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 70, 20));
 
         agregar.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         agregar.setText("Agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
         getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 130, 30));
 
         texto1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
@@ -74,13 +96,67 @@ public class AgregarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedulaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_cedulaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MenuInicio.exe.setVisible(true);
+        ManejarClientes aux = new ManejarClientes();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        
+        if(this.cedula.getText().trim().length() == 0 || this.telefono.getText().trim().length() == 0 || this.nombre.getText().trim().length() == 0){
+            JOptionPane.showMessageDialog(rootPane, "ERROR!!! COMPLETAR LOS CAMPOS ANTES DE PROCEDER");
+        }else{
+            int temp = Integer.parseInt(this.cedula.getText());
+            if(!MenuInicio.clientes.estaNodo(MenuInicio.clientes.getRaiz(),temp) && temp>0){
+                int ci = temp, tlf = Integer.parseInt(this.telefono.getText());
+                Cliente aux = new Cliente(ci,tlf,this.nombre.getText());
+                MenuInicio.clientes.agregar(MenuInicio.clientes.getRaiz(),new NodoArbol(aux,aux.getCi()));
+                ManejarClientes aux3 = new ManejarClientes();
+                this.dispose();
+            }else if(temp < 0){
+                JOptionPane.showMessageDialog(rootPane, "ERROR!!! LA CÉDULA ES MENOR QUE CERO (0)");
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "ERROR!!! ESA CÉDULA DE CLIENTE YA ESTA ASIGNADA");
+            }
+        }
+        
+    }//GEN-LAST:event_agregarActionPerformed
+
+    private void cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedulaKeyTyped
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar) || Character.isSpaceChar(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "ERROR!!! INGRESAR SOLO NÚMEROS");
+        }
+    }//GEN-LAST:event_cedulaKeyTyped
+
+    private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar) || Character.isSpace(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "ERROR!!! INGRESAR SOLO NÚMEROS");
+        }
+    }//GEN-LAST:event_telefonoKeyTyped
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        char validar = evt.getKeyChar();
+        
+        if(Character.isDigit(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "ERROR!!! INGRESAR SOLO LETRAS");
+        }
+    }//GEN-LAST:event_nombreKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;

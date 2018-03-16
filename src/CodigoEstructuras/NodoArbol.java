@@ -4,11 +4,27 @@ public class NodoArbol <T>{
     
     private T dato;
     private NodoArbol<T> padre, HijoI, HijoD;
+    private int codigo;
+    private String codigo2;
     
-    public NodoArbol(T dato){
+    public NodoArbol(T dato, int codigo){
         this.dato = dato;
+        this.codigo = codigo;
     }
-
+    
+    public NodoArbol(T dato, String codigo2){
+        this.dato = dato;
+        this.codigo2 = codigo2;
+    }
+    
+    public int getCodigo(){
+        return this.codigo;
+    }
+    
+    public String getCodigo2(){
+        return this.codigo2;
+    }
+    
     public boolean isRaiz(){
         return this.padre == null;
     }

@@ -5,10 +5,11 @@ import java.util.Random;
 
 public class MenuInicio <T> extends javax.swing.JFrame {
 
-    protected static MenuInicio exe;
-    public static ListaSimple sucursales = new ListaSimple();
+    public static Arbol sucursales = new Arbol();
+    public static Arbol clientes = new Arbol();
+    public static MenuInicio exe;
     
-    public MenuInicio() {
+    public MenuInicio(boolean pasa) {
 
         initComponents();
         this.setVisible(true);
@@ -24,11 +25,29 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         int dd = 0, ddd = 0, dx = 0;
         
         Sucursal aux = this.incializarSucursal("Caracas", dd, ddd, dx);
-        MenuInicio.sucursales.insertPrimero(aux);
+        NodoArbol aux2 = new NodoArbol(aux, aux.getCodigo());
+        MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), aux2);
         aux = this.incializarSucursal("Maracaibo", dd, ddd, dx);
-        MenuInicio.sucursales.insertPrimero(aux);
+        aux2 = new NodoArbol(aux, aux.getCodigo());
+        MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), aux2);
         aux = this.incializarSucursal("Barcelona", dd, ddd, dx);
-        MenuInicio.sucursales.insertPrimero(aux);
+        aux2 = new NodoArbol(aux, aux.getCodigo());
+        MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), aux2);
+        
+    }
+    
+    public MenuInicio(){
+        
+        initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setTitle("MetroCine");
+        Ticket.setPrecio2D(100);
+        Ticket.setPrecio3D(200);
+        Ticket.setPrecio4D(400);
+        precio2D.setText("Ticket 2D: "+Ticket.getPrecio2D());
+        precio3D.setText("Ticket 3D: "+Ticket.getPrecio3D());
+        precio4D.setText("Ticket 4DX: "+Ticket.getPrecio4D());
         
     }
 
@@ -36,10 +55,23 @@ public class MenuInicio <T> extends javax.swing.JFrame {
     public Sucursal incializarSucursal(String direccion, int dd, int ddd, int dx){
     
         Random rand = new Random();
-    
-        int cont = 0;
+        int cont = 0, codigo = 0, multi = 1000;
+        boolean tempo = false;
+        do{
+            codigo = codigo + multi*(rand.nextInt(9)+1);
+            multi = multi/10;
+            if(multi == 1){
+                if(!MenuInicio.sucursales.estaNodo(MenuInicio.sucursales.getRaiz(), codigo)){
+                    tempo = true;
+                }else{
+                    multi = 1000;
+                    codigo = 0;
+                }
+            }
+        }while(tempo == false);
+        System.out.println(codigo);
         
-        Sucursal aux = new Sucursal(direccion);
+        Sucursal aux = new Sucursal(direccion, codigo);
         
             //Agregar salas por defecto
         while(cont != 5){
@@ -59,15 +91,16 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 aux.agregarSala(new Sala4DX(cont,aux));
                 dx++;
             }
-            
+           
         }
         
         NodoSimple<T> temp = aux.getSalas().getCabeza();
         
         int i;
+        int i1 = 1, i2 = 2, i3 = 2;
         while(temp != null){
             i = rand.nextInt(3);
-            if(i == 0){
+            if(i == 0 && i1 != 0){
                 if(temp.getDato() instanceof Sala2D){
                     ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala2D)temp.getDato())));
                 }else if(temp.getDato() instanceof Sala3D){
@@ -75,7 +108,9 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 }else if(temp.getDato() instanceof Sala4DX){
                     ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala4DX)temp.getDato())));
                 }
-            }else if(i == 1){
+                i1--;
+                temp = temp.getProximo();
+            }else if(i == 1 && i2 != 0){
                 if(temp.getDato() instanceof Sala2D){
                     ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala2D)temp.getDato())));
                 }else if(temp.getDato() instanceof Sala3D){
@@ -83,7 +118,9 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 }else if(temp.getDato() instanceof Sala4DX){
                     ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala4DX)temp.getDato())));
                 }
-            }else{
+                i2--;
+                temp = temp.getProximo();
+            }else if(i==2 && i3!=0){
                 if(temp.getDato() instanceof Sala2D){
                     ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Guerra",((Sala2D)temp.getDato())));
                 }else if(temp.getDato() instanceof Sala3D){
@@ -91,11 +128,11 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 }else if(temp.getDato() instanceof Sala4DX){
                     ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Guerra",((Sala4DX)temp.getDato())));
                 }
+                i3--;
+                temp = temp.getProximo();
             }
-            temp = temp.getProximo();
             
         }
-        
         return aux;
     }
     
@@ -104,9 +141,8 @@ public class MenuInicio <T> extends javax.swing.JFrame {
     private void initComponents() {
 
         verSucursales = new javax.swing.JButton();
-        agregarCliente = new javax.swing.JButton();
+        manejarClientes = new javax.swing.JButton();
         buscarPelicula = new javax.swing.JButton();
-        buscarCliente = new javax.swing.JButton();
         agregarSala = new javax.swing.JButton();
         agregarPelicula = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
@@ -128,14 +164,14 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         });
         getContentPane().add(verSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 180, 40));
 
-        agregarCliente.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        agregarCliente.setText("Nuevo Cliente");
-        agregarCliente.addActionListener(new java.awt.event.ActionListener() {
+        manejarClientes.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        manejarClientes.setText("Manejar Clientes");
+        manejarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarClienteActionPerformed(evt);
+                manejarClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 180, 40));
+        getContentPane().add(manejarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 190, 40));
 
         buscarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         buscarPelicula.setText("Buscar Película");
@@ -145,10 +181,6 @@ public class MenuInicio <T> extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 180, 40));
-
-        buscarCliente.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        buscarCliente.setText("Buscar Cliente");
-        getContentPane().add(buscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 180, 40));
 
         agregarSala.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         agregarSala.setText("Agregar Sala");
@@ -175,18 +207,19 @@ public class MenuInicio <T> extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void verSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSucursalesActionPerformed
-        
-        VerSucursalInfo aux = new VerSucursalInfo();
-        
+        this.setVisible(false);
+        VerSucursalInfo aux = new VerSucursalInfo();        
     }//GEN-LAST:event_verSucursalesActionPerformed
 
     private void buscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPeliculaActionPerformed
+        this.setVisible(false);
         BuscarPelicula aux = new BuscarPelicula();
     }//GEN-LAST:event_buscarPeliculaActionPerformed
 
-    private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
-        AgregarCliente aux = new AgregarCliente();
-    }//GEN-LAST:event_agregarClienteActionPerformed
+    private void manejarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manejarClientesActionPerformed
+        this.setVisible(false);
+        ManejarClientes aux = new ManejarClientes();
+    }//GEN-LAST:event_manejarClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,19 +243,17 @@ public class MenuInicio <T> extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-        MenuInicio.exe = new MenuInicio();
-        
+        new MenuInicio(true);
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton agregarCliente;
     private javax.swing.JButton agregarPelicula;
     private javax.swing.JButton agregarSala;
-    private javax.swing.JButton buscarCliente;
     private javax.swing.JButton buscarPelicula;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel logo;
+    private javax.swing.JButton manejarClientes;
     private javax.swing.JLabel precio2D;
     private javax.swing.JLabel precio3D;
     private javax.swing.JLabel precio4D;

@@ -6,149 +6,116 @@ import javax.swing.*;
 public class BuscarPelicula extends javax.swing.JFrame {
 
     
-    private String[] peliculas; 
-            
-    public BuscarPelicula() {
+    private String[] nombrePeliculas; 
+    private Arbol peliculas = new Arbol(), auxIdiomas = new Arbol(), auxGeneros = new Arbol();
+    
+    public BuscarPelicula(){
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setTitle("Buscar Película");
-        MenuInicio.exe.setVisible(false);
         this.generos.setVisible(false);
         this.idiomas.setVisible(false);
         this.texto3.setVisible(false);
         this.texto4.setVisible(false);
-        this.mostrarPredeterminados();
+        this.insertarPeliculas(MenuInicio.sucursales.getRaiz());
     }
     
-    public void mostrarPredeterminados(){
-        Arbol arbol = new Arbol();
-        NodoSimple aux = MenuInicio.sucursales.getCabeza();
-        NodoSimple aux2;
-        while(aux!=null){
-            aux2 = ((Sucursal)aux.getDato()).getSalas().getCabeza();
-            while(aux2!=null){
-                if(aux2.getDato() instanceof Sala2D){
-                    arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala2D)aux2.getDato()).getPelicula().getNombre()));
-                }else if(aux2.getDato() instanceof Sala3D){
-                    arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala3D)aux2.getDato()).getPelicula().getNombre()));
+    public void insertarPeliculas(NodoArbol aux){
+        if(aux != null){
+            NodoSimple temp = ((Sucursal)aux.getDato()).getSalas().getCabeza();
+            while(temp != null){
+                if(temp.getDato() instanceof Sala2D){
+                    String s = ((Sala2D)temp.getDato()).getPelicula().getNombre();
+                    this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala2D)temp.getDato()).getPelicula(),s));
+                }else if(temp.getDato() instanceof Sala3D){
+                    String s = ((Sala3D)temp.getDato()).getPelicula().getNombre();
+                    this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala3D)temp.getDato()).getPelicula(),s));
                 }else{
-                    arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala4DX)aux2.getDato()).getPelicula().getNombre()));
+                    String s = ((Sala4DX)temp.getDato()).getPelicula().getNombre();
+                    this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala4DX)temp.getDato()).getPelicula(),s));
                 }
-                aux2 = aux2.getProximo();
+                temp = temp.getProximo();
             }
-            aux = aux.getProximo();
+            this.insertarPeliculas(aux.getHijoD());
+            this.insertarPeliculas(aux.getHijoI());
         }
-        
-        this.peliculas = new String[arbol.contar(arbol.getRaiz())];
-        recorrer(this.peliculas,arbol.getRaiz(),0);
-        DefaultListModel<String> aux3 = new DefaultListModel<>();
-        aux3.removeAllElements();
-        
-        for(int j=0;j<this.peliculas.length;j++){
-            aux3.addElement(this.peliculas[j]);
-        }
-        
-        this.ordenados.setModel(aux3);
     }
     
     public Arbol primerFiltro(boolean auxiliar){
         
         Arbol arbol = new Arbol();
-        NodoSimple aux = MenuInicio.sucursales.getCabeza();
-        NodoSimple aux2;
-        while(aux!=null){
-            aux2 = ((Sucursal)aux.getDato()).getSalas().getCabeza();
-            while(aux2!=null){
-                if(auxiliar == false){
-                    if(aux2.getDato() instanceof Sala2D){
-                        arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala2D)aux2.getDato()).getPelicula().getGenero()));
-                    }else if(aux2.getDato() instanceof Sala3D){
-                        arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala3D)aux2.getDato()).getPelicula().getGenero()));
-                    }else{
-                        arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala4DX)aux2.getDato()).getPelicula().getGenero()));
-                    }
-                }else{
-                    if(aux2.getDato() instanceof Sala2D){
-                        arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala2D)aux2.getDato()).getPelicula().getIdioma()));
-                    }else if(aux2.getDato() instanceof Sala3D){
-                        arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala3D)aux2.getDato()).getPelicula().getIdioma()));
-                    }else{
-                        arbol.agregar(arbol.getRaiz(), new NodoArbol(((Sala4DX)aux2.getDato()).getPelicula().getIdioma()));
-                    }
-                }
-                aux2 = aux2.getProximo();
+        String[] aux = new String[this.peliculas.contar(this.peliculas.getRaiz())];
+        this.peliculas.getTodosLosCodigos(this.peliculas.getRaiz(), aux, 0);
+        
+        if(auxiliar == true){
+            for(int i=0;i<aux.length;i++){
+                this.peliculas.getRaiz();
+                Pelicula aux2 = (Pelicula)(this.peliculas.buscarNodo(this.peliculas.getRaiz(), aux[i])).getDato();
+                NodoArbol aux3 = new NodoArbol(aux2,aux2.getIdioma());
+                arbol.agregarString(arbol.getRaiz(), aux3);
             }
-            aux = aux.getProximo();
+        }else{
+            for(int i=0;i<aux.length;i++){
+                this.peliculas.getRaiz();
+                Pelicula aux2 = (Pelicula)(this.peliculas.buscarNodo(this.peliculas.getRaiz(), aux[i])).getDato();
+                NodoArbol aux3 = new NodoArbol(aux2,aux2.getGenero());
+                arbol.agregarString(arbol.getRaiz(), aux3);
+            }
         }
+        
         return arbol;
     }
     
     public void segundoFiltro(String comparativa, boolean auxiliar){
         
-        Arbol temp = new Arbol();
-        NodoSimple aux = MenuInicio.sucursales.getCabeza();
-        NodoSimple aux2;
-        int i = 0;
-        while(aux!=null){
-            aux2 = ((Sucursal)aux.getDato()).getSalas().getCabeza();
-            while(aux2!=null){
-                if(auxiliar == false){
-                    if(aux2.getDato() instanceof Sala2D){
-                        if(comparativa == ((Sala2D)aux2.getDato()).getPelicula().getGenero()){
-                            temp.agregar(temp.getRaiz(), new NodoArbol(((Sala2D)aux2.getDato()).getPelicula().getNombre()));
-                        }
-                    }else if(aux2.getDato() instanceof Sala3D){
-                        if(comparativa == ((Sala3D)aux2.getDato()).getPelicula().getGenero()){
-                            temp.agregar(temp.getRaiz(), new NodoArbol(((Sala3D)aux2.getDato()).getPelicula().getNombre()));
-                        }
-                    }else{
-                        if(comparativa == ((Sala4DX)aux2.getDato()).getPelicula().getGenero()){
-                            temp.agregar(temp.getRaiz(), new NodoArbol(((Sala4DX)aux2.getDato()).getPelicula().getNombre()));
-                        }
-                    }
-                }else{
-                    if(aux2.getDato() instanceof Sala2D){
-                        if(comparativa == ((Sala2D)aux2.getDato()).getPelicula().getIdioma()){
-                            temp.agregar(temp.getRaiz(), new NodoArbol(((Sala2D)aux2.getDato()).getPelicula().getNombre()));
-                        }
-                    }else if(aux2.getDato() instanceof Sala3D){
-                        if(comparativa == ((Sala3D)aux2.getDato()).getPelicula().getIdioma()){
-                            temp.agregar(temp.getRaiz(), new NodoArbol(((Sala3D)aux2.getDato()).getPelicula().getNombre()));
-                        }
-                    }else{
-                        if(comparativa == ((Sala4DX)aux2.getDato()).getPelicula().getIdioma()){
-                            temp.agregar(temp.getRaiz(), new NodoArbol(((Sala4DX)aux2.getDato()).getPelicula().getNombre()));
-                        }
-                    }
-                }
-                aux2 = aux2.getProximo();
-            }
-            aux = aux.getProximo();
+        String[] aux = new String[this.peliculas.contar(this.peliculas.getRaiz())];
+        ListaSimple temp = new ListaSimple();
+        this.peliculas.getTodosLosCodigos(this.peliculas.getRaiz(), aux, 0);
+        
+        for(int i=0;i<aux.length;i++){
+            Pelicula aux2 = ((Pelicula)this.peliculas.buscarNodo(this.peliculas.getRaiz(), aux[i]).getDato());
+            temp.insertPrimero(aux2);
+            aux[i] = null;
         }
-        this.peliculas = new String[temp.contar(temp.getRaiz())];
-        recorrer(this.peliculas,temp.getRaiz(),0);
+        
+        int i=0;
+        NodoSimple aux2 = temp.getCabeza();
+        
+        while(aux2!=null){
+            if(auxiliar == true){
+                if(comparativa == ((Pelicula)aux2.getDato()).getIdioma()){
+                    aux[i] = ((Pelicula)aux2.getDato()).getNombre();
+                    i++;
+                }
+            }else{
+                if(comparativa == ((Pelicula)aux2.getDato()).getGenero()){
+                    aux[i] = ((Pelicula)aux2.getDato()).getNombre();
+                    i++;
+                }
+            }
+            aux2 = aux2.getProximo();
+        }
+        
+        i=0;
         DefaultListModel<String> aux3 = new DefaultListModel<>();
         aux3.removeAllElements();
+        this.ordenados.setModel(aux3);
         
-        for(int j=0;j<peliculas.length;j++){
-            aux3.addElement(peliculas[j]);
+        for(int j=0;j<aux.length;j++){
+            if(aux[j] != null){
+                aux3.addElement(aux[j]);
+                i++;
+            }
+        }
+        this.nombrePeliculas = new String[aux3.getSize()];
+        
+        for(int j=0;j<this.nombrePeliculas.length;j++){
+            this.nombrePeliculas[j] = aux3.get(j);
         }
         
         this.ordenados.setModel(aux3);
     }
-    
-    public void recorrer(String[] aux, NodoArbol n, int i){
-        
-        if(n != null){
-            aux[i] = (String)n.getDato();
-            i++;
-            this.recorrer(aux,n.getHijoD(),i);
-            this.recorrer(aux,n.getHijoI(),i);
-        }
-        
-    }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -215,7 +182,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         ordenados.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(ordenados);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 360, 210));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 360, 210));
 
         idiomas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         idiomas.addActionListener(new java.awt.event.ActionListener() {
@@ -267,14 +234,19 @@ public class BuscarPelicula extends javax.swing.JFrame {
     private void odenarInversoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odenarInversoActionPerformed
         
         String aux;
-        for(int i=0;i<this.peliculas.length;i++){
+        
+        for(int i=0;i<this.nombrePeliculas.length;i++){
+           
+        }
+        
+        for(int i=0;i<this.nombrePeliculas.length;i++){
             int c = i;
-            for(int j=c;j<this.peliculas.length;j++){
-                int comp = this.peliculas[i].compareTo(this.peliculas[j]);
+            for(int j=c;j<this.nombrePeliculas.length;j++){
+                int comp = this.nombrePeliculas[i].compareTo(this.nombrePeliculas[j]);
                 if(comp < 0){
-                    aux = this.peliculas[i];
-                    this.peliculas[i] = this.peliculas[j];
-                    this.peliculas[j] = aux;
+                    aux = this.nombrePeliculas[i];
+                    this.nombrePeliculas[i] = this.nombrePeliculas[j];
+                    this.nombrePeliculas[j] = aux;
                 }
             }
         }
@@ -282,8 +254,8 @@ public class BuscarPelicula extends javax.swing.JFrame {
         DefaultListModel<String> aux3 = new DefaultListModel<>();
         aux3.removeAllElements();
         
-        for(int j=0;j<peliculas.length;j++){
-            aux3.addElement(peliculas[j]);
+        for(int j=0;j<this.nombrePeliculas.length;j++){
+            aux3.addElement(this.nombrePeliculas[j]);
         }
         
         this.ordenados.setModel(aux3);
@@ -297,10 +269,10 @@ public class BuscarPelicula extends javax.swing.JFrame {
         this.idiomas.setVisible(true);
         this.texto4.setVisible(true);
         
-        Arbol filtro = this.primerFiltro(true);
+        this.auxIdiomas = this.primerFiltro(true);
         
-        String[] idiomas2 = new String[filtro.contar(filtro.getRaiz())+1];
-        this.recorrer(idiomas2,filtro.getRaiz(),0);
+        String[] idiomas2 = new String[this.auxIdiomas.contar(this.auxIdiomas.getRaiz())+1];
+        this.auxIdiomas.getTodosLosCodigos(this.auxIdiomas.getRaiz(), idiomas2, 0);
         ComboBoxModel aux3 = new DefaultComboBoxModel(idiomas2);
         this.idiomas.setModel(aux3);
         
@@ -314,19 +286,17 @@ public class BuscarPelicula extends javax.swing.JFrame {
         this.generos.setVisible(true);
         this.texto3.setVisible(true);
         
-        Arbol filtro = this.primerFiltro(false);
+        this.auxGeneros = this.primerFiltro(false);
         
-        String[] generos2 = new String[filtro.contar(filtro.getRaiz())+1];
-        this.recorrer(generos2,filtro.getRaiz(),0);
+        String[] generos2 = new String[this.auxGeneros.contar(this.auxGeneros.getRaiz())+1];
+        this.auxGeneros.getTodosLosCodigos(this.auxGeneros.getRaiz(), generos2, 0);
         ComboBoxModel aux3 = new DefaultComboBoxModel(generos2);
         this.generos.setModel(aux3);
         
     }//GEN-LAST:event_filtrarGeneroActionPerformed
 
     private void generosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generosActionPerformed
-        
         this.segundoFiltro(this.generos.getSelectedItem().toString(),false);
-       
     }//GEN-LAST:event_generosActionPerformed
 
     private void idiomasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idiomasActionPerformed
@@ -335,20 +305,20 @@ public class BuscarPelicula extends javax.swing.JFrame {
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         this.dispose();
-        MenuInicio.exe.setVisible(true);
+        MenuInicio aux = new MenuInicio();
     }//GEN-LAST:event_volverActionPerformed
 
     private void odenarAlfabeticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odenarAlfabeticoActionPerformed
         
         String aux;
-        for(int i=0;i<this.peliculas.length;i++){
+        for(int i=0;i<this.nombrePeliculas.length;i++){
             int c = i;
-            for(int j=c;j<this.peliculas.length;j++){
-                int comp = this.peliculas[i].compareTo(this.peliculas[j]);
+            for(int j=c;j<this.nombrePeliculas.length;j++){
+                int comp = this.nombrePeliculas[i].compareTo(this.nombrePeliculas[j]);
                 if(comp > 0){
-                    aux = this.peliculas[i];
-                    this.peliculas[i] = this.peliculas[j];
-                    this.peliculas[j] = aux;
+                    aux = this.nombrePeliculas[i];
+                    this.nombrePeliculas[i] = this.nombrePeliculas[j];
+                    this.nombrePeliculas[j] = aux;
                 }
             }
         }
@@ -356,8 +326,8 @@ public class BuscarPelicula extends javax.swing.JFrame {
         DefaultListModel<String> aux3 = new DefaultListModel<>();
         aux3.removeAllElements();
         
-        for(int j=0;j<peliculas.length;j++){
-            aux3.addElement(peliculas[j]);
+        for(int j=0;j<this.nombrePeliculas.length;j++){
+            aux3.addElement(this.nombrePeliculas[j]);
         }
         
         this.ordenados.setModel(aux3);
