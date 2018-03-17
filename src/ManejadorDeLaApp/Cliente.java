@@ -8,7 +8,7 @@ public class Cliente {
     private int ci, telefono;
     private String nombre;
     private ListaSimple tickets;
-    private boolean solvente;
+    private boolean solvente = true;
     
     public Cliente(int ci, int telefono, String nombre){   //Constructor con datos del cliente
         this.ci = ci;
@@ -87,5 +87,17 @@ public class Cliente {
     
     public int getCi(){
         return this.ci;
+    }
+    
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    
+    public boolean isSolvente(){
+        return this.solvente;
     }
 }
