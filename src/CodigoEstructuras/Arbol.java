@@ -131,6 +131,14 @@ public class Arbol <T>{
         }
     }
     
+    public void eliminarNodo(NodoArbol n, int codigo){
+        
+    }
+    
+    public void eliminarNodo(NodoArbol n, String codigo){
+        
+    }
+    
     public int contar(NodoArbol n){
         if(n == null){
             return 0;

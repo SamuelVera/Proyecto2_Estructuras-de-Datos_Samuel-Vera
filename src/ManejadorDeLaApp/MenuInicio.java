@@ -143,8 +143,6 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         verSucursales = new javax.swing.JButton();
         manejarClientes = new javax.swing.JButton();
         buscarPelicula = new javax.swing.JButton();
-        agregarSala = new javax.swing.JButton();
-        agregarPelicula = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
         precio2D = new javax.swing.JLabel();
         precio3D = new javax.swing.JLabel();
@@ -156,13 +154,13 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         verSucursales.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        verSucursales.setText("Ver Sucursales");
+        verSucursales.setText("Manejar Sucursales");
         verSucursales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verSucursalesActionPerformed(evt);
             }
         });
-        getContentPane().add(verSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 180, 40));
+        getContentPane().add(verSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 210, 40));
 
         manejarClientes.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         manejarClientes.setText("Manejar Clientes");
@@ -171,7 +169,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 manejarClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(manejarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 190, 40));
+        getContentPane().add(manejarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, 40));
 
         buscarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         buscarPelicula.setText("Buscar Película");
@@ -180,45 +178,37 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 buscarPeliculaActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 180, 40));
-
-        agregarSala.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        agregarSala.setText("Agregar Sala");
-        getContentPane().add(agregarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 180, 40));
-
-        agregarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        agregarPelicula.setText("Agregar Película");
-        getContentPane().add(agregarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 180, 40));
+        getContentPane().add(buscarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 210, 40));
 
         logo.setText("Logo feo que deberias cambiar luego");
         getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
         precio2D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(precio2D, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 170, 30));
+        getContentPane().add(precio2D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 170, 30));
 
         precio3D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(precio3D, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 170, 30));
+        getContentPane().add(precio3D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 170, 30));
 
         precio4D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(precio4D, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 170, 30));
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 330));
+        getContentPane().add(precio4D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 170, 30));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 270));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void verSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSucursalesActionPerformed
-        this.setVisible(false);
-        VerSucursalInfo aux = new VerSucursalInfo();        
+        this.dispose();
+        new ManejoSucursales();
     }//GEN-LAST:event_verSucursalesActionPerformed
 
     private void buscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPeliculaActionPerformed
-        this.setVisible(false);
-        BuscarPelicula aux = new BuscarPelicula();
+        this.dispose();
+        new BuscarPelicula();
     }//GEN-LAST:event_buscarPeliculaActionPerformed
 
     private void manejarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manejarClientesActionPerformed
-        this.setVisible(false);
-        ManejarClientes aux = new ManejarClientes();
+        this.dispose();
+        new ManejarClientes();
     }//GEN-LAST:event_manejarClientesActionPerformed
 
     /**
@@ -248,8 +238,6 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton agregarPelicula;
-    private javax.swing.JButton agregarSala;
     private javax.swing.JButton buscarPelicula;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel logo;

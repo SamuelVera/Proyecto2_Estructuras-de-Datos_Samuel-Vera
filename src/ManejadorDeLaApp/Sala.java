@@ -7,7 +7,7 @@ public abstract class Sala {
     protected Sucursal sucursal;
     protected int numero;
     protected Cola peliculas = new Cola();
-    protected ListaSimple ticketsVendidosDia;
+    protected ListaSimple ticketsVendidosDia = new ListaSimple();
     protected double venta = 0;
 
     public Sala(int numero, Sucursal sucursal) {
