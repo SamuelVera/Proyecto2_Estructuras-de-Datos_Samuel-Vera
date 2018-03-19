@@ -1,6 +1,6 @@
 package ManejadorDeLaApp;
 
-import CodigoEstructuras.Cola;
+import CodigoEstructuras.*;
 
 public class Sala3D extends Sala{
     
@@ -11,12 +11,6 @@ public class Sala3D extends Sala{
     @Override
     public void verPeliculas() {
         System.out.println("Función en 3D");
-        
-    }
-    
-    @Override
-    public void agregarPelicula(Pelicula pelicula){
-        this.peliculas.encolar(pelicula);
     }
 
     @Override
@@ -25,17 +19,7 @@ public class Sala3D extends Sala{
     }
 
     @Override
-    public void agregarTicketVendido() {
-        this.ticketsVendidosDia.insertPrimero(1);
+    public void agregarTicketVendido(Ticket ticket) {
+        this.ticketsVendidosDia.agregar(this.ticketsVendidosDia.getRaiz(),new NodoArbol(ticket,ticket.getId()));
     }
-    
-    @Override
-    public int getNumero() {
-        return this.numero;
-    }
-    
-    @Override
-    public Pelicula getPelicula() {
-        return (Pelicula)this.peliculas.getPrimeroEnCola();
-    } 
 }

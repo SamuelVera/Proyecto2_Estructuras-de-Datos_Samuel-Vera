@@ -67,6 +67,7 @@ public class ListaSimple <T>{
                 }
                 NodoSimple<T> temp = aux.getProximo();
                 aux.setProximo(temp.getProximo());
+                temp.setProximo(null);
                 return temp.getDato();
             }
         }

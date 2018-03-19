@@ -7,7 +7,7 @@ public abstract class Sala {
     protected Sucursal sucursal;
     protected int numero;
     protected Cola peliculas = new Cola();
-    protected ListaSimple ticketsVendidosDia = new ListaSimple();
+    protected Arbol ticketsVendidosDia = new Arbol();
     protected double venta = 0;
 
     public Sala(int numero, Sucursal sucursal) {
@@ -17,10 +17,27 @@ public abstract class Sala {
         
     }
     
-    public abstract Pelicula getPelicula();
-    public abstract int getNumero();
-    public abstract void agregarTicketVendido();
+    public Sucursal getSucursal(){
+        return this.sucursal;
+    }
+    
+    public void agregarPelicula(Pelicula pelicula){
+        this.peliculas.encolar(pelicula);
+    }
+    
+    public void setNumero(int numero){
+        this.numero = numero;
+    }
+    
+    public int getNumero(){
+        return this.numero;
+    }
+    
+    public Pelicula getPelicula(){
+        return (Pelicula)this.peliculas.getPrimeroEnCola();
+    }
+    
+    public abstract void agregarTicketVendido(Ticket ticket);
     public abstract void ventas();
-    public abstract void agregarPelicula(Pelicula pelicula);
     public abstract void verPeliculas();
 }

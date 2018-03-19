@@ -5,8 +5,7 @@ import javax.swing.JOptionPane;
 
 public class Editar extends javax.swing.JFrame {
 
-    private int clave;
-    private int clavePrevia;
+    private int clave, clavePrevia, aux;
     private String clavePrevia2;
     
     public Editar(Sucursal aux) {
@@ -24,20 +23,22 @@ public class Editar extends javax.swing.JFrame {
         this.sala4DX.setVisible(false);
     }
     
-    public Editar(boolean t, Sala sala){
+    public Editar(boolean t, Sala sala, Sucursal aux2){
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.campo2.setVisible(false);
+        this.aux =  aux2.getCodigo();
         if(t == true){
             this.clave = 2;
+            this.clavePrevia = sala.getNumero();
             this.campo1.setText(((Integer)(sala.getNumero())).toString());
             if(sala instanceof Sala2D){
-                
+                this.salas.setSelected(this.sala2D.getModel(), true);
             }else if(sala instanceof Sala3D){
-                
+                this.salas.setSelected(this.sala3D.getModel(), true);
             }else{
-                
+                this.salas.setSelected(this.sala4DX.getModel(), true);
             }
         }else{
             this.clave = 3;
@@ -163,9 +164,9 @@ public class Editar extends javax.swing.JFrame {
         }else{
             if(this.clave == 0){
                 if(this.codigoValido()){
-                    int aux = Integer.parseInt(this.campo1.getText());
-                    if(!MenuInicio.sucursales.estaNodo(MenuInicio.sucursales.getRaiz(), aux)){
-                        Sucursal aux2 = new Sucursal(this.campo2.getText(),aux);
+                    this.aux = Integer.parseInt(this.campo1.getText());
+                    if(!MenuInicio.sucursales.estaNodo(MenuInicio.sucursales.getRaiz(), this.aux)){
+                        Sucursal aux2 = new Sucursal(this.campo2.getText(),this.aux);
                         NodoArbol aux3 = (MenuInicio.sucursales.buscarNodo(MenuInicio.sucursales.getRaiz(), this.clavePrevia));
                         aux2.setSalas(((Sucursal)aux3.getDato()).getSalas());
                         NodoArbol cambio = new NodoArbol(aux2, aux2.getCodigo());
@@ -193,6 +194,73 @@ public class Editar extends javax.swing.JFrame {
                     }
                 }else{
                     JOptionPane.showMessageDialog(rootPane, "ERROR!!! LOS CODIGOS DEBEN SER DE 4 DIGITOS");
+                }
+            }else if(this.clave == 2 || this.clave == 3){
+                if(this.camposVacios() || this.salas.getSelection() == null){
+                    JOptionPane.showMessageDialog(rootPane, "ERROR!!! DEBE LLENAR LOS CAMPOS");
+                }else{
+                    boolean pasa = true;
+                    int aux2 = Integer.parseInt(this.campo1.getText());
+                    Sucursal aux3 = (Sucursal)(MenuInicio.sucursales.buscarNodo(MenuInicio.sucursales.getRaiz(), this.aux)).getDato();
+                    NodoSimple aux4 = aux3.getSalas().getCabeza();
+                    while(aux4 != null){
+                        if(aux2 == ((Sala)aux4.getDato()).getNumero()){
+                            JOptionPane.showMessageDialog(rootPane, "ERROR!!! EL NUMERO DE SALA YA ESTA REGISTRADO");
+                            pasa = false;
+                        }
+                        aux4 = aux4.getProximo();
+                    }
+                    if(pasa==true){
+                        if(this.clave == 2){
+                            Sala remp = null;
+                            aux4 = aux3.getSalas().getCabeza();
+                            int pos = 0;
+                            while(aux4 != null){
+                                if(((Sala)aux4.getDato()).getNumero() == this.clavePrevia){
+                                    break;
+                                }
+                                pos++;
+                                aux4 = aux4.getProximo();
+                            }
+                            
+                            aux3.getSalas().eliminarPosicion(pos);
+                            
+                            if(this.salas.isSelected(this.sala2D.getModel())){
+                                remp = new Sala2D(aux2, aux3);
+                                aux3.agregarSala((Sala2D)remp);
+                            }else if(this.salas.isSelected(this.sala3D.getModel())){
+                                remp = new Sala3D(aux2, aux3);
+                                aux3.agregarSala((Sala3D)remp);
+                            }else{
+                                remp = new Sala4DX(aux2, aux3);
+                                aux3.agregarSala((Sala4DX)remp);
+                            }
+                            
+                            NodoArbol remp2 = new NodoArbol(aux3,aux3.getCodigo());
+                            MenuInicio.sucursales.eliminarNodo(MenuInicio.sucursales.getRaiz(), aux3.getCodigo());
+                            MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), remp2);
+                            
+                        }else if(this.clave == 3){
+                            Sala nueva;
+                            if(this.salas.isSelected(this.sala2D.getModel())){
+                                nueva = new Sala2D(aux2, aux3);
+                                aux3.agregarSala((Sala2D)nueva);
+                            }else if(this.salas.isSelected(this.sala3D.getModel())){
+                                nueva = new Sala3D(aux2, aux3);
+                                aux3.agregarSala((Sala3D)nueva);
+                            }else{
+                                nueva = new Sala4DX(aux2, aux3);
+                                aux3.agregarSala((Sala4DX)nueva);
+                            }
+                            
+                            NodoArbol remp2 = new NodoArbol(aux3,aux3.getCodigo());
+                            MenuInicio.sucursales.eliminarNodo(MenuInicio.sucursales.getRaiz(), aux3.getCodigo());
+                            MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), remp2);
+                        }
+                        
+                        new ManejoSucursales();
+                        this.dispose();
+                    }
                 }
             }
         }

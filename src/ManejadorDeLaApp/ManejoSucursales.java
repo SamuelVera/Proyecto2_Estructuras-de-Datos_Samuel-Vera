@@ -16,7 +16,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Información de Sucursales");
         this.agregarSala.setVisible(false);
-        this.agregarPelicula.setVisible(false);
+        this.verPeliculas.setVisible(false);
         this.editar.setVisible(false);
         this.editarSala.setVisible(false);
         
@@ -50,7 +50,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         agregar = new javax.swing.JButton();
         agregarSala = new javax.swing.JButton();
         editarSala = new javax.swing.JButton();
-        agregarPelicula = new javax.swing.JButton();
+        verPeliculas = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,8 +131,13 @@ public class ManejoSucursales extends javax.swing.JFrame {
         });
         getContentPane().add(editarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, -1, 20));
 
-        agregarPelicula.setText("Añadir Pelicula");
-        getContentPane().add(agregarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, 20));
+        verPeliculas.setText("Ver Películas");
+        verPeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verPeliculasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(verPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, 20));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
@@ -162,9 +167,8 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.salas.setVisible(true);
         this.agregar.setVisible(true);
         this.agregarSala.setVisible(true);
-        this.agregarPelicula.setVisible(true);
+        this.verPeliculas.setVisible(true);
         this.editar.setVisible(true);
-        this.editarSala.setVisible(true);
         
     }//GEN-LAST:event_sucursalesActionPerformed
 
@@ -178,7 +182,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         
         int aux2 = Integer.parseInt(this.salas.getSelectedItem().toString());
         NodoSimple aux3 = this.temp.getSalas().getCabeza();
-        
+        this.editarSala.setVisible(true);
         while(aux3 != null){
             if(aux3.getDato() instanceof Sala2D){
                 if(((Sala2D)aux3.getDato()).getNumero() == aux2){
@@ -212,18 +216,21 @@ public class ManejoSucursales extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarActionPerformed
 
     private void agregarSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSalaActionPerformed
-        new Editar(false, null);
+        new Editar(false, null, this.temp);
         this.dispose();
     }//GEN-LAST:event_agregarSalaActionPerformed
 
     private void editarSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarSalaActionPerformed
-        new Editar(true,this.temp2);
+        new Editar(true,this.temp2,this.temp);
         this.dispose();
     }//GEN-LAST:event_editarSalaActionPerformed
 
+    private void verPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPeliculasActionPerformed
+        
+    }//GEN-LAST:event_verPeliculasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
-    private javax.swing.JButton agregarPelicula;
     private javax.swing.JButton agregarSala;
     private javax.swing.JButton editar;
     private javax.swing.JButton editarSala;
@@ -234,6 +241,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
     private javax.swing.JLabel texto2;
     private javax.swing.JLabel texto3;
     private javax.swing.JLabel texto4;
+    private javax.swing.JButton verPeliculas;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

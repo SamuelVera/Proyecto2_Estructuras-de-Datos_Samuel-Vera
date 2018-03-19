@@ -1,6 +1,6 @@
 package ManejadorDeLaApp;
 
-import CodigoEstructuras.Cola;
+import CodigoEstructuras.*;
 
 public class Sala2D extends Sala{
     
@@ -12,11 +12,6 @@ public class Sala2D extends Sala{
     public void verPeliculas() {
         System.out.println("Función en 2D");
     }
-    
-    @Override
-    public void agregarPelicula(Pelicula pelicula){
-        this.peliculas.encolar(pelicula);
-    }
 
     @Override
     public void ventas() {
@@ -24,18 +19,8 @@ public class Sala2D extends Sala{
     }
 
     @Override
-    public void agregarTicketVendido() {
-        this.ticketsVendidosDia.insertPrimero(1);
-    }
-
-    @Override
-    public int getNumero() {
-        return this.numero;
-    }
-
-    @Override
-    public Pelicula getPelicula() {
-        return (Pelicula)this.peliculas.getPrimeroEnCola();
+    public void agregarTicketVendido(Ticket ticket) {
+        this.ticketsVendidosDia.agregar(this.ticketsVendidosDia.getRaiz(),new NodoArbol(ticket,ticket.getId()));
     }
     
 }
