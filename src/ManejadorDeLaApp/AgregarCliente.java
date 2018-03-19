@@ -46,6 +46,11 @@ public class AgregarCliente extends javax.swing.JFrame {
         getContentPane().add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 260, -1));
 
         nombre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
         nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nombreKeyTyped(evt);
@@ -157,6 +162,10 @@ public class AgregarCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "ERROR!!! INGRESAR SOLO LETRAS");
         }
     }//GEN-LAST:event_nombreKeyTyped
+
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        
+    }//GEN-LAST:event_nombreActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;

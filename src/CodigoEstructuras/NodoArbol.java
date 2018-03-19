@@ -20,9 +20,17 @@ public class NodoArbol <T>{
     public int getCodigo(){
         return this.codigo;
     }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
     
     public String getCodigo2(){
         return this.codigo2;
+    }
+    
+    public void setCodigo2(String codigo2) {
+        this.codigo2 = codigo2;
     }
     
     public boolean isRaiz(){
@@ -36,7 +44,11 @@ public class NodoArbol <T>{
     public T getDato() {
         return this.dato;
     }
-
+    
+    public void setDato(T dato) {
+        this.dato = dato;
+    } 
+    
     public NodoArbol<T> getPadre() {
         return this.padre;
     }

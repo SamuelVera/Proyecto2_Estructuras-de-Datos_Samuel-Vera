@@ -25,7 +25,9 @@ public class BuscarPelicula extends javax.swing.JFrame {
         if(aux != null){
             NodoSimple temp = ((Sucursal)aux.getDato()).getSalas().getCabeza();
             while(temp != null){
-                if(temp.getDato() instanceof Sala2D){
+                String s = ((Sala)temp.getDato()).getPelicula().getNombre();
+                this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala)temp.getDato()).getPelicula(),s));
+                /*if(temp.getDato() instanceof Sala2D){
                     String s = ((Sala2D)temp.getDato()).getPelicula().getNombre();
                     this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala2D)temp.getDato()).getPelicula(),s));
                 }else if(temp.getDato() instanceof Sala3D){
@@ -34,7 +36,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
                 }else{
                     String s = ((Sala4DX)temp.getDato()).getPelicula().getNombre();
                     this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala4DX)temp.getDato()).getPelicula(),s));
-                }
+                }*/
                 temp = temp.getProximo();
             }
             this.insertarPeliculas(aux.getHijoD());

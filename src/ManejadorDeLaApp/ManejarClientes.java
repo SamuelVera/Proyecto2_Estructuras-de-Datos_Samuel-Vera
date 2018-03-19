@@ -59,6 +59,11 @@ public class ManejarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
 
+        campo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoActionPerformed(evt);
+            }
+        });
         campo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campoKeyTyped(evt);
@@ -121,6 +126,10 @@ public class ManejarClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "ERROR!!! INGRESAR SOLO NÚMEROS");
         }
     }//GEN-LAST:event_campoKeyTyped
+
+    private void campoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;

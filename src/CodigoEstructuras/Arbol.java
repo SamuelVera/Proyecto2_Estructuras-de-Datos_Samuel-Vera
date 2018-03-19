@@ -44,7 +44,6 @@ public class Arbol <T>{
         }   
     }
     
-        
     public void agregar(NodoArbol aux, NodoArbol n){
         
         if(this.isVacio()){
@@ -131,13 +130,99 @@ public class Arbol <T>{
         }
     }
     
-    public void eliminarNodo(NodoArbol n, int codigo){
-        
+    public NodoArbol eliminarNodo(NodoArbol n, int codigo) {
+        if (raiz != null && raiz.getCodigo() == codigo) {
+            return this.eliminarRaiz();
+        } else if (n.getHijoI() != null && n.getHijoI().getCodigo() == codigo) {
+            return this.eliminarI(n);
+        } else if (n.getHijoD() != null && n.getHijoD().getCodigo() == codigo) {
+            return this.eliminarD(n);
+        }
+        return null;
     }
     
-    public void eliminarNodo(NodoArbol n, String codigo){
-        
+    public NodoArbol eliminarNodo(NodoArbol n, String codigo) {
+        if(n!=null){
+            int comparar = n.getCodigo2().compareToIgnoreCase(codigo);
+            int comparar2 = n.getHijoI().getCodigo2().compareToIgnoreCase(codigo);
+            int comparar3 = n.getHijoD().getCodigo2().compareToIgnoreCase(codigo);
+            if (this.raiz != null && comparar == 0) {
+                return this.eliminarRaiz();
+            } else if (n.getHijoI() != null && comparar2 == 0) {
+                return this.eliminarI(n);
+            } else if (n.getHijoD() != null && comparar3 == 0) {
+                return this.eliminarD(n);
+            }
+        }
+        return null;
     }
+    
+    public NodoArbol eliminarRaiz() {
+        NodoArbol aux = this.raiz;
+        this.raiz = null;
+        if (aux.getHijoI() != null && aux.getHijoD() != null) {
+            this.raiz = aux.getHijoD();
+            NodoArbol aux2 = aux.getHijoD();
+            while (aux2.getHijoI() != null) {
+                aux2 = aux2.getHijoI();
+            }
+            aux2.setHijoI(aux.getHijoI());
+            return aux;
+        } else if (aux.getHijoI() != null) {
+            this.raiz = aux.getHijoI();
+            return aux;
+        } else if (aux.getHijoD() != null) {
+            this.raiz = aux.getHijoD();
+            return aux;
+        }
+        return null;
+    }
+    
+    public NodoArbol eliminarI(NodoArbol n) {
+        if (n.getHijoI() != null) {
+            NodoArbol aux = n.getHijoI();
+            n.setHijoI(null);
+            if (aux.getHijoI() != null && aux.getHijoD() != null) {
+                NodoArbol aux2 = aux.getHijoI();
+                n.setHijoI(aux.getHijoI());
+                while (aux2.getHijoD() != null) {
+                    aux2 = aux2.getHijoD();
+                }
+                aux2.setHijoD(aux.getHijoD());
+            } else if (aux.getHijoI() != null) {
+                n.setHijoI(aux.getHijoI());
+            } else if (aux.getHijoD() != null) {
+                n.setHijoI(aux.getHijoD());
+            }
+            return aux;
+        }
+        return null;
+
+    }
+    
+    public NodoArbol eliminarD(NodoArbol n) {
+        if (n.getHijoD() != null) {
+            NodoArbol aux = n.getHijoD();
+            n.setHijoD(null);
+
+            if (aux.getHijoI() != null && aux.getHijoD() != null) {
+                NodoArbol aux2 = aux.getHijoD();
+                n.setHijoD(aux.getHijoD());
+                while (aux2.getHijoI() != null) {
+                    aux2 = aux2.getHijoI();
+                }
+                aux2.setHijoI(aux.getHijoI());
+            } else if (aux.getHijoI() != null) {
+                n.setHijoD(aux.getHijoI());
+            } else if (aux.getHijoD() != null) {
+                n.setHijoD(aux.getHijoD());
+            }
+            return aux;
+        }
+        return null;
+    }
+    
+    
     
     public int contar(NodoArbol n){
         if(n == null){

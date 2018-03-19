@@ -15,10 +15,10 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setTitle("Información de Sucursales");
-        this.agregar.setVisible(false);
         this.agregarSala.setVisible(false);
         this.agregarPelicula.setVisible(false);
         this.editar.setVisible(false);
+        this.editarSala.setVisible(false);
         
         String[] aux;
         int[] sucur = new int[MenuInicio.sucursales.contar(MenuInicio.sucursales.getRaiz())];
@@ -26,7 +26,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         aux = new String[sucur.length];
         
         for(int i=0;i<aux.length;i++){
-            aux[i] = ""+sucur[i];
+            aux[i] = ((Integer)sucur[i]).toString();
         }
         
         ComboBoxModel aux2 = new DefaultComboBoxModel(aux);
@@ -49,6 +49,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         editar = new javax.swing.JButton();
         agregar = new javax.swing.JButton();
         agregarSala = new javax.swing.JButton();
+        editarSala = new javax.swing.JButton();
         agregarPelicula = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -105,11 +106,30 @@ public class ManejoSucursales extends javax.swing.JFrame {
 
         agregar.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         agregar.setText("Añadir");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
         getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 70, 20));
 
         agregarSala.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         agregarSala.setText("Añadir Sala");
+        agregarSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarSalaActionPerformed(evt);
+            }
+        });
         getContentPane().add(agregarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, 20));
+
+        editarSala.setFont(new java.awt.Font("Verdana", 0, 12));
+        editarSala.setText("Editar Sala");
+        editarSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarSalaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(editarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, -1, 20));
 
         agregarPelicula.setText("Añadir Pelicula");
         getContentPane().add(agregarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, 20));
@@ -131,13 +151,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
             NodoSimple aux2 = temp.getSalas().getCabeza();
 
             while(aux2 != null){
-                if(aux2.getDato() instanceof Sala2D){
-                    aux3[i] = ""+((Sala2D)aux2.getDato()).getNumero();
-                }else if(aux2.getDato() instanceof Sala3D){
-                    aux3[i] = ""+((Sala3D)aux2.getDato()).getNumero();
-                }else{
-                    aux3[i] = ""+((Sala4DX)aux2.getDato()).getNumero();
-                }
+                aux3[i] = ((Integer)((Sala)aux2.getDato()).getNumero()).toString();
                 i++;
                 aux2 = aux2.getProximo();
             }
@@ -150,6 +164,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.agregarSala.setVisible(true);
         this.agregarPelicula.setVisible(true);
         this.editar.setVisible(true);
+        this.editarSala.setVisible(true);
         
     }//GEN-LAST:event_sucursalesActionPerformed
 
@@ -191,11 +206,27 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_editarActionPerformed
 
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        new Editar();
+        this.dispose();
+    }//GEN-LAST:event_agregarActionPerformed
+
+    private void agregarSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSalaActionPerformed
+        new Editar(false, null);
+        this.dispose();
+    }//GEN-LAST:event_agregarSalaActionPerformed
+
+    private void editarSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarSalaActionPerformed
+        new Editar(true,this.temp2);
+        this.dispose();
+    }//GEN-LAST:event_editarSalaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
     private javax.swing.JButton agregarPelicula;
     private javax.swing.JButton agregarSala;
     private javax.swing.JButton editar;
+    private javax.swing.JButton editarSala;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JComboBox<String> salas;
     private javax.swing.JComboBox<String> sucursales;

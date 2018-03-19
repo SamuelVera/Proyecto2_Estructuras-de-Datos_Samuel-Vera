@@ -40,4 +40,21 @@ public class Sucursal {
         return this.salas;
     }
     
+    public void setSalas(ListaSimple salas){
+        this.salas = salas;
+    }
+    
+    public Sala getSala(int num){
+        NodoSimple aux = this.salas.getCabeza();
+        while(aux != null){
+            if(aux.getDato() instanceof Sala){
+                if(((Sala)aux.getDato()).getNumero() == num){
+                    return (Sala)aux.getDato();
+                }
+            }
+            aux = aux.getProximo();
+        }
+        return null;
+    }
+    
 }
