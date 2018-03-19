@@ -20,52 +20,47 @@ public class Arbol <T>{
     
         /*Este método se implementa solo al agregar las películas*/
     public void agregarString(NodoArbol aux, NodoArbol n){
-        if(this.isVacio()){
-            this.raiz = n;
-        }else{
-            if(aux != null){
-                int comparar = n.getCodigo2().compareToIgnoreCase(aux.getCodigo2());
-                if(comparar < 0){
-                    if(aux.getHijoI() == null){
-                        aux.setHijoI(n);
-                        n.setPadre(aux);
-                    }else{
-                        this.agregarString(aux.getHijoI(), n);
-                    }
-                }else if(comparar > 0){
-                    if(aux.getHijoD() == null){
-                        aux.setHijoD(n);
-                        n.setPadre(aux);
-                    }else{
-                        this.agregarString(aux.getHijoD(), n);
-                    }
+        if(aux != null){
+            int comparar = n.getCodigo2().compareToIgnoreCase(aux.getCodigo2());
+            if(comparar < 0){
+                if(aux.getHijoI() == null){
+                    aux.setHijoI(n);
+                    n.setPadre(aux);
+                }else{
+                    this.agregarString(aux.getHijoI(), n);
+                }
+            }else if(comparar > 0){
+                if(aux.getHijoD() == null){
+                    aux.setHijoD(n);
+                    n.setPadre(aux);
+                }else{
+                    this.agregarString(aux.getHijoD(), n);
                 }
             }
-        }   
+        }else{
+            this.raiz = n;
+        }
     }
     
     public void agregar(NodoArbol aux, NodoArbol n){
-        
-        if(this.isVacio()){
-            this.raiz = n;
-        }else{
-            if(aux != null){
-                if(aux.getCodigo() > n.getCodigo()){
-                    if(aux.getHijoI() == null){
-                        n.setPadre(aux);
-                        aux.setHijoI(n);
-                    }else{
-                        this.agregar(aux.getHijoI(), n);
-                    }
-                }else if(aux.getCodigo() < n.getCodigo()){
-                    if(aux.getHijoD() == null){
-                        n.setPadre(aux);
-                        aux.setHijoD(n);
-                    }else{
-                        this.agregar(aux.getHijoD(), n);
-                    }
+        if(aux != null){
+            if(aux.getCodigo() > n.getCodigo()){
+                if(aux.getHijoI() == null){
+                    n.setPadre(aux);
+                    aux.setHijoI(n);
+                }else{
+                    this.agregar(aux.getHijoI(), n);
+                }
+            }else if(aux.getCodigo() < n.getCodigo()){
+                if(aux.getHijoD() == null){
+                    n.setPadre(aux);
+                    aux.setHijoD(n);
+                }else{
+                    this.agregar(aux.getHijoD(), n);
                 }
             }
+        }else{
+            this.raiz = n;
         }
     }
     
@@ -221,8 +216,6 @@ public class Arbol <T>{
         }
         return null;
     }
-    
-    
     
     public int contar(NodoArbol n){
         if(n == null){
