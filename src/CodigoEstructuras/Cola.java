@@ -18,10 +18,8 @@ public class Cola <T>{
             this.cabeza = new NodoSimple<>(dato);
         }else{
             NodoSimple<T> n = new NodoSimple<>(dato);
-            
             n.setProximo(this.cabeza);
             this.cabeza = n;
-            
         }
         
     }
@@ -30,6 +28,10 @@ public class Cola <T>{
         
         if(this.isVacio()){
             return null;
+        }else if(this.cabeza.getProximo() == null){
+            NodoSimple<T> aux = this.cabeza;
+            this.cabeza = null;
+            return aux.getDato();
         }else{
             NodoSimple<T> aux = this.cabeza;
             NodoSimple<T> temp;
