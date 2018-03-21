@@ -11,10 +11,8 @@ public abstract class Sala {
     protected double venta = 0;
 
     public Sala(int numero, Sucursal sucursal) {
-        
         this.numero = numero;
         this.sucursal = sucursal;
-        
     }
     
     public Sucursal getSucursal(){
@@ -35,6 +33,10 @@ public abstract class Sala {
     
     public Pelicula getPelicula(){
         return (Pelicula)this.peliculas.getPrimeroEnCola();
+    }
+    
+    public Cola getColaPeliculas(){
+        return this.peliculas;
     }
     
     public abstract void agregarTicketVendido(Ticket ticket);

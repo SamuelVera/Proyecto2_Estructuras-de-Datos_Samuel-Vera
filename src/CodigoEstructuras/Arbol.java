@@ -152,7 +152,7 @@ public class Arbol <T>{
         return null;
     }
     
-    public NodoArbol eliminarRaiz() {
+    private NodoArbol eliminarRaiz() {
         NodoArbol aux = this.raiz;
         this.raiz = null;
         if (aux.getHijoI() != null && aux.getHijoD() != null) {
@@ -173,7 +173,7 @@ public class Arbol <T>{
         return null;
     }
     
-    public NodoArbol eliminarI(NodoArbol n) {
+    private NodoArbol eliminarI(NodoArbol n) {
         if (n.getHijoI() != null) {
             NodoArbol aux = n.getHijoI();
             n.setHijoI(null);
@@ -195,7 +195,7 @@ public class Arbol <T>{
 
     }
     
-    public NodoArbol eliminarD(NodoArbol n) {
+    private NodoArbol eliminarD(NodoArbol n) {
         if (n.getHijoD() != null) {
             NodoArbol aux = n.getHijoD();
             n.setHijoD(null);

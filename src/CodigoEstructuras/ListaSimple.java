@@ -26,6 +26,18 @@ public class ListaSimple <T>{
         }
     }
     
+    public void insertarUltimo(T dato){
+        if(this.isVacio()){
+            this.cabeza = new NodoSimple<>(dato);
+        }else{
+            NodoSimple<T> aux = this.cabeza;
+            while(aux.getProximo()!=null){
+                aux = aux.getProximo();
+            }
+            aux.setProximo(new NodoSimple<>(dato));
+        }
+    }
+    
     public T eliminarPrimero(){
         if(!this.isVacio()){
             NodoSimple<T> aux = this.cabeza;

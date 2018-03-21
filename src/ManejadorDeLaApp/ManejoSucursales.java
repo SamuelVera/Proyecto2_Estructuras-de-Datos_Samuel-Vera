@@ -8,6 +8,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
 
     private Sucursal temp;
     private Sala temp2;
+    private Pelicula temp3;
     
     public ManejoSucursales() {
         initComponents();
@@ -19,6 +20,10 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.verPeliculas.setVisible(false);
         this.editar.setVisible(false);
         this.editarSala.setVisible(false);
+        this.peliculas.setVisible(false);
+        this.agregarPelícula.setVisible(false);
+        this.eliminarPelicula.setVisible(false);
+        this.comprarPelicula.setVisible(false);
         
         String[] aux;
         int[] sucur = new int[MenuInicio.sucursales.contar(MenuInicio.sucursales.getRaiz())];
@@ -33,6 +38,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         
         this.sucursales.setModel(aux2);
         this.salas.setVisible(false);
+        this.texto5.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -43,14 +49,20 @@ public class ManejoSucursales extends javax.swing.JFrame {
         texto2 = new javax.swing.JLabel();
         texto1 = new javax.swing.JLabel();
         texto4 = new javax.swing.JLabel();
-        sucursales = new javax.swing.JComboBox<>();
+        texto5 = new javax.swing.JLabel();
+        texto6 = new javax.swing.JLabel();
+        peliculas = new javax.swing.JComboBox<>();
         salas = new javax.swing.JComboBox<>();
+        sucursales = new javax.swing.JComboBox<>();
         volver = new javax.swing.JButton();
         editar = new javax.swing.JButton();
         agregar = new javax.swing.JButton();
         agregarSala = new javax.swing.JButton();
         editarSala = new javax.swing.JButton();
         verPeliculas = new javax.swing.JButton();
+        agregarPelícula = new javax.swing.JButton();
+        eliminarPelicula = new javax.swing.JButton();
+        comprarPelicula = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,13 +82,20 @@ public class ManejoSucursales extends javax.swing.JFrame {
         texto4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         getContentPane().add(texto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 180, 30));
 
-        sucursales.setMaximumRowCount(20);
-        sucursales.addActionListener(new java.awt.event.ActionListener() {
+        texto5.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        texto5.setText("Peliculas:");
+        getContentPane().add(texto5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 110, 30));
+
+        texto6.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        getContentPane().add(texto6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 380, 30));
+
+        peliculas.setMaximumRowCount(20);
+        peliculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sucursalesActionPerformed(evt);
+                peliculasActionPerformed(evt);
             }
         });
-        getContentPane().add(sucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 250, 30));
+        getContentPane().add(peliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 250, 30));
 
         salas.setMaximumRowCount(20);
         salas.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +104,14 @@ public class ManejoSucursales extends javax.swing.JFrame {
             }
         });
         getContentPane().add(salas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 250, 30));
+
+        sucursales.setMaximumRowCount(20);
+        sucursales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucursalesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(sucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 250, 30));
 
         volver.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         volver.setText("Volver");
@@ -129,8 +156,9 @@ public class ManejoSucursales extends javax.swing.JFrame {
                 editarSalaActionPerformed(evt);
             }
         });
-        getContentPane().add(editarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, -1, 20));
+        getContentPane().add(editarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, -1, 20));
 
+        verPeliculas.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         verPeliculas.setText("Ver Películas");
         verPeliculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +166,22 @@ public class ManejoSucursales extends javax.swing.JFrame {
             }
         });
         getContentPane().add(verPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, 20));
+
+        agregarPelícula.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        agregarPelícula.setText("Agregar Película");
+        agregarPelícula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarPelículaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarPelícula, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 130, 20));
+
+        eliminarPelicula.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        eliminarPelicula.setText("Eliminar Primera");
+        getContentPane().add(eliminarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 130, 20));
+
+        comprarPelicula.setText("ComprarBoleto");
+        getContentPane().add(comprarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 110, 20));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
@@ -167,9 +211,16 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.salas.setVisible(true);
         this.agregar.setVisible(true);
         this.agregarSala.setVisible(true);
-        this.verPeliculas.setVisible(true);
+        this.verPeliculas.setVisible(false);
         this.editar.setVisible(true);
-        
+        this.editarSala.setVisible(false);
+        this.texto4.setText("");
+        this.peliculas.setVisible(false);
+        this.texto5.setVisible(false);
+        this.agregarPelícula.setVisible(false);
+        this.eliminarPelicula.setVisible(false);
+        this.comprarPelicula.setVisible(false);
+        this.texto6.setVisible(false);
     }//GEN-LAST:event_sucursalesActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
@@ -182,7 +233,6 @@ public class ManejoSucursales extends javax.swing.JFrame {
         
         int aux2 = Integer.parseInt(this.salas.getSelectedItem().toString());
         NodoSimple aux3 = this.temp.getSalas().getCabeza();
-        this.editarSala.setVisible(true);
         while(aux3 != null){
             if(aux3.getDato() instanceof Sala2D){
                 if(((Sala2D)aux3.getDato()).getNumero() == aux2){
@@ -202,7 +252,8 @@ public class ManejoSucursales extends javax.swing.JFrame {
             }
             aux3 = aux3.getProximo();
         }
-        
+        this.editarSala.setVisible(true);
+        this.verPeliculas.setVisible(true);
     }//GEN-LAST:event_salasActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
@@ -227,20 +278,60 @@ public class ManejoSucursales extends javax.swing.JFrame {
 
     private void verPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPeliculasActionPerformed
         
+        ListaSimple aux4 = new ListaSimple();
+        this.texto6.setText("Película en emisión: "+(this.temp2.getPelicula().getNombre()));
+        
+        while(this.temp2.getColaPeliculas().getPrimeroEnCola() != null){
+            aux4.insertarUltimo(this.temp2.getColaPeliculas().desencolar());
+        }
+        
+        String[] aux3 = new String[aux4.contarElementos()];
+        NodoSimple aux5 = aux4.getCabeza();
+        for(int i=0;i<aux3.length && aux5!=null;i++){
+            aux3[i] = ((Pelicula)aux5.getDato()).getNombre();
+            this.temp2.getColaPeliculas().encolar(aux5.getDato());
+        }
+        
+        ComboBoxModel aux2 = new DefaultComboBoxModel(aux3);
+        this.peliculas.setModel(aux2);
+        this.peliculas.setVisible(true);
+        this.texto5.setVisible(true);
+        this.texto6.setVisible(true);
+        this.agregarPelícula.setVisible(true);
+        this.eliminarPelicula.setVisible(true);
     }//GEN-LAST:event_verPeliculasActionPerformed
+
+    private void peliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peliculasActionPerformed
+        this.comprarPelicula.setVisible(true);
+        this.eliminarPelicula.setVisible(true);
+    }//GEN-LAST:event_peliculasActionPerformed
+
+    private void agregarPelículaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPelículaActionPerformed
+        if(this.temp2.getColaPeliculas().getPrimeroEnCola() == null){
+            System.out.println("pazos");
+        }
+        new AgregarPelicula(this.temp2);
+        this.dispose();
+    }//GEN-LAST:event_agregarPelículaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
+    private javax.swing.JButton agregarPelícula;
     private javax.swing.JButton agregarSala;
+    private javax.swing.JButton comprarPelicula;
     private javax.swing.JButton editar;
     private javax.swing.JButton editarSala;
+    private javax.swing.JButton eliminarPelicula;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox<String> peliculas;
     private javax.swing.JComboBox<String> salas;
     private javax.swing.JComboBox<String> sucursales;
     private javax.swing.JLabel texto1;
     private javax.swing.JLabel texto2;
     private javax.swing.JLabel texto3;
     private javax.swing.JLabel texto4;
+    private javax.swing.JLabel texto5;
+    private javax.swing.JLabel texto6;
     private javax.swing.JButton verPeliculas;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables

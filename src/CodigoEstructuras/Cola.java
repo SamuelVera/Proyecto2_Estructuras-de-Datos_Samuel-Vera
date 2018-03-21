@@ -2,24 +2,20 @@ package CodigoEstructuras;
 
 public class Cola <T>{
 
-    private NodoSimple <T> cabeza;
-    
-    public NodoSimple getCabeza(){
-        return this.cabeza;
-    }
+    private NodoSimple <T> ultimo;
     
     public boolean isVacio(){
-        return this.cabeza == null;
+        return this.ultimo == null;
     }
     
     public void encolar(T dato){
         
         if(this.isVacio()){
-            this.cabeza = new NodoSimple<>(dato);
+            this.ultimo = new NodoSimple<>(dato);
         }else{
             NodoSimple<T> n = new NodoSimple<>(dato);
-            n.setProximo(this.cabeza);
-            this.cabeza = n;
+            n.setProximo(this.ultimo);
+            this.ultimo = n;
         }
         
     }
@@ -28,12 +24,12 @@ public class Cola <T>{
         
         if(this.isVacio()){
             return null;
-        }else if(this.cabeza.getProximo() == null){
-            NodoSimple<T> aux = this.cabeza;
-            this.cabeza = null;
+        }else if(this.ultimo.getProximo() == null){
+            NodoSimple<T> aux = this.ultimo;
+            this.ultimo = null;
             return aux.getDato();
         }else{
-            NodoSimple<T> aux = this.cabeza;
+            NodoSimple<T> aux = this.ultimo;
             NodoSimple<T> temp;
             
             while(aux.getProximo().getProximo()!=null){
@@ -53,7 +49,7 @@ public class Cola <T>{
             return null;
         }else{
             
-            NodoSimple<T> aux = this.cabeza;
+            NodoSimple<T> aux = this.ultimo;
             
             while(aux.getProximo() != null){
                 aux = aux.getProximo();

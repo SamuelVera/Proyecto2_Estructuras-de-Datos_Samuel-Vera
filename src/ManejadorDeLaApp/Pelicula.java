@@ -7,7 +7,6 @@ public class Pelicula {
     
     private String nombre, idioma, genero;
     private Sala sala;
-    private boolean activa;
     
     public Pelicula(String nombre, String idioma, String genero, Sala sala){
         
@@ -15,7 +14,6 @@ public class Pelicula {
         this.nombre = nombre;
         this.idioma = idioma;
         this.genero = genero;
-        this.activa = true;
         
     }
     
@@ -37,5 +35,9 @@ public class Pelicula {
     
     public String getIdioma(){
         return this.idioma;
+    }
+    
+    public Sala getSala(){
+        return this.sala;
     }
 }
