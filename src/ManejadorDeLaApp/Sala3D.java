@@ -17,9 +17,4 @@ public class Sala3D extends Sala{
     public void ventas() {
         this.venta += Ticket.getPrecio3D();
     }
-
-    @Override
-    public void agregarTicketVendido(Ticket ticket) {
-        this.ticketsVendidosDia.agregar(this.ticketsVendidosDia.getRaiz(),new NodoArbol(ticket,ticket.getId()));
-    }
 }

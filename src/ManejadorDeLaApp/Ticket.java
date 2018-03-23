@@ -6,21 +6,23 @@ public class Ticket {
     
     private int id;
     private static double precio2D, precio3D, precio4D;
-    private Sucursal sucursal;
     private Sala sala;
     private Pelicula pelicula;
     private Cliente cliente;
     private Date fecha;
-    private boolean pagado = false;
+    private boolean pagado = false, dd, ddd, dx;
 
-    public Ticket(int id, double precio2D, double precio3D, double precio4D, Sucursal sucursal, Sala sala, Pelicula pelicula, Cliente cliente, Date fecha) {
+    public Ticket(int id, Pelicula pelicula, Sala sala,Cliente cliente, boolean dd, boolean ddd, boolean dx, boolean pagado) {
         
         this.id = id;
-        this.sucursal = sucursal;
-        this.sala = sala;
         this.pelicula = pelicula;
+        this.sala = sala;
         this.cliente = cliente;
         this.fecha = fecha;
+        this.dd = dd;
+        this.ddd = ddd;
+        this.dx = dx;
+        this.pagado = pagado;
         
     }
 
@@ -36,7 +38,9 @@ public class Ticket {
         Ticket.precio4D = precio4D;
     }
 
-
+    public Sala getSala() {
+        return sala;
+    }
 
     public static double getPrecio2D() {
         return Ticket.precio2D;
@@ -52,10 +56,6 @@ public class Ticket {
 
     public boolean isPagado() {
         return this.pagado;
-    }
-
-    public Sala getSala() {
-        return this.sala;
     }
     
     public void setPagado(boolean pagado) {

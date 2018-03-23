@@ -17,10 +17,4 @@ public class Sala2D extends Sala{
     public void ventas() {
         this.venta += Ticket.getPrecio2D();
     }
-
-    @Override
-    public void agregarTicketVendido(Ticket ticket) {
-        this.ticketsVendidosDia.agregar(this.ticketsVendidosDia.getRaiz(),new NodoArbol(ticket,ticket.getId()));
-    }
-    
 }

@@ -24,20 +24,20 @@ public class Arbol <T>{
             int comparar = n.getCodigo2().compareToIgnoreCase(aux.getCodigo2());
             if(comparar < 0){
                 if(aux.getHijoI() == null){
-                    aux.setHijoI(n);
                     n.setPadre(aux);
+                    aux.setHijoI(n);
                 }else{
                     this.agregarString(aux.getHijoI(), n);
                 }
             }else if(comparar > 0){
                 if(aux.getHijoD() == null){
-                    aux.setHijoD(n);
                     n.setPadre(aux);
+                    aux.setHijoD(n);
                 }else{
                     this.agregarString(aux.getHijoD(), n);
                 }
             }
-        }else{
+        }else if(this.isVacio()){
             this.raiz = n;
         }
     }
@@ -59,7 +59,7 @@ public class Arbol <T>{
                     this.agregar(aux.getHijoD(), n);
                 }
             }
-        }else{
+        }else if(this.isVacio()){
             this.raiz = n;
         }
     }
@@ -95,21 +95,29 @@ public class Arbol <T>{
         }
     }
     
-    public void getTodosLosCodigos(NodoArbol n, int[] aux, int i){
+    public void getTodosLosCodigos(NodoArbol n, int[] aux){
         if(n != null){
-            aux[i] = n.getCodigo();
-            i++;
-            this.getTodosLosCodigos(n.getHijoD(),aux,i);
-            this.getTodosLosCodigos(n.getHijoI(),aux,i);
+            for(int i=0;i<aux.length;i++){
+                if(aux[i] == 0){
+                    aux[i] = n.getCodigo();
+                    break;
+                }
+            }
+            this.getTodosLosCodigos(n.getHijoD(),aux);
+            this.getTodosLosCodigos(n.getHijoI(),aux);
         }
     }
     
-    public void getTodosLosCodigos(NodoArbol n, String[] aux, int i){
+    public void getTodosLosCodigos(NodoArbol n, String[] aux){
         if(n != null){
-            aux[i] = n.getCodigo2();
-            i++;
-            this.getTodosLosCodigos(n.getHijoD(),aux,i);
-            this.getTodosLosCodigos(n.getHijoI(),aux,i);
+            for(int i=0;i<aux.length;i++){
+                if(aux[i]==null){
+                    aux[i] = n.getCodigo2();
+                    break;
+                }
+            }
+            this.getTodosLosCodigos(n.getHijoD(),aux);
+            this.getTodosLosCodigos(n.getHijoI(),aux);
         }
     }
     

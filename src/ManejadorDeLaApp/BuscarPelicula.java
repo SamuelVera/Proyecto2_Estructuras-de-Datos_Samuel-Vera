@@ -25,18 +25,18 @@ public class BuscarPelicula extends javax.swing.JFrame {
         if(aux != null){
             NodoSimple temp = ((Sucursal)aux.getDato()).getSalas().getCabeza();
             while(temp != null){
-                String s = ((Sala)temp.getDato()).getPelicula().getNombre();
-                this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala)temp.getDato()).getPelicula(),s));
-                /*if(temp.getDato() instanceof Sala2D){
-                    String s = ((Sala2D)temp.getDato()).getPelicula().getNombre();
-                    this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala2D)temp.getDato()).getPelicula(),s));
-                }else if(temp.getDato() instanceof Sala3D){
-                    String s = ((Sala3D)temp.getDato()).getPelicula().getNombre();
-                    this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala3D)temp.getDato()).getPelicula(),s));
-                }else{
-                    String s = ((Sala4DX)temp.getDato()).getPelicula().getNombre();
-                    this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Sala4DX)temp.getDato()).getPelicula(),s));
-                }*/
+                ListaSimple l = new ListaSimple();
+                while(((Sala)temp.getDato()).getColaPeliculas().getPrimeroEnCola() != null){
+                    l.insertarUltimo((((Sala)temp.getDato()).getColaPeliculas()).desencolar());
+                }
+                NodoSimple temp2 = l.getCabeza();
+                String s;
+                while(temp2 != null){
+                    s = ((Pelicula)temp2.getDato()).getNombre();
+                    this.peliculas.agregarString(this.peliculas.getRaiz(), new NodoArbol(((Pelicula)temp2.getDato()),s));
+                    ((Sala)temp.getDato()).getColaPeliculas().encolar((Pelicula)temp2.getDato());
+                    temp2 = temp2.getProximo();
+                }
                 temp = temp.getProximo();
             }
             this.insertarPeliculas(aux.getHijoD());
@@ -48,7 +48,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         
         Arbol arbol = new Arbol();
         String[] aux = new String[this.peliculas.contar(this.peliculas.getRaiz())];
-        this.peliculas.getTodosLosCodigos(this.peliculas.getRaiz(), aux, 0);
+        this.peliculas.getTodosLosCodigos(this.peliculas.getRaiz(), aux);
         
         if(auxiliar == true){
             for(int i=0;i<aux.length;i++){
@@ -73,7 +73,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         
         String[] aux = new String[this.peliculas.contar(this.peliculas.getRaiz())];
         ListaSimple temp = new ListaSimple();
-        this.peliculas.getTodosLosCodigos(this.peliculas.getRaiz(), aux, 0);
+        this.peliculas.getTodosLosCodigos(this.peliculas.getRaiz(), aux);
         
         for(int i=0;i<aux.length;i++){
             Pelicula aux2 = ((Pelicula)this.peliculas.buscarNodo(this.peliculas.getRaiz(), aux[i]).getDato());
@@ -138,6 +138,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         odenarInverso = new javax.swing.JRadioButton();
         volver = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -230,6 +231,9 @@ public class BuscarPelicula extends javax.swing.JFrame {
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, -1, 20));
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 400));
 
+        jButton1.setText("jButton1");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, 20));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -274,7 +278,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         this.auxIdiomas = this.primerFiltro(true);
         
         String[] idiomas2 = new String[this.auxIdiomas.contar(this.auxIdiomas.getRaiz())+1];
-        this.auxIdiomas.getTodosLosCodigos(this.auxIdiomas.getRaiz(), idiomas2, 0);
+        this.auxIdiomas.getTodosLosCodigos(this.auxIdiomas.getRaiz(), idiomas2);
         ComboBoxModel aux3 = new DefaultComboBoxModel(idiomas2);
         this.idiomas.setModel(aux3);
         
@@ -291,7 +295,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         this.auxGeneros = this.primerFiltro(false);
         
         String[] generos2 = new String[this.auxGeneros.contar(this.auxGeneros.getRaiz())+1];
-        this.auxGeneros.getTodosLosCodigos(this.auxGeneros.getRaiz(), generos2, 0);
+        this.auxGeneros.getTodosLosCodigos(this.auxGeneros.getRaiz(), generos2);
         ComboBoxModel aux3 = new DefaultComboBoxModel(generos2);
         this.generos.setModel(aux3);
         
@@ -343,6 +347,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
     private javax.swing.JLabel fondo;
     private javax.swing.JComboBox<String> generos;
     private javax.swing.JComboBox<String> idiomas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton odenarAlfabetico;
     private javax.swing.JRadioButton odenarInverso;

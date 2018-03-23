@@ -7,7 +7,7 @@ public abstract class Sala {
     protected Sucursal sucursal;
     protected int numero;
     protected Cola peliculas = new Cola();
-    protected Arbol ticketsVendidosDia = new Arbol();
+    protected Arbol ticketsDia = new Arbol();
     protected double venta = 0;
 
     public Sala(int numero, Sucursal sucursal) {
@@ -39,7 +39,10 @@ public abstract class Sala {
         return this.peliculas;
     }
     
-    public abstract void agregarTicketVendido(Ticket ticket);
+    public void agregarTicket(Ticket ticket) {
+        this.ticketsDia.agregar(this.ticketsDia.getRaiz(),new NodoArbol(ticket,ticket.getId()));
+    }
+    
     public abstract void ventas();
     public abstract void verPeliculas();
 }

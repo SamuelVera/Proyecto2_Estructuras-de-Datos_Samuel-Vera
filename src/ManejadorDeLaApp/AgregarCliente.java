@@ -112,6 +112,7 @@ public class AgregarCliente extends javax.swing.JFrame {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         
         if(this.cedula.getText().trim().length() == 0 || this.telefono.getText().trim().length() == 0 || this.nombre.getText().trim().length() == 0){
+            getToolkit().beep();
             JOptionPane.showMessageDialog(rootPane, "ERROR!!! COMPLETAR LOS CAMPOS ANTES DE PROCEDER");
         }else{
             int temp = Integer.parseInt(this.cedula.getText());
@@ -122,8 +123,10 @@ public class AgregarCliente extends javax.swing.JFrame {
                 ManejarClientes aux3 = new ManejarClientes();
                 this.dispose();
             }else if(temp < 0){
+                getToolkit().beep();
                 JOptionPane.showMessageDialog(rootPane, "ERROR!!! LA CÉDULA ES MENOR QUE CERO (0)");
             }else{
+                getToolkit().beep();
                 JOptionPane.showMessageDialog(rootPane, "ERROR!!! ESA CÉDULA DE CLIENTE YA ESTA ASIGNADA");
             }
         }

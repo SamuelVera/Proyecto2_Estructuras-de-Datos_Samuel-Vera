@@ -102,35 +102,14 @@ public class MenuInicio <T> extends javax.swing.JFrame {
             i = rand.nextInt(3);
             if(i == 0 && i1 != 0){
                 ((Sala)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler", "Español", "Histórico", (Sala)temp.getDato()));
-                /*if(temp.getDato() instanceof Sala2D){
-                    ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala2D)temp.getDato())));
-                }else if(temp.getDato() instanceof Sala3D){
-                    ((Sala3D)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala3D)temp.getDato())));
-                }else if(temp.getDato() instanceof Sala4DX){
-                    ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler","Español","Histórico",((Sala4DX)temp.getDato())));
-                }*/
                 i1--;
                 temp = temp.getProximo();
             }else if(i == 1 && i2 != 0){
                 ((Sala)temp.getDato()).agregarPelicula(new Pelicula("Whiplash", "Inglés", "Drama", (Sala)temp.getDato()));
-                /*if(temp.getDato() instanceof Sala2D){
-                    ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala2D)temp.getDato())));
-                }else if(temp.getDato() instanceof Sala3D){
-                    ((Sala3D)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala3D)temp.getDato())));
-                }else if(temp.getDato() instanceof Sala4DX){
-                    ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Whiplash","Inglés","Drama",((Sala4DX)temp.getDato())));
-                }*/
                 i2--;
                 temp = temp.getProximo();
             }else if(i==2 && i3!=0){
                 ((Sala)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque", "Inglés", "Guerra", (Sala)temp.getDato()));
-                /*if(temp.getDato() instanceof Sala2D){
-                    ((Sala2D)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Guerra",((Sala2D)temp.getDato())));
-                }else if(temp.getDato() instanceof Sala3D){
-                    ((Sala3D)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Guerra",((Sala3D)temp.getDato())));
-                }else if(temp.getDato() instanceof Sala4DX){
-                    ((Sala4DX)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque","Inglés","Guerra",((Sala4DX)temp.getDato())));
-                }*/
                 i3--;
                 temp = temp.getProximo();
             }

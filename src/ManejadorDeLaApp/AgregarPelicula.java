@@ -9,6 +9,7 @@ public class AgregarPelicula extends javax.swing.JFrame {
     
     public AgregarPelicula(Sala sala) {
         initComponents();
+        this.setTitle("Agregar Película");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.temp = sala;
@@ -48,6 +49,7 @@ public class AgregarPelicula extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         texto1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
@@ -169,7 +171,8 @@ public class AgregarPelicula extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        if(this.campoNombre.getText().trim().length() == 0 || this.generos.isSelected(null)){
+        if(this.campoNombre.getText().trim().length() == 0 || this.generos.isSelected(null) || this.idiomas.isSelected(null)){
+            getToolkit().beep();
             JOptionPane.showMessageDialog(rootPane, "ERROR!!! LLENE LOS CAMPOS ANTES DE PROCEDER");
         }else{
             int aux, aux2;

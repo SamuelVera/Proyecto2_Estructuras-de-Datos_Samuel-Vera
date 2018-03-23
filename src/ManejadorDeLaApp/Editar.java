@@ -10,6 +10,7 @@ public class Editar extends javax.swing.JFrame {
     
     public Editar(Sucursal aux) {
         initComponents();
+        this.setTitle("Editar Sucursal");
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.clave = 0;
@@ -30,6 +31,7 @@ public class Editar extends javax.swing.JFrame {
         this.campo2.setVisible(false);
         this.aux =  aux2.getCodigo();
         if(t == true){
+            this.setTitle("Editar Sala");
             this.clave = 2;
             this.clavePrevia = sala.getNumero();
             this.campo1.setText(((Integer)(sala.getNumero())).toString());
@@ -41,6 +43,7 @@ public class Editar extends javax.swing.JFrame {
                 this.salas.setSelected(this.sala4DX.getModel(), true);
             }
         }else{
+            this.setTitle("Agregar Sala");
             this.clave = 3;
         }
         this.texto1.setText("Número");
@@ -50,6 +53,7 @@ public class Editar extends javax.swing.JFrame {
     public Editar(){
         initComponents();
         this.setVisible(true);
+        this.setTitle("Agregar Sucursal");
         this.setLocationRelativeTo(null);
         this.clave = 1;
         this.texto1.setText("Codigo");
@@ -75,7 +79,6 @@ public class Editar extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -160,6 +163,7 @@ public class Editar extends javax.swing.JFrame {
 
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
         if(this.camposVacios()){
+            getToolkit().beep();
             JOptionPane.showMessageDialog(rootPane, "ERROR!!! LOS LLENE LOS CAMPOS ANTES DE PROCEDER");
         }else{
             if(this.clave == 0){
@@ -190,13 +194,16 @@ public class Editar extends javax.swing.JFrame {
                         new ManejoSucursales();
                         this.dispose();
                     }else{
+                        getToolkit().beep();
                         JOptionPane.showMessageDialog(rootPane, "ERROR!!! YA ESTA REGISTRADO ESE CODIGO");
                     }
                 }else{
+                    getToolkit().beep();
                     JOptionPane.showMessageDialog(rootPane, "ERROR!!! LOS CODIGOS DEBEN SER DE 4 DIGITOS");
                 }
             }else if(this.clave == 2 || this.clave == 3){
                 if(this.camposVacios() || this.salas.getSelection() == null){
+                    getToolkit().beep();
                     JOptionPane.showMessageDialog(rootPane, "ERROR!!! DEBE LLENAR LOS CAMPOS");
                 }else{
                     boolean pasa = true;
@@ -205,6 +212,7 @@ public class Editar extends javax.swing.JFrame {
                     NodoSimple aux4 = aux3.getSalas().getCabeza();
                     while(aux4 != null){
                         if(aux2 == ((Sala)aux4.getDato()).getNumero()){
+                            getToolkit().beep();
                             JOptionPane.showMessageDialog(rootPane, "ERROR!!! EL NUMERO DE SALA YA ESTA REGISTRADO");
                             pasa = false;
                         }

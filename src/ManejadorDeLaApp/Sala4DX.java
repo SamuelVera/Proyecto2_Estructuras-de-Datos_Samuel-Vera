@@ -17,9 +17,4 @@ public class Sala4DX extends Sala{
     public void ventas() {
         this.venta += Ticket.getPrecio4D();
     }
-    
-    @Override
-    public void agregarTicketVendido(Ticket ticket) {
-        this.ticketsVendidosDia.agregar(this.ticketsVendidosDia.getRaiz(),new NodoArbol(ticket,ticket.getId()));
-    }
 }
