@@ -6,6 +6,7 @@ public class Ticket {
     
     private int id;
     private static double precio2D, precio3D, precio4D;
+    private double precioTicket;
     private Sala sala;
     private Pelicula pelicula;
     private Cliente cliente;
@@ -23,6 +24,13 @@ public class Ticket {
         this.ddd = ddd;
         this.dx = dx;
         this.pagado = pagado;
+        if(sala instanceof Sala2D){
+            this.precioTicket = Ticket.getPrecio2D();
+        }else if(sala instanceof Sala3D){
+            this.precioTicket = Ticket.getPrecio3D();
+        }else{
+            this.precioTicket = Ticket.getPrecio4D();
+        }
         
     }
 

@@ -7,7 +7,6 @@ public class Cliente {
     private int ci, telefono;
     private String nombre;
     private Arbol tickets = new Arbol();
-    private boolean solvente = true;
     
     public Cliente(int ci, int telefono, String nombre){   //Constructor con datos del cliente
         this.ci = ci;
@@ -21,31 +20,25 @@ public class Cliente {
     }
     
         //Método de ver si todos los tickets estan pagados
-    private boolean ticketsPagados(NodoArbol n){
+    public boolean isSolvente(NodoArbol n){
         if(n!=null){
             if(!((Ticket)n.getDato()).isPagado()){
                 return false;
             }
-            return this.ticketsPagados(n.getHijoD())&& this.ticketsPagados(n.getHijoI());
+            return isSolvente(n.getHijoD())&& isSolvente(n.getHijoI());
         }else{
             return true;
         }
     }
     
-        //Pagar Ticket conociendo sus identificadores
-    public void pagar(int cod){
-        NodoArbol aux = this.tickets.buscarNodo(this.tickets.getRaiz(), cod);
-        Sala aux2;
-        Sucursal aux3;
-        this.tickets.eliminarNodo(this.tickets.getRaiz(), cod);
-        ((Ticket)aux.getDato()).setPagado(true);
-        ((Ticket)aux.getDato()).getSala().agregarTicket((Ticket)aux.getDato());
-        aux2 = ((Ticket)aux.getDato()).getSala();
-        aux3 = aux2.getSucursal();
-        MenuInicio.sucursales.eliminarNodo(MenuInicio.sucursales.getRaiz(), aux3.getCodigo());
-        MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), new NodoArbol(aux3, aux3.getCodigo()));
-        this.tickets.agregar(this.tickets.getRaiz(), aux);
-        this.solvente = this.ticketsPagados(this.tickets.getRaiz());
+    public void getTicketsPagados(NodoArbol n, ListaSimple aux){
+        if(n != null){
+            if(((Ticket)n.getDato()).isPagado()){
+                aux.insertPrimero(n.getDato());
+            }
+            this.getTicketsPagados(n.getHijoD(),aux);
+            this.getTicketsPagados(n.getHijoI(),aux);
+        }
     }
     
         //Retirar n Tickets conociendo sus identificadores
@@ -65,12 +58,8 @@ public class Cliente {
         return nombre;
     }
     
-    public boolean isSolvente(){
-        return this.solvente;
-    }
-    
-    public void setSolvente(boolean solvente){
-        this.solvente = false;
+    public void setSolvente(){
+        this.isSolvente(this.tickets.getRaiz());
     }
     
     public Arbol getArbolTickets(){

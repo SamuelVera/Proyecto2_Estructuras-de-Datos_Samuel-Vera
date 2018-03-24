@@ -13,6 +13,7 @@ public class ManejarClientes extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Manejador de Clientes");
         this.pagar.setVisible(false);
+        this.historial.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -28,6 +29,7 @@ public class ManejarClientes extends javax.swing.JFrame {
         texto3 = new javax.swing.JLabel();
         texto4 = new javax.swing.JLabel();
         pagar = new javax.swing.JButton();
+        historial = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,7 +52,7 @@ public class ManejarClientes extends javax.swing.JFrame {
                 volverActionPerformed(evt);
             }
         });
-        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, -1, 20));
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 70, 20));
 
         buscar.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         buscar.setText("Buscar");
@@ -74,26 +76,35 @@ public class ManejarClientes extends javax.swing.JFrame {
         getContentPane().add(campo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, -1));
 
         texto1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        getContentPane().add(texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 310, 30));
+        getContentPane().add(texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 310, 30));
 
         texto2.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         texto2.setText("Buscar por cédula:");
         getContentPane().add(texto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         texto3.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 310, 30));
+        getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 310, 30));
 
         texto4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        getContentPane().add(texto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 240, 30));
+        getContentPane().add(texto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 220, 20));
 
         pagar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        pagar.setText("Pagar");
+        pagar.setText("Pagar/Deshacer");
         pagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pagarActionPerformed(evt);
             }
         });
-        getContentPane().add(pagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, -1, -1));
+        getContentPane().add(pagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 140, 20));
+
+        historial.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        historial.setText("Historial Compras");
+        historial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historialActionPerformed(evt);
+            }
+        });
+        getContentPane().add(historial, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 150, 20));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 220));
 
         pack();
@@ -117,13 +128,14 @@ public class ManejarClientes extends javax.swing.JFrame {
             this.temp = ((Cliente)aux.getDato());
             this.texto1.setText("Nombre: "+((Cliente)aux.getDato()).getNombre());
             this.texto3.setText("Telefono: "+((Cliente)aux.getDato()).getTelefono());
-            if(!((Cliente)aux.getDato()).isSolvente()){
+            if(!((Cliente)aux.getDato()).isSolvente(((Cliente)aux.getDato()).getArbolTickets().getRaiz())){
                 this.texto4.setText("Hay pagos pendientes");
                 this.pagar.setVisible(true);
             }else{
                 this.texto4.setText("El cliente está solvente");
                 this.pagar.setVisible(false);
             }
+            this.historial.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(rootPane, "NO EXISTE CLIENTE REGISTRADO POR C.I "+this.campo.getText());
         }
@@ -142,18 +154,24 @@ public class ManejarClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_campoKeyTyped
 
     private void campoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_campoActionPerformed
 
     private void pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarActionPerformed
-        new PagarOrdenPendiente(this.temp);
+        new ManejarOrdenes(this.temp);
         this.dispose();
     }//GEN-LAST:event_pagarActionPerformed
+
+    private void historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialActionPerformed
+        new ManejarOrdenes(this.temp,0);
+        this.dispose();
+    }//GEN-LAST:event_historialActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
     private javax.swing.JButton buscar;
     private javax.swing.JTextField campo;
+    private javax.swing.JButton historial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton pagar;
     private javax.swing.JLabel texto1;

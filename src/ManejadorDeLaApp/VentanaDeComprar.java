@@ -168,7 +168,6 @@ public class VentanaDeComprar extends javax.swing.JFrame {
             }
             
             if(clien!=null){
-                clien.setSolvente(false);
                 MenuInicio.clientes.eliminarNodo(MenuInicio.clientes.getRaiz(),clien.getCi());
                 MenuInicio.clientes.agregar(MenuInicio.clientes.getRaiz(),new NodoArbol(clien,clien.getCi()));
             }
