@@ -19,6 +19,8 @@ public class Editar extends javax.swing.JFrame {
         this.texto2.setText("Ubicación");
         this.campo1.setText(((Integer)aux.getCodigo()).toString());
         this.campo2.setText(aux.getUbicacion());
+        this.campo3.setVisible(false);
+        this.campo4.setVisible(false);
         this.sala2D.setVisible(false);
         this.sala3D.setVisible(false);
         this.sala4DX.setVisible(false);
@@ -29,6 +31,8 @@ public class Editar extends javax.swing.JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.campo2.setVisible(false);
+        this.campo3.setVisible(false);
+        this.campo4.setVisible(false);
         this.aux =  aux2.getCodigo();
         if(t == true){
             this.setTitle("Editar Sala");
@@ -61,16 +65,39 @@ public class Editar extends javax.swing.JFrame {
         this.sala2D.setVisible(false);
         this.sala3D.setVisible(false);
         this.sala4DX.setVisible(false);
+        this.campo3.setVisible(false);
+        this.campo4.setVisible(false);
     }
-
+    
+    public Editar(boolean t){
+        initComponents();
+        this.setVisible(true);
+        this.setTitle("Editar Precios de Tickets");
+        this.setLocationRelativeTo(null);
+        this.clave = 4;
+        this.sala2D.setVisible(false);
+        this.sala3D.setVisible(false);
+        this.sala4DX.setVisible(false);
+        this.campo2.setVisible(false);
+        this.texto1.setText("Precio 2D: ");
+        this.texto2.setText("Precio 3D: ");
+        this.texto3.setText("Precio 4DX: ");
+        this.campo1.setText(""+Ticket.getPrecio2D());
+        this.campo4.setText(""+Ticket.getPrecio3D());
+        this.campo3.setText(""+Ticket.getPrecio4D());
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         salas = new javax.swing.ButtonGroup();
         texto1 = new javax.swing.JLabel();
         texto2 = new javax.swing.JLabel();
+        texto3 = new javax.swing.JLabel();
         campo2 = new javax.swing.JTextField();
         campo1 = new javax.swing.JTextField();
+        campo4 = new javax.swing.JTextField();
+        campo3 = new javax.swing.JTextField();
         volver = new javax.swing.JButton();
         confirmar = new javax.swing.JButton();
         sala2D = new javax.swing.JRadioButton();
@@ -86,7 +113,10 @@ public class Editar extends javax.swing.JFrame {
         getContentPane().add(texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 30));
 
         texto2.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        getContentPane().add(texto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 140, 30));
+        getContentPane().add(texto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 140, 30));
+
+        texto3.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 120, 30));
 
         campo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,7 +128,7 @@ public class Editar extends javax.swing.JFrame {
                 campo2KeyTyped(evt);
             }
         });
-        getContentPane().add(campo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 170, 30));
+        getContentPane().add(campo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 170, 30));
 
         campo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +141,30 @@ public class Editar extends javax.swing.JFrame {
             }
         });
         getContentPane().add(campo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, 30));
+
+        campo4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo4ActionPerformed(evt);
+            }
+        });
+        campo4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campo4KeyTyped(evt);
+            }
+        });
+        getContentPane().add(campo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 170, 30));
+
+        campo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo3ActionPerformed(evt);
+            }
+        });
+        campo3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campo3KeyTyped(evt);
+            }
+        });
+        getContentPane().add(campo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 170, 30));
 
         volver.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         volver.setText("Volver");
@@ -270,6 +324,47 @@ public class Editar extends javax.swing.JFrame {
                         this.dispose();
                     }
                 }
+            }else if(this.clave == 4){
+                if(this.camposVacios()){
+                    JOptionPane.showMessageDialog(rootPane, "ERROR!!! COMPLETE LOS CAMPOS");
+                }else{
+                    double precio2D, precio3D, precio4D;
+                    precio2D = Double.valueOf(this.campo1.getText());
+                    precio3D = Double.valueOf(this.campo4.getText());
+                    precio4D = Double.valueOf(this.campo3.getText());
+                    Ticket.setPrecio2D(precio2D);
+                    Ticket.setPrecio3D(precio3D);
+                    Ticket.setPrecio4D(precio4D);
+                    if(!MenuInicio.clientes.isVacio()){
+                        int[] aux = new int[MenuInicio.clientes.contar(MenuInicio.clientes.getRaiz())];
+                        MenuInicio.clientes.getTodosLosCodigos(MenuInicio.clientes.getRaiz(), aux);
+                        Cliente aux2;
+                        for(int i=0;i<aux.length;i++){
+                            aux2 = (Cliente)MenuInicio.clientes.buscarNodo(MenuInicio.clientes.getRaiz(), aux[i]).getDato();
+                            if(!aux2.getCarro().getTicketsPorPagar().isVacio()){
+                                Ticket temp2;
+                                int[] temp = new int[aux2.getCarro().getTicketsPorPagar().contar(aux2.getCarro().getTicketsPorPagar().getRaiz())];
+                                aux2.getCarro().getTicketsPorPagar().getTodosLosCodigos(aux2.getCarro().getTicketsPorPagar().getRaiz(), temp);
+                                for(int j=0;j<temp.length;j++){
+                                    temp2 = (Ticket)aux2.getCarro().getTicketsPorPagar().buscarNodo(aux2.getCarro().getTicketsPorPagar().getRaiz(), temp[j]).getDato();
+                                    if(temp2.is2D()){
+                                        temp2.setPrecioTicket(precio2D);
+                                    }else if(temp2.is3D()){
+                                        temp2.setPrecioTicket(precio3D);
+                                    }else{
+                                        temp2.setPrecioTicket(precio4D);
+                                    }
+                                    aux2.getCarro().getTicketsPorPagar().eliminarNodo(aux2.getCarro().getTicketsPorPagar().getRaiz(), temp2.getId());
+                                    aux2.getCarro().getTicketsPorPagar().agregar(aux2.getCarro().getTicketsPorPagar().getRaiz(),new NodoArbol(temp2,temp2.getId()));
+                                }
+                                MenuInicio.clientes.eliminarNodo(MenuInicio.clientes.getRaiz(), aux2.getCi());
+                                MenuInicio.clientes.agregar(MenuInicio.clientes.getRaiz(), new NodoArbol(aux2,aux2.getCi()));
+                            }
+                        }
+                    }
+                    new MenuInicio();
+                    this.dispose();
+                }
             }
         }
     }//GEN-LAST:event_confirmarActionPerformed
@@ -281,8 +376,10 @@ public class Editar extends javax.swing.JFrame {
     public boolean camposVacios(){
         if(this.clave == 0 || this.clave == 1){
             return this.campo2.getText().trim().length() == 0 || this.campo1.getText().trim().length() == 0;
-        }else{
+        }else  if(this.clave == 2 || this.clave == 3){
             return this.campo1.getText().trim().length() == 0;
+        }else{
+            return this.campo3.getText().trim().length() == 0 || this.campo4.getText().trim().length() == 0 || this.campo1.getText().trim().length() == 0;
         }
     }
     
@@ -308,9 +405,27 @@ public class Editar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campo2KeyTyped
 
+    private void campo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo3ActionPerformed
+
+    private void campo3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo3KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo3KeyTyped
+
+    private void campo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo4ActionPerformed
+
+    private void campo4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo4KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo4KeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField campo1;
     private javax.swing.JTextField campo2;
+    private javax.swing.JTextField campo3;
+    private javax.swing.JTextField campo4;
     private javax.swing.JButton confirmar;
     private javax.swing.JLabel fondo;
     private javax.swing.JRadioButton sala2D;
@@ -319,6 +434,7 @@ public class Editar extends javax.swing.JFrame {
     private javax.swing.ButtonGroup salas;
     private javax.swing.JLabel texto1;
     private javax.swing.JLabel texto2;
+    private javax.swing.JLabel texto3;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

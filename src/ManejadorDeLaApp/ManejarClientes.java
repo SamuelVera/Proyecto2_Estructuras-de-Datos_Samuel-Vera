@@ -121,25 +121,27 @@ public class ManejarClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarClienteActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        int key = Integer.parseInt(this.campo.getText());
-        
-        if(MenuInicio.clientes.estaNodo(MenuInicio.clientes.getRaiz(), key)){
-            NodoArbol aux = MenuInicio.clientes.buscarNodo(MenuInicio.clientes.getRaiz(), key);
-            this.temp = ((Cliente)aux.getDato());
-            this.texto1.setText("Nombre: "+((Cliente)aux.getDato()).getNombre());
-            this.texto3.setText("Telefono: "+((Cliente)aux.getDato()).getTelefono());
-            if(!((Cliente)aux.getDato()).isSolvente()){
-                this.texto4.setText("Hay pagos pendientes");
-                this.pagar.setVisible(true);
-            }else{
-                this.texto4.setText("El cliente está solvente");
-                this.pagar.setVisible(false);
-            }
-            this.historial.setVisible(true);
+        if(this.campo.getText().trim().length() == 0){
+            JOptionPane.showMessageDialog(rootPane, "ERROR!!! COMPLETE EL CAMPO DE BÚSQUEDA");
         }else{
-            JOptionPane.showMessageDialog(rootPane, "NO EXISTE CLIENTE REGISTRADO POR C.I "+this.campo.getText());
+            int key = Integer.parseInt(this.campo.getText());    
+            if(MenuInicio.clientes.estaNodo(MenuInicio.clientes.getRaiz(), key)){
+                NodoArbol aux = MenuInicio.clientes.buscarNodo(MenuInicio.clientes.getRaiz(), key);
+                this.temp = ((Cliente)aux.getDato());
+                this.texto1.setText("Nombre: "+((Cliente)aux.getDato()).getNombre());
+                this.texto3.setText("Telefono: "+((Cliente)aux.getDato()).getTelefono());
+                if(!((Cliente)aux.getDato()).isSolvente()){
+                    this.texto4.setText("Hay pagos pendientes");
+                    this.pagar.setVisible(true);
+                }else{
+                    this.texto4.setText("El cliente está solvente");
+                    this.pagar.setVisible(false);
+                }
+                this.historial.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "NO EXISTE CLIENTE REGISTRADO POR ESA C.I "+this.campo.getText());
+            }
         }
-        
     }//GEN-LAST:event_buscarActionPerformed
 
     private void campoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoKeyTyped

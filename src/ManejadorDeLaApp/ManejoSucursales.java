@@ -363,6 +363,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         
             ComboBoxModel aux2 = new DefaultComboBoxModel(aux3);
             this.peliculas.setModel(aux2);
+            this.texto6.setText("Película en emisión: "+this.temp2.getPelicula().getNombre());
         }
     }//GEN-LAST:event_eliminarPeliculaActionPerformed
 

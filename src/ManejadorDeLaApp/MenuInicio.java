@@ -1,14 +1,30 @@
+/*
+*   Universidad Metropolitana
+*   Estructuras de Datos
+*   Proyecto 2
+*   Samuel Vera
+*   Carnet: 20171110080
+*/
+
 package ManejadorDeLaApp;
 
 import CodigoEstructuras.*;
 import java.util.Random;
 
-public class MenuInicio <T> extends javax.swing.JFrame {
+/*
+*   Clase main donde comienza la ejecución
+*   
+*   Además desde esta clase se manejan en un contexto estático
+*   a lo árboles que funcionan como principal estructura del programa.
+*/
 
+public class MenuInicio <T> extends javax.swing.JFrame {
+    
     public static Arbol sucursales = new Arbol();
     public static Arbol clientes = new Arbol();
     public static MenuInicio exe;
     
+        //Constructor a llamar al comienzo de la ejecución
     public MenuInicio(boolean pasa) {
 
         initComponents();
@@ -18,9 +34,9 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         Ticket.setPrecio2D(100);
         Ticket.setPrecio3D(200);
         Ticket.setPrecio4D(400);
-        precio2D.setText("Ticket 2D: "+Ticket.getPrecio2D());
-        precio3D.setText("Ticket 3D: "+Ticket.getPrecio3D());
-        precio4D.setText("Ticket 4DX: "+Ticket.getPrecio4D());
+        this.precio2D.setText("Ticket 2D: "+Ticket.getPrecio2D());
+        this.precio3D.setText("Ticket 3D: "+Ticket.getPrecio3D());
+        this.precio4D.setText("Ticket 4DX: "+Ticket.getPrecio4D());
         
         int dd = 0, ddd = 0, dx = 0;
         
@@ -36,22 +52,22 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         
     }
     
+        /*Contructor a llamar para las demás interacciones de la ventana con otra
+        *para no alterar los valores de los arboles de datos
+        */
     public MenuInicio(){
         
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setTitle("MetroCine");
-        Ticket.setPrecio2D(100);
-        Ticket.setPrecio3D(200);
-        Ticket.setPrecio4D(400);
-        precio2D.setText("Ticket 2D: "+Ticket.getPrecio2D());
-        precio3D.setText("Ticket 3D: "+Ticket.getPrecio3D());
-        precio4D.setText("Ticket 4DX: "+Ticket.getPrecio4D());
+        this.precio2D.setText("Ticket 2D: "+Ticket.getPrecio2D());
+        this.precio3D.setText("Ticket 3D: "+Ticket.getPrecio3D());
+        this.precio4D.setText("Ticket 4DX: "+Ticket.getPrecio4D());
         
     }
 
-        //Inicializar Sucursal por defecto
+        //Método para inicializar las sucursales por defecto
     public Sucursal incializarSucursal(String direccion, int dd, int ddd, int dx){
     
         Random rand = new Random();
@@ -69,15 +85,13 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 }
             }
         }while(tempo == false);
-        System.out.println(codigo);
         
         Sucursal aux = new Sucursal(direccion, codigo);
         
             //Agregar salas por defecto
         while(cont != 5){
             
-            int aux2 = rand.nextInt(3);
-            
+            int aux2 = rand.nextInt(3);   
             if(aux2 == 0 && dd!=5){
                 cont++;
                 aux.agregarSala(new Sala2D(cont,aux));
@@ -125,6 +139,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         verSucursales = new javax.swing.JButton();
         manejarClientes = new javax.swing.JButton();
         buscarPelicula = new javax.swing.JButton();
+        cambiarPrecio = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
         precio2D = new javax.swing.JLabel();
         precio3D = new javax.swing.JLabel();
@@ -142,7 +157,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 verSucursalesActionPerformed(evt);
             }
         });
-        getContentPane().add(verSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 210, 40));
+        getContentPane().add(verSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 210, 30));
 
         manejarClientes.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         manejarClientes.setText("Manejar Clientes");
@@ -151,7 +166,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 manejarClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(manejarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, 40));
+        getContentPane().add(manejarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 210, 30));
 
         buscarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         buscarPelicula.setText("Buscar Película");
@@ -160,7 +175,16 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 buscarPeliculaActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 210, 40));
+        getContentPane().add(buscarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 210, 30));
+
+        cambiarPrecio.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        cambiarPrecio.setText("Cambiar Precios");
+        cambiarPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarPrecioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cambiarPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 210, 30));
 
         logo.setText("Logo feo que deberias cambiar luego");
         getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
@@ -193,8 +217,13 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         new ManejarClientes();
     }//GEN-LAST:event_manejarClientesActionPerformed
 
+    private void cambiarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPrecioActionPerformed
+        new Editar(true);
+        this.dispose();
+    }//GEN-LAST:event_cambiarPrecioActionPerformed
+
     /**
-     * @param args the command line arguments
+     * @param args
      */
     public static void main(String args[]) {
 
@@ -221,6 +250,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarPelicula;
+    private javax.swing.JButton cambiarPrecio;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel logo;
     private javax.swing.JButton manejarClientes;

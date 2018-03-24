@@ -125,11 +125,9 @@ public class VentanaDeComprar extends javax.swing.JFrame {
             
             if(!MenuInicio.clientes.estaNodo(MenuInicio.clientes.getRaiz(), cod)){
                     JOptionPane.showMessageDialog(rootPane, "El cliente no está registrado en el sistema, deberá pagar al momento");
-                    pago = true;
                     clien = null;
                 }else{
                     JOptionPane.showMessageDialog(rootPane, "El cliente está registrado en el sistema, tiene facilidades para pagar su ticker luego");
-                    pago = false;
                     clien = (Cliente)MenuInicio.clientes.buscarNodo(MenuInicio.clientes.getRaiz(), cod).getDato();
                 }
             
@@ -145,11 +143,11 @@ public class VentanaDeComprar extends javax.swing.JFrame {
                     }
                 }
                 if(this.temp2  instanceof Sala2D){
-                    aux = new Ticket(codigo, this.temp3, this.temp2, clien, true, false, false, pago);
+                    aux = new Ticket(codigo, this.temp3, this.temp2, clien, true, false, false);
                 }else if(this.temp2 instanceof Sala3D){
-                    aux = new Ticket(codigo, this.temp3, this.temp2, clien, false, true, false, pago);
+                    aux = new Ticket(codigo, this.temp3, this.temp2, clien, false, true, false);
                 }else{
-                    aux = new Ticket(codigo, this.temp3, this.temp2, clien, false, false, true, pago);
+                    aux = new Ticket(codigo, this.temp3, this.temp2, clien, false, false, true);
                 }
                 if(clien != null){
                     clien.agregarTickets(aux);

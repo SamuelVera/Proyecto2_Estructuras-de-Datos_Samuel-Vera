@@ -5,15 +5,15 @@ import java.util.Date;
 public class Ticket {
     
     private int id;
-    private static double precio2D, precio3D, precio4D;
+    protected static double precio2D, precio3D, precio4D;
     private double precioTicket;
     private Sala sala;
     private Pelicula pelicula;
     private Cliente cliente;
     private Date fecha;
-    private boolean pagado = false, dd, ddd, dx;
+    private boolean dd, ddd, dx;
 
-    public Ticket(int id, Pelicula pelicula, Sala sala,Cliente cliente, boolean dd, boolean ddd, boolean dx, boolean pagado) {
+    public Ticket(int id, Pelicula pelicula, Sala sala,Cliente cliente, boolean dd, boolean ddd, boolean dx) {
         
         this.id = id;
         this.pelicula = pelicula;
@@ -23,7 +23,6 @@ public class Ticket {
         this.dd = dd;
         this.ddd = ddd;
         this.dx = dx;
-        this.pagado = pagado;
         if(sala instanceof Sala2D){
             this.precioTicket = Ticket.getPrecio2D();
         }else if(sala instanceof Sala3D){
@@ -34,16 +33,20 @@ public class Ticket {
         
     }
 
-    public static void setPrecio2D(double precio2D) {
-        Ticket.precio2D = precio2D;
+    public void setPrecioTicket(double precio){
+        this.precioTicket = precio;
+    }
+    
+    public static void setPrecio2D(double precio2) {
+        Ticket.precio2D = precio2;
     }
 
-    public static void setPrecio3D(double precio3D) {
-        Ticket.precio3D = precio3D;
+    public static void setPrecio3D(double precio3) {
+        Ticket.precio3D = precio3;
     }
 
-    public static void setPrecio4D(double precio4D) {
-        Ticket.precio4D = precio4D;
+    public static void setPrecio4D(double precio4) {
+        Ticket.precio4D = precio4;
     }
 
     public Sala getSala() {
@@ -62,15 +65,27 @@ public class Ticket {
         return Ticket.precio4D;
     }
 
-    public boolean isPagado() {
-        return this.pagado;
-    }
-    
-    public void setPagado(boolean pagado) {
-        this.pagado = pagado;
-    }
-
     public int getId() {
         return this.id;
+    }
+    
+    public String getNombrePelicula(){
+        return this.pelicula.getNombre();
+    }
+
+    public double getPrecioTicket() {
+        return precioTicket;
+    }
+    
+    public boolean is2D(){
+        return this.dd;
+    }
+    
+    public boolean is3D(){
+        return this.ddd;
+    }        
+    
+    public boolean is4D(){
+        return this.dx;
     }
 }
