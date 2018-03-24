@@ -128,7 +128,7 @@ public class ManejarClientes extends javax.swing.JFrame {
             this.temp = ((Cliente)aux.getDato());
             this.texto1.setText("Nombre: "+((Cliente)aux.getDato()).getNombre());
             this.texto3.setText("Telefono: "+((Cliente)aux.getDato()).getTelefono());
-            if(!((Cliente)aux.getDato()).isSolvente(((Cliente)aux.getDato()).getArbolTickets().getRaiz())){
+            if(!((Cliente)aux.getDato()).isSolvente()){
                 this.texto4.setText("Hay pagos pendientes");
                 this.pagar.setVisible(true);
             }else{

@@ -6,7 +6,7 @@ public class Cliente {
     
     private int ci, telefono;
     private String nombre;
-    private Arbol tickets = new Arbol();
+    private CarroCompra carro = new CarroCompra();
     
     public Cliente(int ci, int telefono, String nombre){   //Constructor con datos del cliente
         this.ci = ci;
@@ -14,36 +14,23 @@ public class Cliente {
         this.nombre = nombre;
     }
     
-        //Agregar n tickets al carrito
+        //Agregar tickets al carrito
     public void agregarTickets(Ticket ticket){
-        this.tickets.agregar(this.tickets.getRaiz(), new NodoArbol(ticket,ticket.getId()));
+        this.carro.getTicketsPorPagar().agregar(this.carro.getTicketsPorPagar().getRaiz(), new NodoArbol(ticket,ticket.getId()));
+    }
+    
+    public CarroCompra getCarro(){
+        return this.carro;
     }
     
         //Método de ver si todos los tickets estan pagados
-    public boolean isSolvente(NodoArbol n){
-        if(n!=null){
-            if(!((Ticket)n.getDato()).isPagado()){
-                return false;
-            }
-            return isSolvente(n.getHijoD())&& isSolvente(n.getHijoI());
-        }else{
-            return true;
-        }
-    }
-    
-    public void getTicketsPagados(NodoArbol n, ListaSimple aux){
-        if(n != null){
-            if(((Ticket)n.getDato()).isPagado()){
-                aux.insertPrimero(n.getDato());
-            }
-            this.getTicketsPagados(n.getHijoD(),aux);
-            this.getTicketsPagados(n.getHijoI(),aux);
-        }
+    public boolean isSolvente(){
+        return this.carro.getTicketsPorPagar().contar(this.carro.getTicketsPorPagar().getRaiz()) == 0;
     }
     
         //Retirar n Tickets conociendo sus identificadores
     public void deshacer(int cod){
-        this.tickets.eliminarNodo(this.tickets.getRaiz(), cod);
+        this.carro.getTicketsPorPagar().eliminarNodo(this.carro.getTicketsPorPagar().getRaiz(), cod);
     }
     
     public int getCi(){
@@ -56,13 +43,5 @@ public class Cliente {
 
     public String getNombre() {
         return nombre;
-    }
-    
-    public void setSolvente(){
-        this.isSolvente(this.tickets.getRaiz());
-    }
-    
-    public Arbol getArbolTickets(){
-        return this.tickets;
     }
 }

@@ -16,7 +16,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Manejador de Ordenes");
         this.temp = cliente;
-        this.temp2 = this.temp.getArbolTickets();
+        this.temp2 = this.temp.getCarro().getTicketsPorPagar();
         this.filtrarPagos(this.temp2.getRaiz());
         this.texto1.setText("CI: "+this.temp.getCi());
         this.texto2.setText(this.temp.getNombre());
@@ -38,14 +38,14 @@ public class ManejarOrdenes extends javax.swing.JFrame {
         this.deshacer.setVisible(false);
         this.setTitle("Manejador de Ordenes");
         this.temp = cliente;
-        this.temp2 = this.temp.getArbolTickets();
+        this.temp2 = this.temp.getCarro().getTicketsPagados();
         this.texto1.setText("CI: "+this.temp.getCi());
         this.texto2.setText(this.temp.getNombre());
-        ListaSimple aux = new ListaSimple();
-        this.temp.getTicketsPagados(this.temp2.getRaiz(), aux);
-        String[] aux2 = new String[aux.contarElementos()];
-        for(int i=0;i<aux2.length && !aux.isVacio();i++){
-            aux2[i] = ""+((Ticket)aux.eliminarPrimero()).getId();
+        int[] aux = new int[this.temp2.contar(this.temp2.getRaiz())];
+        this.temp2.getTodosLosCodigos(this.temp2.getRaiz(), aux);
+        String[] aux2 = new String[aux.length];
+        for(int i=0;i<aux2.length;i++){
+            aux2[i] = ""+aux[i];
         }
         ComboBoxModel aux3 = new DefaultComboBoxModel(aux2);
         this.ticketsPorPagar.setModel(aux3);
@@ -161,16 +161,15 @@ public class ManejarOrdenes extends javax.swing.JFrame {
             NodoArbol aux3;
             Sala sala;
             for(int i=0;i<aux.length;i++){
-                aux3 = this.temp.getArbolTickets().buscarNodo(this.temp.getArbolTickets().getRaiz(), aux[i]);
-                this.temp.getArbolTickets().eliminarNodo(this.temp.getArbolTickets().getRaiz(), aux3.getCodigo());
+                aux3 = this.temp.getCarro().getTicketsPorPagar().buscarNodo(this.temp.getCarro().getTicketsPorPagar().getRaiz(), aux[i]);
+                this.temp.getCarro().getTicketsPorPagar().eliminarNodo(this.temp.getCarro().getTicketsPorPagar().getRaiz(), aux3.getCodigo());
                 ((Ticket)aux3.getDato()).setPagado(true);
-                this.temp.getArbolTickets().agregar(this.temp.getArbolTickets().getRaiz(), new NodoArbol(((Ticket)aux3.getDato()),((Ticket)aux3.getDato()).getId()));
+                this.temp.getCarro().getTicketsPagados().agregar(this.temp.getCarro().getTicketsPagados().getRaiz(), new NodoArbol(((Ticket)aux3.getDato()),((Ticket)aux3.getDato()).getId()));
                 sala = ((Ticket)aux3.getDato()).getSala();
                 sala.agregarTicket((Ticket)aux3.getDato());
                 MenuInicio.sucursales.eliminarNodo(MenuInicio.sucursales.getRaiz(), sala.getSucursal().getCodigo());
                 MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), new NodoArbol(sala.getSucursal(),sala.getSucursal().getCodigo()));
             }
-            this.temp.isSolvente(this.temp.getArbolTickets().getRaiz());
             MenuInicio.clientes.eliminarNodo(MenuInicio.clientes.getRaiz(), this.temp.getCi());
             MenuInicio.clientes.agregar(MenuInicio.clientes.getRaiz(), new NodoArbol(this.temp,this.temp.getCi()));
             new ManejarClientes();
@@ -189,9 +188,10 @@ public class ManejarOrdenes extends javax.swing.JFrame {
                 aux[i] = Integer.parseInt(aux2[i].toString());
             }
             for(int i=0;i<aux.length;i++){
-                this.temp.getArbolTickets().eliminarNodo(this.temp.getArbolTickets().getRaiz(), aux[i]);
+                this.temp.getCarro().getTicketsPorPagar().eliminarNodo(this.temp.getCarro().getTicketsPorPagar().getRaiz(), aux[i]);
             }
-            this.temp.isSolvente(this.temp.getArbolTickets().getRaiz());
+            MenuInicio.clientes.eliminarNodo(MenuInicio.clientes.getRaiz(), this.temp.getCi());
+            MenuInicio.clientes.agregar(MenuInicio.clientes.getRaiz(), new NodoArbol(this.temp,this.temp.getCi()));
             new ManejarClientes();
             this.dispose();
         }
