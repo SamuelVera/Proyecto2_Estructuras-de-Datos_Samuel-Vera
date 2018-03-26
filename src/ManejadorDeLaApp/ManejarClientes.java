@@ -38,6 +38,7 @@ public class ManejarClientes extends javax.swing.JFrame {
 
         agregarCliente.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         agregarCliente.setText("Agregar Cliente");
+        agregarCliente.setOpaque(false);
         agregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarClienteActionPerformed(evt);
@@ -47,6 +48,7 @@ public class ManejarClientes extends javax.swing.JFrame {
 
         volver.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         volver.setText("Volver");
+        volver.setOpaque(false);
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
@@ -56,12 +58,13 @@ public class ManejarClientes extends javax.swing.JFrame {
 
         buscar.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         buscar.setText("Buscar");
+        buscar.setOpaque(false);
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarActionPerformed(evt);
             }
         });
-        getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
+        getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, 20));
 
         campo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +93,7 @@ public class ManejarClientes extends javax.swing.JFrame {
 
         pagar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         pagar.setText("Pagar/Deshacer");
+        pagar.setOpaque(false);
         pagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pagarActionPerformed(evt);
@@ -99,12 +103,15 @@ public class ManejarClientes extends javax.swing.JFrame {
 
         historial.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         historial.setText("Historial Compras");
+        historial.setOpaque(false);
         historial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 historialActionPerformed(evt);
             }
         });
         getContentPane().add(historial, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 150, 20));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 220));
 
         pack();

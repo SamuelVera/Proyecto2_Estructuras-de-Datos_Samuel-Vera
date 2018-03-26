@@ -88,6 +88,7 @@ public class VentanaDeComprar extends javax.swing.JFrame {
 
         comprar.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         comprar.setText("Comprar");
+        comprar.setOpaque(false);
         comprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comprarActionPerformed(evt);
@@ -107,6 +108,8 @@ public class VentanaDeComprar extends javax.swing.JFrame {
             }
         });
         getContentPane().add(campo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 200, 30));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 270));
 
         pack();

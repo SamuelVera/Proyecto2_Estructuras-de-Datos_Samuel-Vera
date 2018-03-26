@@ -152,6 +152,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
         verSucursales.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         verSucursales.setText("Manejar Sucursales");
+        verSucursales.setOpaque(false);
         verSucursales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verSucursalesActionPerformed(evt);
@@ -161,6 +162,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
         manejarClientes.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         manejarClientes.setText("Manejar Clientes");
+        manejarClientes.setOpaque(false);
         manejarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manejarClientesActionPerformed(evt);
@@ -170,6 +172,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
         buscarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         buscarPelicula.setText("Buscar Película");
+        buscarPelicula.setOpaque(false);
         buscarPelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarPeliculaActionPerformed(evt);
@@ -179,6 +182,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
         cambiarPrecio.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         cambiarPrecio.setText("Cambiar Precios");
+        cambiarPrecio.setOpaque(false);
         cambiarPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cambiarPrecioActionPerformed(evt);
@@ -197,7 +201,9 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
         precio4D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         getContentPane().add(precio4D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 170, 30));
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 270));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 250));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

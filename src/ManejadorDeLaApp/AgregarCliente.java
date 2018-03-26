@@ -68,6 +68,7 @@ public class AgregarCliente extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         jButton1.setText("Volver");
+        jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -77,6 +78,7 @@ public class AgregarCliente extends javax.swing.JFrame {
 
         agregar.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         agregar.setText("Agregar");
+        agregar.setOpaque(false);
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
@@ -95,7 +97,9 @@ public class AgregarCliente extends javax.swing.JFrame {
         texto3.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         texto3.setText("Teléfono:");
         getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 90, 20));
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 400, 200));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 200));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

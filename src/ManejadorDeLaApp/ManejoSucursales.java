@@ -112,35 +112,39 @@ public class ManejoSucursales extends javax.swing.JFrame {
         });
         getContentPane().add(sucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 250, 30));
 
-        volver.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        volver.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         volver.setText("Volver");
+        volver.setOpaque(false);
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
             }
         });
-        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, 20));
 
         editar.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         editar.setText("Editar");
+        editar.setOpaque(false);
         editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarActionPerformed(evt);
             }
         });
-        getContentPane().add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 70, 20));
+        getContentPane().add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 70, 20));
 
         agregar.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         agregar.setText("Añadir");
+        agregar.setOpaque(false);
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 70, 20));
+        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 70, 20));
 
         agregarSala.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         agregarSala.setText("Añadir Sala");
+        agregarSala.setOpaque(false);
         agregarSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarSalaActionPerformed(evt);
@@ -148,8 +152,9 @@ public class ManejoSucursales extends javax.swing.JFrame {
         });
         getContentPane().add(agregarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, 20));
 
-        editarSala.setFont(new java.awt.Font("Verdana", 0, 12));
+        editarSala.setFont(new java.awt.Font("Verdana", 0, 11));
         editarSala.setText("Editar Sala");
+        editarSala.setOpaque(false);
         editarSala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarSalaActionPerformed(evt);
@@ -159,6 +164,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
 
         verPeliculas.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         verPeliculas.setText("Ver Películas");
+        verPeliculas.setOpaque(false);
         verPeliculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verPeliculasActionPerformed(evt);
@@ -168,6 +174,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
 
         agregarPelicula.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         agregarPelicula.setText("Agregar Película");
+        agregarPelicula.setOpaque(false);
         agregarPelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarPeliculaActionPerformed(evt);
@@ -177,6 +184,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
 
         eliminarPelicula.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         eliminarPelicula.setText("Eliminar Primera");
+        eliminarPelicula.setOpaque(false);
         eliminarPelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarPeliculaActionPerformed(evt);
@@ -184,13 +192,17 @@ public class ManejoSucursales extends javax.swing.JFrame {
         });
         getContentPane().add(eliminarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 130, 20));
 
+        comprarPelicula.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         comprarPelicula.setText("ComprarBoleto");
+        comprarPelicula.setOpaque(false);
         comprarPelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comprarPeliculaActionPerformed(evt);
             }
         });
         getContentPane().add(comprarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 120, 20));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 290));
 
         pack();
@@ -363,10 +375,34 @@ public class ManejoSucursales extends javax.swing.JFrame {
         
             ComboBoxModel aux2 = new DefaultComboBoxModel(aux3);
             this.peliculas.setModel(aux2);
-            this.texto6.setText("Película en emisión: "+this.temp2.getPelicula().getNombre());
+            if(this.temp2.getPelicula() != null){
+                this.texto6.setText("Película en emisión: "+this.temp2.getPelicula().getNombre());
+            }
+            this.eliminarPelicula(MenuInicio.clientes.getRaiz());
         }
     }//GEN-LAST:event_eliminarPeliculaActionPerformed
 
+    private void eliminarPelicula(NodoArbol n){
+        if(n!=null){
+            Cliente clien = (Cliente)n.getDato();
+            this.eliminarTicket(clien.getCarro().getTicketsPorPagar().getRaiz(),clien.getCarro().getTicketsPorPagar());
+            MenuInicio.clientes.eliminarNodo(MenuInicio.clientes.getRaiz(), clien.getCi());
+            MenuInicio.clientes.agregar(MenuInicio.clientes.getRaiz(), new NodoArbol(clien,clien.getCi()));
+            this.eliminarPelicula(n.getHijoD());
+            this.eliminarPelicula(n.getHijoI());
+        }
+    }
+    
+    private void eliminarTicket(NodoArbol n, Arbol a){
+        if(n!=null){
+            if(((Ticket)n.getDato()).getSala().getNumero() == this.temp2.getNumero() && ((Ticket)n.getDato()).getSala().getSucursal().getCodigo() == this.temp.getCodigo()){
+                a.eliminarNodo(a.getRaiz(), n.getCodigo());
+                this.eliminarTicket(n.getHijoD(),a);
+                this.eliminarTicket(n.getHijoI(), a);
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
     private javax.swing.JButton agregarPelicula;

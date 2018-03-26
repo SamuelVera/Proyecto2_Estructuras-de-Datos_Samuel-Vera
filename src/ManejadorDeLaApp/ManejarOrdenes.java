@@ -100,6 +100,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
 
         ver.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         ver.setText("Ver Datos del Ticket");
+        ver.setOpaque(false);
         ver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verActionPerformed(evt);
@@ -109,6 +110,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
 
         pagar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         pagar.setText("Pagar");
+        pagar.setOpaque(false);
         pagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pagarActionPerformed(evt);
@@ -118,6 +120,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
 
         deshacer.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         deshacer.setText("Devolver Tickets");
+        deshacer.setOpaque(false);
         deshacer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deshacerActionPerformed(evt);
@@ -127,6 +130,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
 
         volver.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         volver.setText("Volver");
+        volver.setOpaque(false);
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
@@ -138,6 +142,8 @@ public class ManejarOrdenes extends javax.swing.JFrame {
         JScrollPane.setViewportView(tickets);
 
         getContentPane().add(JScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 160, 180));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 230));
 
         pack();

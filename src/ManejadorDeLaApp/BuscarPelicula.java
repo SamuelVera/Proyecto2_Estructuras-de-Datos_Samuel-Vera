@@ -137,8 +137,8 @@ public class BuscarPelicula extends javax.swing.JFrame {
         odenarAlfabetico = new javax.swing.JRadioButton();
         odenarInverso = new javax.swing.JRadioButton();
         volver = new javax.swing.JButton();
+        verDatos = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -163,6 +163,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         filtroYFiltro.add(filtrarGenero);
         filtrarGenero.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         filtrarGenero.setText("Género");
+        filtrarGenero.setOpaque(false);
         filtrarGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtrarGeneroActionPerformed(evt);
@@ -173,6 +174,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         filtroYFiltro.add(filtrarIdioma);
         filtrarIdioma.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         filtrarIdioma.setText("Idioma");
+        filtrarIdioma.setOpaque(false);
         filtrarIdioma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtrarIdiomaActionPerformed(evt);
@@ -205,6 +207,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         filtroYFiltro.add(odenarAlfabetico);
         odenarAlfabetico.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         odenarAlfabetico.setText("Alfabeticamente");
+        odenarAlfabetico.setOpaque(false);
         odenarAlfabetico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 odenarAlfabeticoActionPerformed(evt);
@@ -215,6 +218,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         filtroYFiltro.add(odenarInverso);
         odenarInverso.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         odenarInverso.setText("Inversamente");
+        odenarInverso.setOpaque(false);
         odenarInverso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 odenarInversoActionPerformed(evt);
@@ -223,16 +227,20 @@ public class BuscarPelicula extends javax.swing.JFrame {
         getContentPane().add(odenarInverso, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
 
         volver.setText("Volver");
+        volver.setOpaque(false);
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
             }
         });
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, -1, 20));
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 400));
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, 20));
+        verDatos.setText("jButton1");
+        verDatos.setOpaque(false);
+        getContentPane().add(verDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, 20));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -347,7 +355,6 @@ public class BuscarPelicula extends javax.swing.JFrame {
     private javax.swing.JLabel fondo;
     private javax.swing.JComboBox<String> generos;
     private javax.swing.JComboBox<String> idiomas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton odenarAlfabetico;
     private javax.swing.JRadioButton odenarInverso;
@@ -356,6 +363,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
     private javax.swing.JLabel texto2;
     private javax.swing.JLabel texto3;
     private javax.swing.JLabel texto4;
+    private javax.swing.JButton verDatos;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

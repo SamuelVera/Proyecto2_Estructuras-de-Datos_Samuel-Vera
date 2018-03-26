@@ -71,65 +71,78 @@ public class AgregarPelicula extends javax.swing.JFrame {
         generos.add(accion);
         accion.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         accion.setText("Acción");
+        accion.setOpaque(false);
         getContentPane().add(accion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         generos.add(experimental);
         experimental.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         experimental.setText("Experimental");
+        experimental.setOpaque(false);
         getContentPane().add(experimental, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
         generos.add(scifi);
         scifi.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         scifi.setText("Sci-fi");
+        scifi.setOpaque(false);
         getContentPane().add(scifi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
 
         generos.add(terror);
         terror.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         terror.setText("Terror");
+        terror.setOpaque(false);
         getContentPane().add(terror, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         generos.add(fantasia);
         fantasia.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         fantasia.setText("Fantasía");
+        fantasia.setOpaque(false);
         getContentPane().add(fantasia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, -1));
 
         generos.add(historico);
         historico.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         historico.setText("Histórico");
+        historico.setOpaque(false);
         getContentPane().add(historico, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
 
         generos.add(guerra);
         guerra.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         guerra.setText("Guerra");
+        guerra.setOpaque(false);
         getContentPane().add(guerra, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
 
         generos.add(deporte);
         deporte.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         deporte.setText("Deporte");
+        deporte.setOpaque(false);
         getContentPane().add(deporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, -1));
 
         generos.add(comedia);
         comedia.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         comedia.setText("Comedia");
+        comedia.setOpaque(false);
         getContentPane().add(comedia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, -1, -1));
 
         generos.add(musical);
         musical.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         musical.setText("Musical");
+        musical.setOpaque(false);
         getContentPane().add(musical, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         generos.add(drama);
         drama.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         drama.setText("Drama");
+        drama.setOpaque(false);
         getContentPane().add(drama, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         generos.add(romance);
         romance.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         romance.setText("Romance");
+        romance.setOpaque(false);
         getContentPane().add(romance, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
 
         agregar.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         agregar.setText("Agregar");
+        agregar.setOpaque(false);
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
@@ -139,32 +152,40 @@ public class AgregarPelicula extends javax.swing.JFrame {
 
         volver.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         volver.setText("Volver");
+        volver.setOpaque(false);
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 80, 20));
 
         idiomas.add(espanol);
         espanol.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         espanol.setText("Español");
+        espanol.setOpaque(false);
         getContentPane().add(espanol, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         idiomas.add(ingles);
         ingles.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         ingles.setText("Inglés");
+        ingles.setOpaque(false);
         getContentPane().add(ingles, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
 
         idiomas.add(frances);
         frances.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         frances.setText("Francés");
+        frances.setOpaque(false);
         getContentPane().add(frances, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, -1, -1));
 
         idiomas.add(italiano);
         italiano.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         italiano.setText("Italiano");
+        italiano.setOpaque(false);
         getContentPane().add(italiano, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         idiomas.add(aleman);
         aleman.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         aleman.setText("Alemán");
+        aleman.setOpaque(false);
         getContentPane().add(aleman, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 350));
 
         pack();
