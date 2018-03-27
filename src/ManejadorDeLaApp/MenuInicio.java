@@ -9,7 +9,12 @@
 package ManejadorDeLaApp;
 
 import CodigoEstructuras.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Random;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /*
 *   Clase main donde comienza la ejecución
@@ -23,10 +28,12 @@ public class MenuInicio <T> extends javax.swing.JFrame {
     public static Arbol sucursales = new Arbol();
     public static Arbol clientes = new Arbol();
     public static MenuInicio exe;
+    public static Date fecha = new Date();
+    private SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     
         //Constructor a llamar al comienzo de la ejecución
     public MenuInicio(boolean pasa) {
-
+        
         initComponents();
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -37,7 +44,6 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         this.precio2D.setText("Ticket 2D: "+Ticket.getPrecio2D());
         this.precio3D.setText("Ticket 3D: "+Ticket.getPrecio3D());
         this.precio4D.setText("Ticket 4DX: "+Ticket.getPrecio4D());
-        
         int dd = 0, ddd = 0, dx = 0;
         
         Sucursal aux = this.incializarSucursal("Caracas", dd, ddd, dx);
@@ -49,7 +55,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         aux = this.incializarSucursal("Barcelona", dd, ddd, dx);
         aux2 = new NodoArbol(aux, aux.getCodigo());
         MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), aux2);
-        
+        this.dia.setText(this.df.format(MenuInicio.fecha));
     }
     
         /*Contructor a llamar para las demás interacciones de la ventana con otra
@@ -64,6 +70,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         this.precio2D.setText("Ticket 2D: "+Ticket.getPrecio2D());
         this.precio3D.setText("Ticket 3D: "+Ticket.getPrecio3D());
         this.precio4D.setText("Ticket 4DX: "+Ticket.getPrecio4D());
+        this.dia.setText(this.df.format(MenuInicio.fecha));
         
     }
 
@@ -144,6 +151,8 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         precio2D = new javax.swing.JLabel();
         precio3D = new javax.swing.JLabel();
         precio4D = new javax.swing.JLabel();
+        avanzarDia = new javax.swing.JButton();
+        dia = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -202,6 +211,18 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         precio4D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         getContentPane().add(precio4D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 170, 30));
 
+        avanzarDia.setText("+1 Día");
+        avanzarDia.setOpaque(false);
+        avanzarDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                avanzarDiaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(avanzarDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, -1, 20));
+
+        dia.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        getContentPane().add(dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 130, 20));
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 250));
 
@@ -228,6 +249,11 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cambiarPrecioActionPerformed
 
+    private void avanzarDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avanzarDiaActionPerformed
+        new FinalDia();
+        this.dispose();
+    }//GEN-LAST:event_avanzarDiaActionPerformed
+    
     /**
      * @param args
      */
@@ -253,10 +279,11 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         new MenuInicio(true);
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton avanzarDia;
     private javax.swing.JButton buscarPelicula;
     private javax.swing.JButton cambiarPrecio;
+    private javax.swing.JLabel dia;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel logo;
     private javax.swing.JButton manejarClientes;

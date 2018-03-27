@@ -235,8 +235,13 @@ public class BuscarPelicula extends javax.swing.JFrame {
         });
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, -1, 20));
 
-        verDatos.setText("jButton1");
+        verDatos.setText("Ver Datos");
         verDatos.setOpaque(false);
+        verDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verDatosActionPerformed(evt);
+            }
+        });
         getContentPane().add(verDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, 20));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
@@ -347,6 +352,12 @@ public class BuscarPelicula extends javax.swing.JFrame {
         this.ordenados.setModel(aux3);
         
     }//GEN-LAST:event_odenarAlfabeticoActionPerformed
+
+    private void verDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verDatosActionPerformed
+        Pelicula aux = (Pelicula)this.peliculas.buscarNodo(this.peliculas.getRaiz(), this.ordenados.getSelectedValue()).getDato();
+        String s = aux.getNombre()+" "+aux.getIdioma()+" "+aux.getGenero();
+        JOptionPane.showMessageDialog(rootPane, s);
+    }//GEN-LAST:event_verDatosActionPerformed
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton filtrarGenero;

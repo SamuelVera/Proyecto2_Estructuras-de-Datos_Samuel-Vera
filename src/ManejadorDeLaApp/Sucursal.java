@@ -10,10 +10,8 @@ public class Sucursal {
     private ListaSimple salas = new ListaSimple();
     
     public Sucursal(String ubicacion, int codigo){
-        
         this.codigo = codigo;
         this.ubicacion = ubicacion;
-        
     }
     
     public int getCodigo(){
@@ -35,13 +33,13 @@ public class Sucursal {
     public void agregarSala(Sala4DX aux){
         this.salas.insertPrimero(aux);
     }
-
-    public ListaSimple getSalas() {
-        return this.salas;
-    }
     
     public void setSalas(ListaSimple salas){
         this.salas = salas;
+    }
+    
+    public ListaSimple getSalas() {
+        return this.salas;
     }
     
     public Sala getSala(int num){
@@ -55,5 +53,16 @@ public class Sucursal {
             aux = aux.getProximo();
         }
         return null;
+    }
+    
+    public double gananciaDia(){
+        double aux = 0, mayor = -1;
+        NodoSimple n = this.salas.getCabeza();
+        
+        while(n!=null){
+            aux = aux+((Sala)n.getDato()).ventasDia(((Sala)n.getDato()).getArbolTickets().getRaiz());
+            n = n.getProximo();
+        }
+        return aux;
     }
 }

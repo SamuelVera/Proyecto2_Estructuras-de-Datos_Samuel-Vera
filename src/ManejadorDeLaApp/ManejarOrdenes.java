@@ -1,6 +1,7 @@
 package ManejadorDeLaApp;
 
 import CodigoEstructuras.*;
+import java.text.SimpleDateFormat;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -63,6 +64,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
         texto5 = new javax.swing.JLabel();
         texto6 = new javax.swing.JLabel();
         texto7 = new javax.swing.JLabel();
+        texto8 = new javax.swing.JLabel();
         ver = new javax.swing.JButton();
         pagar = new javax.swing.JButton();
         deshacer = new javax.swing.JButton();
@@ -80,23 +82,24 @@ public class ManejarOrdenes extends javax.swing.JFrame {
         getContentPane().add(texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 30));
 
         texto2.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        getContentPane().add(texto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 190, 30));
+        getContentPane().add(texto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 190, 30));
 
         texto3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         texto3.setText("Seleccione los tickets");
         getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 160, -1));
 
         texto4.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(texto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 190, 20));
+        getContentPane().add(texto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 190, 20));
 
         texto5.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(texto5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 190, 20));
+        getContentPane().add(texto5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 190, 20));
 
         texto6.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(texto6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 190, 20));
+        getContentPane().add(texto6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 190, 20));
 
         texto7.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(texto7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 190, 20));
+        getContentPane().add(texto7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 190, 20));
+        getContentPane().add(texto8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 190, 20));
 
         ver.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         ver.setText("Ver Datos del Ticket");
@@ -232,6 +235,8 @@ public class ManejarOrdenes extends javax.swing.JFrame {
             }
             this.texto6.setText("Pelicula: "+aux.getNombrePelicula());
             this.texto7.setText("Precio: "+aux.getPrecioTicket()+" Bs.");
+            SimpleDateFormat aux2 = new SimpleDateFormat("dd-MM-yyyy");
+            this.texto8.setText(aux2.format(aux.getFecha()));
         }
     }//GEN-LAST:event_verActionPerformed
 
@@ -248,6 +253,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
     private javax.swing.JLabel texto5;
     private javax.swing.JLabel texto6;
     private javax.swing.JLabel texto7;
+    private javax.swing.JLabel texto8;
     private javax.swing.JList<String> tickets;
     private javax.swing.JButton ver;
     private javax.swing.JButton volver;

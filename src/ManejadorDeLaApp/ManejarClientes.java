@@ -56,7 +56,7 @@ public class ManejarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 70, 20));
 
-        buscar.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        buscar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         buscar.setText("Buscar");
         buscar.setOpaque(false);
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +64,7 @@ public class ManejarClientes extends javax.swing.JFrame {
                 buscarActionPerformed(evt);
             }
         });
-        getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, 20));
+        getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, 30));
 
         campo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

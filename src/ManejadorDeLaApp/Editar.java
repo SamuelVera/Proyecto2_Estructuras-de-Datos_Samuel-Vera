@@ -168,6 +168,7 @@ public class Editar extends javax.swing.JFrame {
 
         volver.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         volver.setText("Volver");
+        volver.setOpaque(false);
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
@@ -176,6 +177,7 @@ public class Editar extends javax.swing.JFrame {
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(217, 170, 70, 20));
 
         confirmar.setText("Confirmar");
+        confirmar.setOpaque(false);
         confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmarActionPerformed(evt);
@@ -186,17 +188,22 @@ public class Editar extends javax.swing.JFrame {
         salas.add(sala2D);
         sala2D.setFont(new java.awt.Font("Verdana", 0, 16)); // NOI18N
         sala2D.setText("Sala 2D");
+        sala2D.setOpaque(false);
         getContentPane().add(sala2D, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         salas.add(sala3D);
         sala3D.setFont(new java.awt.Font("Verdana", 0, 16)); // NOI18N
         sala3D.setText("Sala 3D");
+        sala3D.setOpaque(false);
         getContentPane().add(sala3D, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
 
         salas.add(sala4DX);
         sala4DX.setFont(new java.awt.Font("Verdana", 0, 16)); // NOI18N
         sala4DX.setText("Sala 4DX");
+        sala4DX.setOpaque(false);
         getContentPane().add(sala4DX, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 200));
 
         pack();
@@ -211,7 +218,11 @@ public class Editar extends javax.swing.JFrame {
     }//GEN-LAST:event_campo2ActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        new ManejoSucursales();
+        if(this.clave != 4){
+            new ManejoSucursales();
+        }else{
+            new MenuInicio();
+        }
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 

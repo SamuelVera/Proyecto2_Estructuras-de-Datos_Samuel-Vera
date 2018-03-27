@@ -153,6 +153,11 @@ public class AgregarPelicula extends javax.swing.JFrame {
         volver.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         volver.setText("Volver");
         volver.setOpaque(false);
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 80, 20));
 
         idiomas.add(espanol);
@@ -251,6 +256,11 @@ public class AgregarPelicula extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_agregarActionPerformed
+
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        new ManejoSucursales();
+        this.dispose();
+    }//GEN-LAST:event_volverActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton accion;

@@ -9,12 +9,14 @@ public class Sala3D extends Sala{
     }
 
     @Override
-    public void verPeliculas() {
-        System.out.println("Función en 3D");
-    }
-
-    @Override
-    public void ventas() {
-        this.venta += Ticket.getPrecio3D();
+    public double ventasDia(NodoArbol n) {
+        if(n!=null){
+            Ticket aux = (Ticket)n.getDato();
+            if(this.fd.format(aux.getFecha()).equals(this.fd.format(MenuInicio.fecha))){
+                return aux.getPrecioTicket() + this.ventasDia(n.getHijoD()) + this.ventasDia(n.getHijoI());
+            }
+            return this.ventasDia(n.getHijoD()) + this.ventasDia(n.getHijoI());
+        }
+        return 0;
     }
 }

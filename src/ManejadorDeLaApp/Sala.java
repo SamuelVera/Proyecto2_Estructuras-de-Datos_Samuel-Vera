@@ -1,15 +1,16 @@
 package ManejadorDeLaApp;
 
 import CodigoEstructuras.*;
+import java.text.SimpleDateFormat;
 
 public abstract class Sala {
     
     protected Sucursal sucursal;
     protected int numero;
     protected Cola peliculas = new Cola();
-    protected Arbol ticketsDia = new Arbol();
-    protected double venta = 0;
-
+    protected Arbol tickets = new Arbol();
+    protected SimpleDateFormat fd = new SimpleDateFormat("dd/MM/yyyy");
+    
     public Sala(int numero, Sucursal sucursal) {
         this.numero = numero;
         this.sucursal = sucursal;
@@ -40,9 +41,23 @@ public abstract class Sala {
     }
     
     public void agregarTicket(Ticket ticket) {
-        this.ticketsDia.agregar(this.ticketsDia.getRaiz(),new NodoArbol(ticket,ticket.getId()));
+        this.tickets.agregar(this.tickets.getRaiz(),new NodoArbol(ticket,ticket.getId()));
     }
     
-    public abstract void ventas();
-    public abstract void verPeliculas();
+    public Arbol getArbolTickets(){
+        return this.tickets;
+    }
+    
+    public int visitasDia(NodoArbol n){
+        if(n!=null){
+            Ticket aux = (Ticket)n.getDato();
+            if(this.fd.format(aux.getFecha()).equals(this.fd.format(MenuInicio.fecha))){
+                return 1 + this.visitasDia(n.getHijoD()) + this.visitasDia(n.getHijoI());
+            }
+            return this.visitasDia(n.getHijoD()) + this.visitasDia(n.getHijoI());
+        }
+        return 0;
+    }
+    
+    public abstract double ventasDia(NodoArbol n);
 }

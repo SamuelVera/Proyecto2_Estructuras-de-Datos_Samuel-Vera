@@ -13,7 +13,7 @@ public class Ticket {
     private Date fecha;
     private boolean dd, ddd, dx;
 
-    public Ticket(int id, Pelicula pelicula, Sala sala,Cliente cliente, boolean dd, boolean ddd, boolean dx) {
+    public Ticket(int id, Pelicula pelicula, Sala sala, Cliente cliente, boolean dd, boolean ddd, boolean dx, Date fecha) {
         
         this.id = id;
         this.pelicula = pelicula;
@@ -88,4 +88,9 @@ public class Ticket {
     public boolean is4D(){
         return this.dx;
     }
+    
+    public Date getFecha(){
+        return this.fecha;
+    }
+    
 }
