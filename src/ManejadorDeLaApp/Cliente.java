@@ -23,16 +23,6 @@ public class Cliente {
         return this.carro;
     }
     
-        //Método de ver si todos los tickets estan pagados
-    public boolean isSolvente(){
-        return this.carro.getTicketsPorPagar().contar(this.carro.getTicketsPorPagar().getRaiz()) == 0;
-    }
-    
-        //Retirar n Tickets conociendo sus identificadores
-    public void deshacer(int cod){
-        this.carro.getTicketsPorPagar().eliminarNodo(this.carro.getTicketsPorPagar().getRaiz(), cod);
-    }
-    
     public int getCi(){
         return this.ci;
     }
@@ -44,4 +34,22 @@ public class Cliente {
     public String getNombre() {
         return nombre;
     }
+    
+        //Método de ver si el cliente ha pagado todos sus tickets pendientes
+    public boolean isSolvente(){
+        return this.carro.getTicketsPorPagar().contar(this.carro.getTicketsPorPagar().getRaiz()) == 0;
+    }
+    
+        //Retirar un ticket conociendo su identificador
+    public void deshacerCompra(int cod){
+        this.carro.getTicketsPorPagar().eliminarNodo(this.carro.getTicketsPorPagar().getRaiz(), cod);
+    }
+    
+        //Comprar un ticket conociendo su identificador
+    public void hacerCompra(int cod){
+        Ticket t = (Ticket)this.carro.getTicketsPorPagar().buscarNodo(this.carro.getTicketsPorPagar().getRaiz(), cod).getDato();
+        this.carro.getTicketsPorPagar().eliminarNodo(this.carro.getTicketsPorPagar().getRaiz(), cod);
+        this.carro.getTicketsPagados().agregar(this.carro.getTicketsPagados().getRaiz(), new NodoArbol(t, t.getId()));
+    }
+    
 }

@@ -17,14 +17,6 @@ public class Pelicula {
         
     }
     
-    public void verDatos(){
-        
-        System.out.println("Pelicula: "+this.nombre);
-        System.out.println("Idioma: "+this.idioma);
-        System.out.println("Género: "+this.genero);
-        
-    }
-    
     public String getGenero(){
         return this.genero;
     }

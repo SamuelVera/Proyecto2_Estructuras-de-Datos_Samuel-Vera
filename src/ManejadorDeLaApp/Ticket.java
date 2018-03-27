@@ -5,7 +5,7 @@ import java.util.Date;
 public class Ticket {
     
     private int id;
-    protected static double precio2D, precio3D, precio4D;
+    private static double precio2D, precio3D, precio4D;
     private double precioTicket;
     private Sala sala;
     private Pelicula pelicula;

@@ -171,8 +171,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
                 for(int i=0;i<aux.length;i++){
                     aux3 = this.temp.getCarro().getTicketsPorPagar().buscarNodo(this.temp.getCarro().getTicketsPorPagar().getRaiz(), aux[i]);
                     precio = precio+((Ticket)aux3.getDato()).getPrecioTicket();
-                    this.temp.getCarro().getTicketsPorPagar().eliminarNodo(this.temp.getCarro().getTicketsPorPagar().getRaiz(), aux3.getCodigo());
-                    this.temp.getCarro().getTicketsPagados().agregar(this.temp.getCarro().getTicketsPagados().getRaiz(), new NodoArbol(((Ticket)aux3.getDato()),((Ticket)aux3.getDato()).getId()));
+                    this.temp.hacerCompra(((Ticket)aux3.getDato()).getId());
                     sala = ((Ticket)aux3.getDato()).getSala();
                     sala.agregarTicket((Ticket)aux3.getDato());
                     MenuInicio.sucursales.eliminarNodo(MenuInicio.sucursales.getRaiz(), sala.getSucursal().getCodigo());
@@ -203,7 +202,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
                     aux[i] = Integer.parseInt(aux2[i].toString());
                 }
                 for(int i=0;i<aux.length;i++){
-                    this.temp.getCarro().getTicketsPorPagar().eliminarNodo(this.temp.getCarro().getTicketsPorPagar().getRaiz(), aux[i]);
+                    this.temp.deshacerCompra(aux[i]);
                 }
                 this.temp2 = this.temp.getCarro().getTicketsPorPagar();
                 MenuInicio.clientes.eliminarNodo(MenuInicio.clientes.getRaiz(), this.temp.getCi());
