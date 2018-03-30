@@ -8,19 +8,24 @@
 
 package ManejadorDeLaApp;
 
+import EstructuraDeClases.Sucursal;
+import EstructuraDeClases.Ticket;
+import EstructuraDeClases.Sala2D;
+import EstructuraDeClases.Sala4DX;
+import EstructuraDeClases.Pelicula;
+import EstructuraDeClases.Sala;
+import EstructuraDeClases.Sala3D;
 import CodigoEstructuras.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Random;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /*
 *   Clase main donde comienza la ejecución
 *   
 *   Además desde esta clase se manejan en un contexto estático
-*   a lo árboles que funcionan como principal estructura del programa.
+*   a lo árboles que funcionan como principal estructura del programa y 
+*   la fecha de la simulación.
 */
 
 public class MenuInicio <T> extends javax.swing.JFrame {
@@ -28,7 +33,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
     public static Arbol sucursales = new Arbol();
     public static Arbol clientes = new Arbol();
     public static MenuInicio exe;
-    public static Date fecha = new Date();
+    public static Date fecha = new Date(); //La fecha comienza desde como la del sistema(computador).
     private SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     
         //Constructor a llamar al comienzo de la ejecución
@@ -59,8 +64,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
     }
     
         /*Contructor a llamar para las demás interacciones de la ventana con otra
-        *para no alterar los valores de los arboles de datos
-        */
+        para no alterar los valores de los arboles de datos*/
     public MenuInicio(){
         
         initComponents();
@@ -117,10 +121,11 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         
         NodoSimple<T> temp = aux.getSalas().getCabeza();
         
+            //Agregar películas por defecto
         int i;
-        int i1 = 1, i2 = 2, i3 = 2;
+        int i1 = 1, i2 = 1, i3 = 1, i4 = 1, i5 = 1;
         while(temp != null){
-            i = rand.nextInt(3);
+            i = rand.nextInt(5);
             if(i == 0 && i1 != 0){
                 ((Sala)temp.getDato()).agregarPelicula(new Pelicula("Lista de Schindler", "Español", "Histórico", (Sala)temp.getDato()));
                 i1--;
@@ -132,6 +137,14 @@ public class MenuInicio <T> extends javax.swing.JFrame {
             }else if(i==2 && i3!=0){
                 ((Sala)temp.getDato()).agregarPelicula(new Pelicula("Dunkerque", "Inglés", "Guerra", (Sala)temp.getDato()));
                 i3--;
+                temp = temp.getProximo();
+            }else if(i==3 && i4!=0){
+                ((Sala)temp.getDato()).agregarPelicula(new Pelicula("Después de la Guerra", "Francés", "Drama", (Sala)temp.getDato()));
+                i4--;
+                temp = temp.getProximo();
+            }else if(i==4 && i5!=0){
+                ((Sala)temp.getDato()).agregarPelicula(new Pelicula("Regresión", "Español", "Thriller", (Sala)temp.getDato()));
+                i5--;
                 temp = temp.getProximo();
             }
             
@@ -231,27 +244,27 @@ public class MenuInicio <T> extends javax.swing.JFrame {
 
     private void verSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSucursalesActionPerformed
         this.dispose();
-        new ManejoSucursales();
+        new ManejarElementos();//Ir a la ventana de ver sucursales, salas, películas, etc.
     }//GEN-LAST:event_verSucursalesActionPerformed
 
     private void buscarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPeliculaActionPerformed
         this.dispose();
-        new BuscarPelicula();
+        new BuscarPelicula();//Ir a ventana de buscar películas.
     }//GEN-LAST:event_buscarPeliculaActionPerformed
 
     private void manejarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manejarClientesActionPerformed
         this.dispose();
-        new ManejarClientes();
+        new ManejarClientes();//Ir a ventana para manejar datos de los clientes.
     }//GEN-LAST:event_manejarClientesActionPerformed
 
     private void cambiarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPrecioActionPerformed
-        new Editar(true);
         this.dispose();
+        new Editar(true);//Ir a ventana para cambiar precios de los tickets.
     }//GEN-LAST:event_cambiarPrecioActionPerformed
 
     private void avanzarDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avanzarDiaActionPerformed
-        new FinalDia();
         this.dispose();
+        new FinalDia();//Avanzar un día en la simulación.
     }//GEN-LAST:event_avanzarDiaActionPerformed
     
     /**

@@ -1,7 +1,15 @@
 package ManejadorDeLaApp;
 
+import EstructuraDeClases.Cliente;
 import CodigoEstructuras.*;
 import javax.swing.JOptionPane;
+
+/*Clase desde la cual se hacen las operaciones de
+-Buscar un cliente.
+-Agregar cliente.
+-Acceder al historial de compras de un cliente.
+-Acceder a los tickets pendientes de pago de un cliente.
+*/
 
 public class ManejarClientes extends javax.swing.JFrame {
 
@@ -66,11 +74,6 @@ public class ManejarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, 30));
 
-        campo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoActionPerformed(evt);
-            }
-        });
         campo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campoKeyTyped(evt);
@@ -153,7 +156,7 @@ public class ManejarClientes extends javax.swing.JFrame {
 
     private void campoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoKeyTyped
         char validar = evt.getKeyChar();
-        
+            //Validación de ingresar solo números en la cédula
         if(Character.isLetter(validar)){
             getToolkit().beep();
             evt.consume();
@@ -162,17 +165,13 @@ public class ManejarClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campoKeyTyped
 
-    private void campoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoActionPerformed
-        
-    }//GEN-LAST:event_campoActionPerformed
-
     private void pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarActionPerformed
-        new ManejarOrdenes(this.temp);
+        new ManejarOrdenes(this.temp); //Acceder a la orden pendiente del cliente
         this.dispose();
     }//GEN-LAST:event_pagarActionPerformed
 
     private void historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialActionPerformed
-        new ManejarOrdenes(this.temp,0);
+        new ManejarOrdenes(this.temp,0); //Acceder al historial de compras del cliente
         this.dispose();
     }//GEN-LAST:event_historialActionPerformed
 

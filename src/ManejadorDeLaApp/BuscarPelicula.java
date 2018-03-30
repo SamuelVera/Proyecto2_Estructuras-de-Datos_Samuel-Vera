@@ -1,10 +1,17 @@
 package ManejadorDeLaApp;
 
+import EstructuraDeClases.Sucursal;
+import EstructuraDeClases.Pelicula;
+import EstructuraDeClases.Sala;
 import CodigoEstructuras.*;
 import javax.swing.*;
 
+/*Desde esta clase se puede:
+-Filtrar películas por género e idioma.
+-Ordenar las películas alfabéticamente y en orden inverso.
+-Ver datos de la película seleccionada.
+*/
 public class BuscarPelicula extends javax.swing.JFrame {
-
     
     private String[] nombrePeliculas; 
     private Arbol peliculas = new Arbol(), auxIdiomas = new Arbol(), auxGeneros = new Arbol();
@@ -19,9 +26,11 @@ public class BuscarPelicula extends javax.swing.JFrame {
         this.texto3.setVisible(false);
         this.texto4.setVisible(false);
         this.insertarPeliculas(MenuInicio.sucursales.getRaiz());
+        this.inicializarLista();
     }
     
-    public void insertarPeliculas(NodoArbol aux){
+        //Método para crear un ABB con los nombres de las películas como códigos.
+    private void insertarPeliculas(NodoArbol aux){
         if(aux != null){
             NodoSimple temp = ((Sucursal)aux.getDato()).getSalas().getCabeza();
             while(temp != null){
@@ -44,7 +53,25 @@ public class BuscarPelicula extends javax.swing.JFrame {
         }
     }
     
-    public Arbol primerFiltro(boolean auxiliar){
+        /*Inicializar la lista con todas las películas sin copiar la misma 
+        película 2 o más veces.*/
+    private void inicializarLista(){
+        String[] aux = new String[this.peliculas.contar(this.peliculas.getRaiz())];
+        this.peliculas.getTodosLosCodigos(this.peliculas.getRaiz(), aux);
+        DefaultListModel<String> aux2 = new DefaultListModel<>();
+        for(int i=0;i<aux.length;i++){
+            aux2.addElement(aux[i]);
+        }
+        this.ordenados.setModel(aux2);
+        this.nombrePeliculas = aux;
+    }
+    
+        /*Este método retorna un árbol binario de búsqueda
+        cuyos datos son los géneros o los idiomas de las películas ofertadas,
+        para luego desplegarlos en las listas. Si el parámetro boolean auxiliar
+        es true se despliega la lista en función de los idiomas, y si es false
+        en función de los géneros.*/
+    private Arbol primerFiltro(boolean auxiliar){
         
         Arbol arbol = new Arbol();
         String[] aux = new String[this.peliculas.contar(this.peliculas.getRaiz())];
@@ -69,7 +96,10 @@ public class BuscarPelicula extends javax.swing.JFrame {
         return arbol;
     }
     
-    public void segundoFiltro(String comparativa, boolean auxiliar){
+        /*En este método se filtran las películas según el idioma selecionado o,
+        si el parámetro boolean auxiliar es true, o según el género seleccionado
+        si auxiliar es false.*/
+    private void segundoFiltro(String comparativa, boolean auxiliar){
         
         String[] aux = new String[this.peliculas.contar(this.peliculas.getRaiz())];
         ListaSimple temp = new ListaSimple();
@@ -101,8 +131,6 @@ public class BuscarPelicula extends javax.swing.JFrame {
         
         i=0;
         DefaultListModel<String> aux3 = new DefaultListModel<>();
-        aux3.removeAllElements();
-        this.ordenados.setModel(aux3);
         
         for(int j=0;j<aux.length;j++){
             if(aux[j] != null){
@@ -250,6 +278,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        //Ordenar las películas de manera inversa a la alfabética.
     private void odenarInversoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odenarInversoActionPerformed
         
         String aux;
@@ -282,7 +311,6 @@ public class BuscarPelicula extends javax.swing.JFrame {
 
     private void filtrarIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrarIdiomaActionPerformed
         
-        this.filtrarGenero.setContentAreaFilled(false);
         this.generos.setVisible(false);
         this.texto3.setVisible(false);
         this.idiomas.setVisible(true);
@@ -294,12 +322,12 @@ public class BuscarPelicula extends javax.swing.JFrame {
         this.auxIdiomas.getTodosLosCodigos(this.auxIdiomas.getRaiz(), idiomas2);
         ComboBoxModel aux3 = new DefaultComboBoxModel(idiomas2);
         this.idiomas.setModel(aux3);
+        this.inicializarLista();
         
     }//GEN-LAST:event_filtrarIdiomaActionPerformed
 
     private void filtrarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrarGeneroActionPerformed
 
-        this.filtrarIdioma.setContentAreaFilled(false);
         this.idiomas.setVisible(false);
         this.texto4.setVisible(false);
         this.generos.setVisible(true);
@@ -311,6 +339,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         this.auxGeneros.getTodosLosCodigos(this.auxGeneros.getRaiz(), generos2);
         ComboBoxModel aux3 = new DefaultComboBoxModel(generos2);
         this.generos.setModel(aux3);
+        this.inicializarLista();
         
     }//GEN-LAST:event_filtrarGeneroActionPerformed
 
@@ -327,6 +356,7 @@ public class BuscarPelicula extends javax.swing.JFrame {
         MenuInicio aux = new MenuInicio();
     }//GEN-LAST:event_volverActionPerformed
 
+        //Ordenar las películas filtradas de forma alfabética.
     private void odenarAlfabeticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odenarAlfabeticoActionPerformed
         
         String aux;
@@ -353,10 +383,11 @@ public class BuscarPelicula extends javax.swing.JFrame {
         
     }//GEN-LAST:event_odenarAlfabeticoActionPerformed
 
+        //Desplegar ventana con los datos de la película seleccionada.
     private void verDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verDatosActionPerformed
         Pelicula aux = (Pelicula)this.peliculas.buscarNodo(this.peliculas.getRaiz(), this.ordenados.getSelectedValue()).getDato();
-        String s = aux.getNombre()+" "+aux.getIdioma()+" "+aux.getGenero();
-        JOptionPane.showMessageDialog(rootPane, s);
+        String s = "Nombre: "+aux.getNombre()+"\nIdioma: "+aux.getIdioma()+"\nGénero: "+aux.getGenero();
+        JOptionPane.showMessageDialog(rootPane, s, "Datos de la Película", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_verDatosActionPerformed
  
     // Variables declaration - do not modify//GEN-BEGIN:variables

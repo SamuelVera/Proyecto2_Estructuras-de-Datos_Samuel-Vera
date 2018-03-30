@@ -1,7 +1,13 @@
 package ManejadorDeLaApp;
 
+import EstructuraDeClases.Sucursal;
+import EstructuraDeClases.Ticket;
+import EstructuraDeClases.Sala2D;
+import EstructuraDeClases.Cliente;
+import EstructuraDeClases.Pelicula;
+import EstructuraDeClases.Sala;
+import EstructuraDeClases.Sala3D;
 import CodigoEstructuras.*;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
+/*Desde esta ventana se efectuan las compras de n tickets para una película
+que este ofertada.*/
 public class VentanaDeComprar extends javax.swing.JFrame {
 
     private Sucursal temp;
@@ -17,7 +25,8 @@ public class VentanaDeComprar extends javax.swing.JFrame {
     private Pelicula temp3;
     private double precio;
     private SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-    
+
+        //Constructor con el que se inicializan los elementos gráficos de la ventana.
     public VentanaDeComprar(Pelicula pelicula) {
         initComponents();
         this.setTitle("Ventana de Comprar");
@@ -44,6 +53,7 @@ public class VentanaDeComprar extends javax.swing.JFrame {
         this.inicializarFechas();
     }
     
+        //Inicializar lista de los próximos 5 días que se oferta la película.
     private void inicializarFechas(){
         String[] fechas = new String[5];
         Date aux = MenuInicio.fecha;
@@ -111,11 +121,6 @@ public class VentanaDeComprar extends javax.swing.JFrame {
 
         fechas.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         fechas.setMaximumRowCount(7);
-        fechas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechasActionPerformed(evt);
-            }
-        });
         getContentPane().add(fechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 100, -1));
 
         numeroBoletos.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -139,11 +144,6 @@ public class VentanaDeComprar extends javax.swing.JFrame {
         getContentPane().add(comprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 90, -1));
 
         campo.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        campo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoActionPerformed(evt);
-            }
-        });
         campo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campoKeyTyped(evt);
@@ -157,9 +157,12 @@ public class VentanaDeComprar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        //Acción del botón comprar.
     private void comprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprarActionPerformed
         if(this.campo.getText().trim().length() == 0){
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! COMPLETE LOS CAMPOS ANTES DE CONTINUAR");
+            JOptionPane.showMessageDialog(rootPane, "COMPLETE LOS CAMPOS ANTES DE CONTINUAR","  ¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
+        }else if(Integer.parseInt(this.campo.getText()) <= 0){
+            JOptionPane.showMessageDialog(rootPane, "CÉDULA INGRESADA MENOR A CERO(0)","  ¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
         }else{
             
             int aux2 = this.numeroBoletos.getSelectedIndex()+1;
@@ -179,18 +182,22 @@ public class VentanaDeComprar extends javax.swing.JFrame {
             if(!MenuInicio.clientes.estaNodo(MenuInicio.clientes.getRaiz(), cod)){
                     JOptionPane.showMessageDialog(rootPane, "El cliente no está registrado en el sistema, deberá pagar al momento");
                     clien = null;
+                    /*Si la cédula no se encuentra registrada no se guarda como orden
+                    del cliente y el pago se efectua de inmediato.*/
                 }else{
                     JOptionPane.showMessageDialog(rootPane, "El cliente está registrado en el sistema, tiene facilidades para pagar su ticker luego");
                     clien = (Cliente)MenuInicio.clientes.buscarNodo(MenuInicio.clientes.getRaiz(), cod).getDato();
+                    /*Si la cédula se encuentra registrada los tickets se guardan en la orden
+                    del cliente para que pueda pagarlos luego.*/
                 }
             
             while(aux2 != 0){
-                int multi = 1000000, codigo=0;
+                int multi = 1000000, codigo = 0;
                 Random rand = new Random();
                 while(multi != 1){
-                codigo = codigo + (rand.nextInt(9)+1)*multi;
-                multi = multi/10;
-                    if(multi == 1 && this.temp2.tickets.estaNodo(this.temp2.tickets.getRaiz(), codigo)){
+                    codigo = codigo + (rand.nextInt(9)+1)*multi;
+                    multi = multi/10;
+                    if(multi == 1 && this.temp2.getArbolTickets().estaNodo(this.temp2.getArbolTickets().getRaiz(), codigo)){
                         multi = 1000000;
                         codigo = 0;
                     }
@@ -221,8 +228,10 @@ public class VentanaDeComprar extends javax.swing.JFrame {
             }
             
             if(clien!=null){
+                
                 MenuInicio.clientes.eliminarNodo(MenuInicio.clientes.getRaiz(),clien.getCi());
                 MenuInicio.clientes.agregar(MenuInicio.clientes.getRaiz(),new NodoArbol(clien,clien.getCi()));
+                
             }
             
             this.temp.getSalas().eliminarPosicion(pos);
@@ -230,17 +239,14 @@ public class VentanaDeComprar extends javax.swing.JFrame {
             MenuInicio.sucursales.eliminarNodo(MenuInicio.sucursales.getRaiz(), this.temp.getCodigo());
             MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), new NodoArbol(this.temp,this.temp.getCodigo()));
             
-            new ManejoSucursales();
+            new ManejarElementos();
             this.dispose();
         }
     }//GEN-LAST:event_comprarActionPerformed
 
-    private void campoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoActionPerformed
-        
-    }//GEN-LAST:event_campoActionPerformed
-
     private void campoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoKeyTyped
         char validar = evt.getKeyChar();
+        //Validar que la cédula no se pueda ingresar con letras
         if(Character.isLetter(validar)|| Character.isSpaceChar(validar)){
             getToolkit().beep();
             evt.consume();
@@ -249,15 +255,12 @@ public class VentanaDeComprar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campoKeyTyped
 
+        //Despliegue del precio de la orden o compra.
     private void numeroBoletosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroBoletosActionPerformed
         double precion;
         precion = this.precio * (this.numeroBoletos.getSelectedIndex()+1);
         this.texto3.setText("Precio: "+precion+" Bs.");
     }//GEN-LAST:event_numeroBoletosActionPerformed
-
-    private void fechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fechasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField campo;

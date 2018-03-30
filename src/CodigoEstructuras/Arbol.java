@@ -1,6 +1,6 @@
 package CodigoEstructuras;
 
-import ManejadorDeLaApp.Pelicula;
+import EstructuraDeClases.Pelicula;
 
 public class Arbol <T>{
     

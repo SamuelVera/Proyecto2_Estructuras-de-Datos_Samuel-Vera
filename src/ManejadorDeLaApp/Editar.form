@@ -68,7 +68,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="campo2">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campo2ActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campo2KeyTyped"/>
       </Events>
       <Constraints>
@@ -79,7 +78,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="campo1">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campo1ActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campo1KeyTyped"/>
       </Events>
       <Constraints>
@@ -90,7 +88,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="campo4">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campo4ActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campo4KeyTyped"/>
       </Events>
       <Constraints>
@@ -101,7 +98,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="campo3">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campo3ActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campo3KeyTyped"/>
       </Events>
       <Constraints>

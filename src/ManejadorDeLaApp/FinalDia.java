@@ -1,13 +1,26 @@
 package ManejadorDeLaApp;
 
+import EstructuraDeClases.Sucursal;
+import EstructuraDeClases.Ticket;
+import EstructuraDeClases.Sala2D;
+import EstructuraDeClases.Cliente;
+import EstructuraDeClases.Sala4DX;
+import EstructuraDeClases.Sala;
+import EstructuraDeClases.Sala3D;
 import CodigoEstructuras.*;
 import java.text.SimpleDateFormat;
 
+/*En esta clase se pone la información del día como
+-Sala más concurrida y su información.
+-Ganancias del día en ventas de tickets.
+-Avanzar al siguiente día correspondiente en la simulación.
+*/
 public class FinalDia extends javax.swing.JFrame {
 
     private ListaSimple salas = new ListaSimple();
     private SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     
+        //Constructor desde el cual se inicializan los elementos gráficos de la ventana
     public FinalDia() {
         initComponents();
         this.setVisible(true);
@@ -29,9 +42,11 @@ public class FinalDia extends javax.swing.JFrame {
         }
         this.salaMayorTicketsVendidos.setText("Tickets Vendidos: "+aux.visitasDia(aux.getArbolTickets().getRaiz()));
         this.gananciaDia.setText("Ganancia del Dia "+this.gananciaTotal(MenuInicio.sucursales.getRaiz())+" Bs.");
-        this.eliminarTicketsNoPagos(MenuInicio.clientes.getRaiz());
+        this.buscarTickets(MenuInicio.clientes.getRaiz());
     }
 
+        /*Método que se emplea de manera auxiliar para colocar todas las salas
+        de las diferentes sucursales en una lista*/
     private void obtenerTodasLasSalas(NodoArbol n){
         if(n!=null){
             NodoSimple n2 = ((Sucursal)n.getDato()).getSalas().getCabeza();
@@ -44,6 +59,9 @@ public class FinalDia extends javax.swing.JFrame {
         }
     }
     
+        /*Con la lista de todas las salas se busca cual tiene
+        mayor cantidad de tickets vendidos para el día presente en la
+        simulación*/
     private Sala salasMasConcurrida(){
         Sala aux = null, temp;
         int aux2 = 0;
@@ -59,6 +77,7 @@ public class FinalDia extends javax.swing.JFrame {
         return aux;
     }
     
+        //Cálculo de la ganancia total de la sala más concurrida
     private double gananciaTotal(NodoArbol n){
         if(n!=null){
             return ((Sucursal)n.getDato()).gananciaDia() + this.gananciaTotal(n.getHijoD()) + this.gananciaTotal(n.getHijoI());
@@ -66,22 +85,26 @@ public class FinalDia extends javax.swing.JFrame {
         return 0;
     }
     
-    private void eliminarTicketsNoPagos(NodoArbol n){
+        /*Método que se emplea para eliminar los tickets de los clientes que tengan
+        fecha del día presente de la simulación que no hayan sido pagados*/
+    private void buscarTickets(NodoArbol n){
         if(n!=null){
-            this.buscarTicketsNoPagos(((Cliente)n.getDato()).getCarro().getTicketsPorPagar().getRaiz(), (Cliente)n.getDato());
-            this.eliminarTicketsNoPagos(n.getHijoD());
-            this.eliminarTicketsNoPagos(n.getHijoI());
+            this.eliminarTicketsNoPagos(((Cliente)n.getDato()).getCarro().getTicketsPorPagar().getRaiz(), (Cliente)n.getDato());
+            this.buscarTickets(n.getHijoD());
+            this.buscarTickets(n.getHijoI());
         }
     }
     
-    private void buscarTicketsNoPagos(NodoArbol n, Cliente c){
+        /*Método que se emplea para eliminar los tickets de los clientes que tengan
+        fecha del día presente de la simulación que no hayan sido pagados*/
+    private void eliminarTicketsNoPagos(NodoArbol n, Cliente c){
         if(n!=null){
             Ticket aux = (Ticket)n.getDato();
             if(this.df.format(aux.getFecha()).equals(this.df.format(MenuInicio.fecha))){
                 c.getCarro().getTicketsPorPagar().eliminarNodo(c.getCarro().getTicketsPorPagar().getRaiz(), aux.getId());
             }
-            this.buscarTicketsNoPagos(n.getHijoD(),c);
-            this.buscarTicketsNoPagos(n.getHijoI(),c);
+            this.eliminarTicketsNoPagos(n.getHijoD(),c);
+            this.eliminarTicketsNoPagos(n.getHijoI(),c);
         }
     }
     
@@ -139,8 +162,8 @@ public class FinalDia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
-        MenuInicio.fecha.setDate(MenuInicio.fecha.getDate()+1);
-        new MenuInicio();
+        MenuInicio.fecha.setDate(MenuInicio.fecha.getDate()+1); //Avanzar un día
+        new MenuInicio(); //Volver al menu de inicio
         this.dispose();
     }//GEN-LAST:event_continuarActionPerformed
 

@@ -1,10 +1,15 @@
 package ManejadorDeLaApp;
 
+import EstructuraDeClases.Cliente;
 import CodigoEstructuras.*;
 import javax.swing.JOptionPane;
 
+/*Desde esta clase se puede:
+-Agregar un cliente al sistema.
+*/
 public class AgregarCliente extends javax.swing.JFrame {
 
+        //Inicialización de los elementos de la ventana.
     public AgregarCliente() {
         
         initComponents();
@@ -21,7 +26,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         cedula = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
         telefono = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        volver = new javax.swing.JButton();
         agregar = new javax.swing.JButton();
         texto1 = new javax.swing.JLabel();
         texto2 = new javax.swing.JLabel();
@@ -33,11 +38,6 @@ public class AgregarCliente extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cedula.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        cedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cedulaActionPerformed(evt);
-            }
-        });
         cedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 cedulaKeyTyped(evt);
@@ -46,11 +46,6 @@ public class AgregarCliente extends javax.swing.JFrame {
         getContentPane().add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 260, -1));
 
         nombre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        nombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreActionPerformed(evt);
-            }
-        });
         nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nombreKeyTyped(evt);
@@ -66,15 +61,15 @@ public class AgregarCliente extends javax.swing.JFrame {
         });
         getContentPane().add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 260, -1));
 
-        jButton1.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
-        jButton1.setText("Volver");
-        jButton1.setOpaque(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        volver.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        volver.setText("Volver");
+        volver.setOpaque(false);
+        volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                volverActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 70, 20));
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 70, 20));
 
         agregar.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         agregar.setText("Agregar");
@@ -104,22 +99,21 @@ public class AgregarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedulaActionPerformed
-        
-    }//GEN-LAST:event_cedulaActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ManejarClientes aux = new ManejarClientes();
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        ManejarClientes aux = new ManejarClientes();//Volver a la ventana de manejar los clientes.
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_volverActionPerformed
 
+        //Acción del botón agregar.
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         
+            //Validación de los campos.
         if(this.cedula.getText().trim().length() == 0 || this.telefono.getText().trim().length() == 0 || this.nombre.getText().trim().length() == 0){
             getToolkit().beep();
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! COMPLETAR LOS CAMPOS ANTES DE PROCEDER");
+            JOptionPane.showMessageDialog(rootPane, "COMPLETAR LOS CAMPOS ANTES DE PROCEDER","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
             int temp = Integer.parseInt(this.cedula.getText());
+                //Validación de que la cédula no sea negativa y no este registrada en el sistema.
             if(!MenuInicio.clientes.estaNodo(MenuInicio.clientes.getRaiz(),temp) && temp>0){
                 int ci = temp, tlf = Integer.parseInt(this.telefono.getText());
                 Cliente aux = new Cliente(ci,tlf,this.nombre.getText());
@@ -128,10 +122,10 @@ public class AgregarCliente extends javax.swing.JFrame {
                 this.dispose();
             }else if(temp < 0){
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(rootPane, "ERROR!!! LA CÉDULA ES MENOR QUE CERO (0)");
+                JOptionPane.showMessageDialog(rootPane, "LA CÉDULA ES MENOR QUE CERO (0)","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
             }else{
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(rootPane, "ERROR!!! ESA CÉDULA DE CLIENTE YA ESTA ASIGNADA");
+                JOptionPane.showMessageDialog(rootPane, "ESA CÉDULA DE CLIENTE YA ESTA ASIGNADA","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
             }
         }
         
@@ -139,50 +133,46 @@ public class AgregarCliente extends javax.swing.JFrame {
 
     private void cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedulaKeyTyped
         char validar = evt.getKeyChar();
-        
+            //Cédula sin letras ni espacios.
         if(Character.isLetter(validar) || Character.isSpaceChar(validar)){
             getToolkit().beep();
             evt.consume();
             
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! INGRESAR SOLO NÚMEROS");
+            JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO NÚMEROS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_cedulaKeyTyped
 
     private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
         char validar = evt.getKeyChar();
-        
+            //Telefono sin letras ni espacios.
         if(Character.isLetter(validar) || Character.isSpace(validar)){
             getToolkit().beep();
             evt.consume();
             
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! INGRESAR SOLO NÚMEROS");
+            JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO NÚMEROS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_telefonoKeyTyped
 
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
         char validar = evt.getKeyChar();
-        
+            //Nombre sin números.
         if(Character.isDigit(validar)){
             getToolkit().beep();
             evt.consume();
             
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! INGRESAR SOLO LETRAS");
+            JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO LETRAS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_nombreKeyTyped
-
-    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
-        
-    }//GEN-LAST:event_nombreActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
     private javax.swing.JTextField cedula;
     private javax.swing.JLabel fondo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField telefono;
     private javax.swing.JLabel texto1;
     private javax.swing.JLabel texto2;
     private javax.swing.JLabel texto3;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

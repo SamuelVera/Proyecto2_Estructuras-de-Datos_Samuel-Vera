@@ -1,16 +1,33 @@
 package ManejadorDeLaApp;
 
+import EstructuraDeClases.Sucursal;
+import EstructuraDeClases.Ticket;
+import EstructuraDeClases.Sala2D;
+import EstructuraDeClases.Cliente;
+import EstructuraDeClases.Sala4DX;
+import EstructuraDeClases.Pelicula;
+import EstructuraDeClases.Sala;
+import EstructuraDeClases.Sala3D;
 import CodigoEstructuras.*;
 import javax.swing.*;
 
+/*Esta clase cumple con las siguientes acciones:
+-Buscar sucursales.
+-Buscar salas de las sucursales.
+-Acceder a la edición y adición de salas, sucursales y películas.
+-Ver cola de películas de una sala.
+-Acceder a la ventana de comprar un ticket.
+-Eliminar la primera película en cola(En emisión) de una sala.
+*/
 
-public class ManejoSucursales extends javax.swing.JFrame {
+public class ManejarElementos extends javax.swing.JFrame {
 
     private Sucursal temp;
     private Sala temp2;
     private Pelicula temp3;
     
-    public ManejoSucursales() {
+        //Constructor para inicializar los elementos básicos de la ventana
+    public ManejarElementos() {
         initComponents();
         
         this.setVisible(true);
@@ -50,19 +67,20 @@ public class ManejoSucursales extends javax.swing.JFrame {
         texto4 = new javax.swing.JLabel();
         texto5 = new javax.swing.JLabel();
         texto6 = new javax.swing.JLabel();
+        texto7 = new javax.swing.JLabel();
         peliculas = new javax.swing.JComboBox<>();
         salas = new javax.swing.JComboBox<>();
         sucursales = new javax.swing.JComboBox<>();
         volver = new javax.swing.JButton();
         editar = new javax.swing.JButton();
-        agregar = new javax.swing.JButton();
+        agregarSucursal = new javax.swing.JButton();
         agregarSala = new javax.swing.JButton();
         editarSala = new javax.swing.JButton();
         verPeliculas = new javax.swing.JButton();
         agregarPelicula = new javax.swing.JButton();
         eliminarPelicula = new javax.swing.JButton();
         comprarPelicula = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -87,6 +105,9 @@ public class ManejoSucursales extends javax.swing.JFrame {
 
         texto6.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         getContentPane().add(texto6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 380, 30));
+
+        texto7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        getContentPane().add(texto7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 90, 20));
 
         peliculas.setMaximumRowCount(20);
         peliculas.addActionListener(new java.awt.event.ActionListener() {
@@ -130,17 +151,17 @@ public class ManejoSucursales extends javax.swing.JFrame {
                 editarActionPerformed(evt);
             }
         });
-        getContentPane().add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 70, 20));
+        getContentPane().add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 70, 20));
 
-        agregar.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
-        agregar.setText("Añadir");
-        agregar.setOpaque(false);
-        agregar.addActionListener(new java.awt.event.ActionListener() {
+        agregarSucursal.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        agregarSucursal.setText("Añadir Sucursal");
+        agregarSucursal.setOpaque(false);
+        agregarSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarActionPerformed(evt);
+                agregarSucursalActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 70, 20));
+        getContentPane().add(agregarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 130, 20));
 
         agregarSala.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         agregarSala.setText("Añadir Sala");
@@ -150,7 +171,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
                 agregarSalaActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, 20));
+        getContentPane().add(agregarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, 20));
 
         editarSala.setFont(new java.awt.Font("Verdana", 0, 11));
         editarSala.setText("Editar Sala");
@@ -160,7 +181,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
                 editarSalaActionPerformed(evt);
             }
         });
-        getContentPane().add(editarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, -1, 20));
+        getContentPane().add(editarSala, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 90, 20));
 
         verPeliculas.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         verPeliculas.setText("Ver Películas");
@@ -180,7 +201,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
                 agregarPeliculaActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 130, 20));
+        getContentPane().add(agregarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 140, 20));
 
         eliminarPelicula.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         eliminarPelicula.setText("Eliminar Primera");
@@ -193,7 +214,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         getContentPane().add(eliminarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 130, 20));
 
         comprarPelicula.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
-        comprarPelicula.setText("ComprarBoleto");
+        comprarPelicula.setText("ComprarTicket");
         comprarPelicula.setOpaque(false);
         comprarPelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,12 +223,15 @@ public class ManejoSucursales extends javax.swing.JFrame {
         });
         getContentPane().add(comprarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 120, 20));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 290));
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 290));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        /*Despliegue de la información de la sucursal selecionada, botones de
+        editar la sucursal y agregar sala, y la lista de las salas pertenecientes 
+        a la sucursal.*/
     private void sucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucursalesActionPerformed
         NodoArbol auxi;
         this.texto2.setText("Salas:");
@@ -229,27 +253,31 @@ public class ManejoSucursales extends javax.swing.JFrame {
 
         ComboBoxModel aux2 = new DefaultComboBoxModel(aux3);
         this.salas.setModel(aux2);
+        
         this.salas.setVisible(true);
-        this.agregar.setVisible(true);
+        this.agregarSucursal.setVisible(true);
         this.agregarSala.setVisible(true);
-        this.verPeliculas.setVisible(false);
         this.editar.setVisible(true);
         this.editarSala.setVisible(false);
-        this.texto4.setText("");
+        this.verPeliculas.setVisible(false);
         this.peliculas.setVisible(false);
         this.texto5.setVisible(false);
         this.agregarPelicula.setVisible(false);
         this.eliminarPelicula.setVisible(false);
         this.comprarPelicula.setVisible(false);
         this.texto6.setVisible(false);
+        this.texto4.setText("");
+        this.texto7.setText("");
     }//GEN-LAST:event_sucursalesActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        this.setVisible(false);
-        new MenuInicio();
+        new MenuInicio(); //Volver al menú de inicio
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 
+        /*Despliegue de la información de la sala selecionada; botones de editar
+        sala, agregar película y ver cola de películas; además que al pulsar el
+        último se despliega la cola de películas de la sala. */
     private void salasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salasActionPerformed
         
         int aux2 = Integer.parseInt(this.salas.getSelectedItem().toString());
@@ -275,6 +303,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         }
         this.editarSala.setVisible(true);
         this.verPeliculas.setVisible(true);
+        this.texto7.setText("");
     }//GEN-LAST:event_salasActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
@@ -282,10 +311,10 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_editarActionPerformed
 
-    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+    private void agregarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSucursalActionPerformed
         new Editar();
         this.dispose();
-    }//GEN-LAST:event_agregarActionPerformed
+    }//GEN-LAST:event_agregarSucursalActionPerformed
 
     private void agregarSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSalaActionPerformed
         new Editar(false, null, this.temp);
@@ -297,11 +326,16 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_editarSalaActionPerformed
 
+        /*Despliegue de la cola de películas de la sala selecionada, 
+        la película en emisión, y los botones de eliminar primera en cola
+        y comprar tickets.*/
     private void verPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPeliculasActionPerformed
         ListaSimple aux4 = new ListaSimple();
         
         if(this.temp2.getPelicula() != null){
             this.texto6.setText("Película en emisión: "+(this.temp2.getPelicula().getNombre()));
+        }else{
+            this.texto6.setText("No hay película en emisión");
         }
         this.temp3 = this.temp2.getPelicula();
         while(this.temp2.getColaPeliculas().getPrimeroEnCola() != null){
@@ -324,7 +358,14 @@ public class ManejoSucursales extends javax.swing.JFrame {
     }//GEN-LAST:event_verPeliculasActionPerformed
 
     private void peliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peliculasActionPerformed
-        this.comprarPelicula.setVisible(true);
+        if(this.peliculas.getSelectedItem().toString() == this.temp2.getPelicula().getNombre()){
+            this.comprarPelicula.setVisible(true);
+            this.texto7.setText("(En emisión)");
+        }else{
+            this.comprarPelicula.setVisible(false);
+            this.texto7.setText("(No en emisión)");
+        }
+        
         this.eliminarPelicula.setVisible(true);
     }//GEN-LAST:event_peliculasActionPerformed
 
@@ -338,9 +379,10 @@ public class ManejoSucursales extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_comprarPeliculaActionPerformed
 
+        //Acción al pulsar botón de eliminar una película
     private void eliminarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPeliculaActionPerformed
         if(this.temp2.getPelicula() == null){
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! NO HAY PELÍCULAS EN COLA");
+            JOptionPane.showMessageDialog(rootPane, "NO HAY PELÍCULAS EN COLA","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
             this.temp2.getColaPeliculas().desencolar();
             NodoSimple n = this.temp.getSalas().getCabeza();
@@ -393,6 +435,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
         }
     }
     
+        //Método para eliminar Tickets de las películas que se dejan de ofertar
     private void eliminarTicket(NodoArbol n, Arbol a){
         if(n!=null){
             if(((Ticket)n.getDato()).getSala().getNumero() == this.temp2.getNumero() && ((Ticket)n.getDato()).getSala().getSucursal().getCodigo() == this.temp.getCodigo()){
@@ -404,14 +447,14 @@ public class ManejoSucursales extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton agregar;
     private javax.swing.JButton agregarPelicula;
     private javax.swing.JButton agregarSala;
+    private javax.swing.JButton agregarSucursal;
     private javax.swing.JButton comprarPelicula;
     private javax.swing.JButton editar;
     private javax.swing.JButton editarSala;
     private javax.swing.JButton eliminarPelicula;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel fondo;
     private javax.swing.JComboBox<String> peliculas;
     private javax.swing.JComboBox<String> salas;
     private javax.swing.JComboBox<String> sucursales;
@@ -421,6 +464,7 @@ public class ManejoSucursales extends javax.swing.JFrame {
     private javax.swing.JLabel texto4;
     private javax.swing.JLabel texto5;
     private javax.swing.JLabel texto6;
+    private javax.swing.JLabel texto7;
     private javax.swing.JButton verPeliculas;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables

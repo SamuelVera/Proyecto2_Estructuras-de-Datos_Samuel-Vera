@@ -1,5 +1,10 @@
 package ManejadorDeLaApp;
 
+import EstructuraDeClases.Ticket;
+import EstructuraDeClases.Sala2D;
+import EstructuraDeClases.Cliente;
+import EstructuraDeClases.Sala;
+import EstructuraDeClases.Sala3D;
 import CodigoEstructuras.*;
 import java.text.SimpleDateFormat;
 import javax.swing.ComboBoxModel;
@@ -7,11 +12,19 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
+/*En esta clase se cumple:
+-Manejar las ordenenes de los clientes registrados.
+-Eliminar tickets de la orden de un cliente.
+-Efectuar compra de los tickets de la orden de un cliente.
+-Ver historial de compras de un cliente.
+*/
 public class ManejarOrdenes extends javax.swing.JFrame {
 
     private Cliente temp;
     private Arbol temp2;
     
+        /*Constructor a llamar cuando se va a modificar una orden
+        o a comprar tickets.*/
     public ManejarOrdenes(Cliente cliente) {
         initComponents();
         this.setVisible(true);
@@ -25,6 +38,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
         this.inicializarLista();
     }
     
+        //Constructor a llamar cuando se va a ver el historial de compras de un cliente.
     public ManejarOrdenes(Cliente cliente, int t){
         this.initComponents();
         this.setVisible(true);
@@ -41,6 +55,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
         this.tickets.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
+        //Inicializador de la lista de tickets a desplegar del cliente.
     private void inicializarLista(){
         int[] aux = new int[this.temp2.contar(this.temp2.getRaiz())];
         this.temp2.getTodosLosCodigos(this.temp2.getRaiz(), aux);
@@ -152,10 +167,11 @@ public class ManejarOrdenes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        //Acción de pagar los tickets seleccionados de la lista.
     private void pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagarActionPerformed
         if(this.tickets.isSelectionEmpty()){
             getToolkit().beep();
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! NO SE HA SELECCIONADO NINGÚN TICKET");
+            JOptionPane.showMessageDialog(rootPane, "NO SE HA SELECCIONADO NINGÚN TICKET","    ¡¡ERROR!!", JOptionPane.ERROR_MESSAGE);
         }else{
             int dialogButton;
             dialogButton = JOptionPane.showConfirmDialog (null, "¿Está seguro que la compra es correcta?","PRECAUCIÓN",JOptionPane.YES_NO_OPTION);
@@ -188,10 +204,11 @@ public class ManejarOrdenes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pagarActionPerformed
 
+        //Acción de eliminar los tickets seleccionados de la lista.
     private void deshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerActionPerformed
          if(this.tickets.isSelectionEmpty()){
             getToolkit().beep();
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! NO SE HA SELECCIONADO NINGÚN TICKET");
+            JOptionPane.showMessageDialog(rootPane, "NO SE HA SELECCIONADO NINGÚN TICKET","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
             int dialogButton;
             dialogButton = JOptionPane.showConfirmDialog (null, "¿Está Seguro?","PRECAUCIÓN",JOptionPane.YES_NO_OPTION);
@@ -215,13 +232,14 @@ public class ManejarOrdenes extends javax.swing.JFrame {
     }//GEN-LAST:event_deshacerActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        new ManejarClientes();
+        new ManejarClientes();//Volver a ventana de ver los clientes
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 
+        //Ver datos de un ticket ya comprado.
     private void verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verActionPerformed
         if(this.tickets.getSelectedValue() == null){
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! SELECCIONA UN TICKET");
+            JOptionPane.showMessageDialog(rootPane, "SELECCIONA UN TICKET","   ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
             Ticket aux = (Ticket)this.temp2.buscarNodo(this.temp2.getRaiz(), Integer.parseInt(this.tickets.getSelectedValue())).getDato();
             this.texto4.setText("Sucursal: "+aux.getSala().getSucursal().getUbicacion());

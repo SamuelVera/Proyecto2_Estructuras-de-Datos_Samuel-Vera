@@ -70,7 +70,10 @@ public class ListaSimple <T>{
                 return this.eliminarPrimero();
             }else if(pos == this.contarElementos()-1){
                 return this.eliminarUltimo();
-            }else{
+            }else if(pos >= this.contarElementos()){
+                return null;
+            }
+            else{
                 NodoSimple<T> aux = this.cabeza;
                 int cont = 0;
                 while(cont != pos-1){

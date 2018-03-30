@@ -1,12 +1,18 @@
 package ManejadorDeLaApp;
 
+import EstructuraDeClases.Sucursal;
+import EstructuraDeClases.Pelicula;
+import EstructuraDeClases.Sala;
 import CodigoEstructuras.*;
 import javax.swing.JOptionPane;
 
+/*Clase para agregar una película a una determinada sala.
+*/
 public class AgregarPelicula extends javax.swing.JFrame {
 
     private Sala temp;
     
+        //Inicialización de los elementos básicos de la ventana.
     public AgregarPelicula(Sala sala) {
         initComponents();
         this.setTitle("Agregar Película");
@@ -28,7 +34,7 @@ public class AgregarPelicula extends javax.swing.JFrame {
         texto4 = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         accion = new javax.swing.JRadioButton();
-        experimental = new javax.swing.JRadioButton();
+        thriller = new javax.swing.JRadioButton();
         scifi = new javax.swing.JRadioButton();
         terror = new javax.swing.JRadioButton();
         fantasia = new javax.swing.JRadioButton();
@@ -74,11 +80,11 @@ public class AgregarPelicula extends javax.swing.JFrame {
         accion.setOpaque(false);
         getContentPane().add(accion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        generos.add(experimental);
-        experimental.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        experimental.setText("Experimental");
-        experimental.setOpaque(false);
-        getContentPane().add(experimental, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
+        generos.add(thriller);
+        thriller.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        thriller.setText("Thriller");
+        thriller.setOpaque(false);
+        getContentPane().add(thriller, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
 
         generos.add(scifi);
         scifi.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
@@ -196,14 +202,18 @@ public class AgregarPelicula extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        //Acción del botón agregar.
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+            //Validación de que los campos esten completos.
         if(this.campoNombre.getText().trim().length() == 0 || this.generos.isSelected(null) || this.idiomas.isSelected(null)){
             getToolkit().beep();
-            JOptionPane.showMessageDialog(rootPane, "ERROR!!! LLENE LOS CAMPOS ANTES DE PROCEDER");
+            JOptionPane.showMessageDialog(rootPane, "LLENE LOS CAMPOS ANTES DE PROCEDER","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
+            //Construcción de los parámetros de la película.
             int aux, aux2;
             Pelicula aux3;
             String idioma, genero;
+                //Género.
             if(this.generos.isSelected(this.accion.getModel())){
                 genero = "Acción";
             }else if(this.generos.isSelected(this.comedia.getModel())){
@@ -212,8 +222,8 @@ public class AgregarPelicula extends javax.swing.JFrame {
                 genero = "Deporte";
             }else if(this.generos.isSelected(this.drama.getModel())){
                 genero = "Drama";
-            }else if(this.generos.isSelected(this.experimental.getModel())){
-                genero = "Experimental";
+            }else if(this.generos.isSelected(this.thriller.getModel())){
+                genero = "Thriller";
             }else if(this.generos.isSelected(this.fantasia.getModel())){
                 genero = "Fantasía";
             }else if(this.generos.isSelected(this.guerra.getModel())){
@@ -230,6 +240,7 @@ public class AgregarPelicula extends javax.swing.JFrame {
                 genero = "Terror";
             }
             
+                //Idioma.
             if(this.idiomas.isSelected(this.aleman.getModel())){
                 idioma ="Alemán";
             }else if(this.idiomas.isSelected(this.espanol.getModel())){
@@ -252,13 +263,13 @@ public class AgregarPelicula extends javax.swing.JFrame {
             MenuInicio.sucursales.eliminarNodo(MenuInicio.sucursales.getRaiz(),aux5);
             MenuInicio.sucursales.agregar(MenuInicio.sucursales.getRaiz(), n);
             
-            new ManejoSucursales();
+            new ManejarElementos();
             this.dispose();
         }
     }//GEN-LAST:event_agregarActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        new ManejoSucursales();
+        new ManejarElementos();//Volver a la ventana de ver informaciones.
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
 
@@ -271,7 +282,6 @@ public class AgregarPelicula extends javax.swing.JFrame {
     private javax.swing.JRadioButton deporte;
     private javax.swing.JRadioButton drama;
     private javax.swing.JRadioButton espanol;
-    private javax.swing.JRadioButton experimental;
     private javax.swing.JRadioButton fantasia;
     private javax.swing.JLabel fondo;
     private javax.swing.JRadioButton frances;
@@ -289,6 +299,7 @@ public class AgregarPelicula extends javax.swing.JFrame {
     private javax.swing.JLabel texto2;
     private javax.swing.JLabel texto3;
     private javax.swing.JLabel texto4;
+    private javax.swing.JRadioButton thriller;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }
