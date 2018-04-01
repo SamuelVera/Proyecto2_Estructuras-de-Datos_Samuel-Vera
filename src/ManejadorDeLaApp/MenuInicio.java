@@ -160,12 +160,12 @@ public class MenuInicio <T> extends javax.swing.JFrame {
         manejarClientes = new javax.swing.JButton();
         buscarPelicula = new javax.swing.JButton();
         cambiarPrecio = new javax.swing.JButton();
-        logo = new javax.swing.JLabel();
         precio2D = new javax.swing.JLabel();
         precio3D = new javax.swing.JLabel();
         precio4D = new javax.swing.JLabel();
         avanzarDia = new javax.swing.JButton();
         dia = new javax.swing.JLabel();
+        logo = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -180,7 +180,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 verSucursalesActionPerformed(evt);
             }
         });
-        getContentPane().add(verSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 210, 30));
+        getContentPane().add(verSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 210, 30));
 
         manejarClientes.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         manejarClientes.setText("Manejar Clientes");
@@ -190,7 +190,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 manejarClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(manejarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 210, 30));
+        getContentPane().add(manejarClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 210, 30));
 
         buscarPelicula.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         buscarPelicula.setText("Buscar Película");
@@ -200,7 +200,7 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 buscarPeliculaActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 210, 30));
+        getContentPane().add(buscarPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 210, 30));
 
         cambiarPrecio.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         cambiarPrecio.setText("Cambiar Precios");
@@ -210,19 +210,16 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 cambiarPrecioActionPerformed(evt);
             }
         });
-        getContentPane().add(cambiarPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 210, 30));
-
-        logo.setText("Logo feo que deberias cambiar luego");
-        getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
+        getContentPane().add(cambiarPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 210, 30));
 
         precio2D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(precio2D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 170, 30));
+        getContentPane().add(precio2D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 170, 30));
 
         precio3D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(precio3D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 170, 30));
+        getContentPane().add(precio3D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 170, 30));
 
         precio4D.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        getContentPane().add(precio4D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 170, 30));
+        getContentPane().add(precio4D, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 170, 30));
 
         avanzarDia.setText("+1 Día");
         avanzarDia.setOpaque(false);
@@ -231,13 +228,16 @@ public class MenuInicio <T> extends javax.swing.JFrame {
                 avanzarDiaActionPerformed(evt);
             }
         });
-        getContentPane().add(avanzarDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, -1, 20));
+        getContentPane().add(avanzarDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, 20));
 
         dia.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         getContentPane().add(dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 130, 20));
 
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo.png"))); // NOI18N
+        getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 410, 70));
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 250));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 240));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
