@@ -301,6 +301,12 @@ public class ManejarElementos extends javax.swing.JFrame {
             }
             aux3 = aux3.getProximo();
         }
+        this.peliculas.setVisible(false);
+        this.texto5.setVisible(false);
+        this.texto6.setVisible(false);
+        this.agregarPelicula.setVisible(false);
+        this.comprarPelicula.setVisible(false);
+        this.eliminarPelicula.setVisible(false);
         this.editarSala.setVisible(true);
         this.verPeliculas.setVisible(true);
         this.texto7.setText("");

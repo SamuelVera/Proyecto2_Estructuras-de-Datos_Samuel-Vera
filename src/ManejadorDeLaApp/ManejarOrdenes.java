@@ -242,7 +242,7 @@ public class ManejarOrdenes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "SELECCIONA UN TICKET","   ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
             Ticket aux = (Ticket)this.temp2.buscarNodo(this.temp2.getRaiz(), Integer.parseInt(this.tickets.getSelectedValue())).getDato();
-            this.texto4.setText("Sucursal: "+aux.getSala().getSucursal().getUbicacion());
+            this.texto4.setText("Sucursal: "+aux.getSucursal().getUbicacion());
             if(aux.getSala() instanceof Sala2D){
                 this.texto5.setText("Sala: "+aux.getSala().getNumero()+" (2D)");
             }else if(aux.getSala() instanceof Sala3D){

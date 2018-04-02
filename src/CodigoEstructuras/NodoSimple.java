@@ -18,12 +18,11 @@ public class NodoSimple <T>{
     }
     
     public T getDato() {
-        return dato;
+        return this.dato;
     }
 
     public NodoSimple<T> getProximo() {
-        return proximo;
+        return this.proximo;
     }
-    
     
 }

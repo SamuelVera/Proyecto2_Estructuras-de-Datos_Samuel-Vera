@@ -38,7 +38,7 @@ public class ManejarClientes extends javax.swing.JFrame {
         texto4 = new javax.swing.JLabel();
         pagar = new javax.swing.JButton();
         historial = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -91,7 +91,7 @@ public class ManejarClientes extends javax.swing.JFrame {
         texto3.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 310, 30));
 
-        texto4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        texto4.setFont(new java.awt.Font("Verdana", 0, 16)); // NOI18N
         getContentPane().add(texto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 220, 20));
 
         pagar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -114,8 +114,8 @@ public class ManejarClientes extends javax.swing.JFrame {
         });
         getContentPane().add(historial, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 150, 20));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 220));
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 220));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -179,8 +179,8 @@ public class ManejarClientes extends javax.swing.JFrame {
     private javax.swing.JButton agregarCliente;
     private javax.swing.JButton buscar;
     private javax.swing.JTextField campo;
+    private javax.swing.JLabel fondo;
     private javax.swing.JButton historial;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton pagar;
     private javax.swing.JLabel texto1;
     private javax.swing.JLabel texto2;

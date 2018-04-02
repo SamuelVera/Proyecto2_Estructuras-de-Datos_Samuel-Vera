@@ -23,9 +23,9 @@ public class AgregarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cedula = new javax.swing.JTextField();
-        nombre = new javax.swing.JTextField();
-        telefono = new javax.swing.JTextField();
+        campoCedula = new javax.swing.JTextField();
+        campoNombre = new javax.swing.JTextField();
+        campoTelefono = new javax.swing.JTextField();
         volver = new javax.swing.JButton();
         agregar = new javax.swing.JButton();
         texto1 = new javax.swing.JLabel();
@@ -37,29 +37,29 @@ public class AgregarCliente extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cedula.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoCedula.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        campoCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                cedulaKeyTyped(evt);
+                campoCedulaKeyTyped(evt);
             }
         });
-        getContentPane().add(cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 260, -1));
+        getContentPane().add(campoCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 260, -1));
 
-        nombre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoNombre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        campoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                nombreKeyTyped(evt);
+                campoNombreKeyTyped(evt);
             }
         });
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 260, -1));
+        getContentPane().add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 260, -1));
 
-        telefono.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoTelefono.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        campoTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                telefonoKeyTyped(evt);
+                campoTelefonoKeyTyped(evt);
             }
         });
-        getContentPane().add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 260, -1));
+        getContentPane().add(campoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 260, -1));
 
         volver.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         volver.setText("Volver");
@@ -108,15 +108,15 @@ public class AgregarCliente extends javax.swing.JFrame {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         
             //Validación de los campos.
-        if(this.cedula.getText().trim().length() == 0 || this.telefono.getText().trim().length() == 0 || this.nombre.getText().trim().length() == 0){
+        if(this.campoCedula.getText().trim().length() == 0 || this.campoTelefono.getText().trim().length() == 0 || this.campoNombre.getText().trim().length() == 0){
             getToolkit().beep();
             JOptionPane.showMessageDialog(rootPane, "COMPLETAR LOS CAMPOS ANTES DE PROCEDER","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
-            int temp = Integer.parseInt(this.cedula.getText());
+            int temp = Integer.parseInt(this.campoCedula.getText());
                 //Validación de que la cédula no sea negativa y no este registrada en el sistema.
             if(!MenuInicio.clientes.estaNodo(MenuInicio.clientes.getRaiz(),temp) && temp>0){
-                int ci = temp, tlf = Integer.parseInt(this.telefono.getText());
-                Cliente aux = new Cliente(ci,tlf,this.nombre.getText());
+                int ci = temp, tlf = Integer.parseInt(this.campoTelefono.getText());
+                Cliente aux = new Cliente(ci,tlf,this.campoNombre.getText());
                 MenuInicio.clientes.agregar(MenuInicio.clientes.getRaiz(),new NodoArbol(aux,aux.getCi()));
                 ManejarClientes aux3 = new ManejarClientes();
                 this.dispose();
@@ -131,7 +131,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_agregarActionPerformed
 
-    private void cedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedulaKeyTyped
+    private void campoCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCedulaKeyTyped
         char validar = evt.getKeyChar();
             //Cédula sin letras ni espacios.
         if(Character.isLetter(validar) || Character.isSpaceChar(validar)){
@@ -140,9 +140,9 @@ public class AgregarCliente extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO NÚMEROS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_cedulaKeyTyped
+    }//GEN-LAST:event_campoCedulaKeyTyped
 
-    private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
+    private void campoTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoTelefonoKeyTyped
         char validar = evt.getKeyChar();
             //Telefono sin letras ni espacios.
         if(Character.isLetter(validar) || Character.isSpace(validar)){
@@ -151,9 +151,9 @@ public class AgregarCliente extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO NÚMEROS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_telefonoKeyTyped
+    }//GEN-LAST:event_campoTelefonoKeyTyped
 
-    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+    private void campoNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreKeyTyped
         char validar = evt.getKeyChar();
             //Nombre sin números.
         if(Character.isDigit(validar)){
@@ -162,14 +162,14 @@ public class AgregarCliente extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO LETRAS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_nombreKeyTyped
+    }//GEN-LAST:event_campoNombreKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
-    private javax.swing.JTextField cedula;
+    private javax.swing.JTextField campoCedula;
+    private javax.swing.JTextField campoNombre;
+    private javax.swing.JTextField campoTelefono;
     private javax.swing.JLabel fondo;
-    private javax.swing.JTextField nombre;
-    private javax.swing.JTextField telefono;
     private javax.swing.JLabel texto1;
     private javax.swing.JLabel texto2;
     private javax.swing.JLabel texto3;

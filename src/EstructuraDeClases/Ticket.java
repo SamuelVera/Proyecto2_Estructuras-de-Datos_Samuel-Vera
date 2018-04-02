@@ -19,6 +19,7 @@ public class Ticket {
     private static double precio2D, precio3D, precio4D;
     private double precioTicket;
     private Sala sala;
+    private Sucursal sucursal;
     private Pelicula pelicula;
     private Cliente cliente;
     private Date fecha;
@@ -30,6 +31,7 @@ public class Ticket {
         this.id = id;
         this.pelicula = pelicula;
         this.sala = sala;
+        this.sucursal = sala.getSucursal();
         this.cliente = cliente;
         this.fecha = fecha;
         this.dd = dd;
@@ -67,7 +69,11 @@ public class Ticket {
 
         //Retornar sala a la que pertene el ticket.
     public Sala getSala() {
-        return sala;
+        return this.sala;
+    }
+    
+    public Sucursal getSucursal(){
+        return this.sucursal;
     }
 
         //Retornar precio de los tickets 2D.
@@ -97,7 +103,7 @@ public class Ticket {
 
         //Retornar el precio del ticket.
     public double getPrecioTicket() {
-        return precioTicket;
+        return this.precioTicket;
     }
     
         //Retornar si es para función 2D.

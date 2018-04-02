@@ -144,22 +144,6 @@ public class Arbol <T>{
         return null;
     }
     
-    public NodoArbol eliminarNodo(NodoArbol n, String codigo) {
-        if(n!=null){
-            int comparar = n.getCodigo2().compareToIgnoreCase(codigo);
-            int comparar2 = n.getHijoI().getCodigo2().compareToIgnoreCase(codigo);
-            int comparar3 = n.getHijoD().getCodigo2().compareToIgnoreCase(codigo);
-            if (this.raiz != null && comparar == 0) {
-                return this.eliminarRaiz();
-            } else if (n.getHijoI() != null && comparar2 == 0) {
-                return this.eliminarI(n);
-            } else if (n.getHijoD() != null && comparar3 == 0) {
-                return this.eliminarD(n);
-            }
-        }
-        return null;
-    }
-    
     private NodoArbol eliminarRaiz() {
         NodoArbol aux = this.raiz;
         this.raiz = null;

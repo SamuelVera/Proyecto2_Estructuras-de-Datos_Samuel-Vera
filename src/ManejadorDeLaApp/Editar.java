@@ -112,7 +112,7 @@ public class Editar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "CODIGO NEGATIVO","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else if(this.codigoValido()){
             this.aux = Integer.parseInt(this.campo1.getText());
-            if(!MenuInicio.sucursales.estaNodo(MenuInicio.sucursales.getRaiz(), this.aux)){
+            if(!MenuInicio.sucursales.estaNodo(MenuInicio.sucursales.getRaiz(), this.aux) || this.aux == this.clavePrevia){
                 Sucursal aux2 = new Sucursal(this.campo2.getText(),this.aux);
                 NodoArbol aux3 = (MenuInicio.sucursales.buscarNodo(MenuInicio.sucursales.getRaiz(), this.clavePrevia));
                 aux2.setSalas(((Sucursal)aux3.getDato()).getSalas());
