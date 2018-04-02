@@ -50,6 +50,7 @@ public class VentanaDeComprar extends javax.swing.JFrame {
         this.texto4.setText("Género: "+this.temp3.getGenero());
         this.texto5.setText("Idioma: "+this.temp3.getIdioma());
         this.texto8.setText("Fecha de la función");
+        this.texto10.setText("Sucursal: "+this.temp.getUbicacion());
         this.inicializarFechas();
     }
     
@@ -81,9 +82,11 @@ public class VentanaDeComprar extends javax.swing.JFrame {
         texto7 = new javax.swing.JLabel();
         texto8 = new javax.swing.JLabel();
         texto9 = new javax.swing.JLabel();
+        texto10 = new javax.swing.JLabel();
         fechas = new javax.swing.JComboBox<>();
         numeroBoletos = new javax.swing.JComboBox<>();
         comprar = new javax.swing.JButton();
+        volver = new javax.swing.JButton();
         campo = new javax.swing.JTextField();
         fondo = new javax.swing.JLabel();
 
@@ -95,29 +98,32 @@ public class VentanaDeComprar extends javax.swing.JFrame {
         getContentPane().add(texto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 320, 30));
 
         texto2.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        getContentPane().add(texto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 310, 30));
+        getContentPane().add(texto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 310, 30));
 
         texto3.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 210, 30));
 
         texto4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        getContentPane().add(texto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 310, 30));
+        getContentPane().add(texto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 310, 30));
 
         texto5.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        getContentPane().add(texto5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 310, 30));
+        getContentPane().add(texto5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 310, 30));
 
         texto6.setText("Número de Boletos:");
         getContentPane().add(texto6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 100, 10));
 
         texto7.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         texto7.setText("C.I cliente:");
-        getContentPane().add(texto7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 30));
+        getContentPane().add(texto7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 30));
 
         texto8.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         getContentPane().add(texto8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 210, 30));
 
         texto9.setText("Fecha:");
         getContentPane().add(texto9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 200, 80, 10));
+
+        texto10.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        getContentPane().add(texto10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 310, 30));
 
         fechas.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         fechas.setMaximumRowCount(7);
@@ -133,7 +139,7 @@ public class VentanaDeComprar extends javax.swing.JFrame {
         });
         getContentPane().add(numeroBoletos, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 100, 20));
 
-        comprar.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        comprar.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
         comprar.setText("Comprar");
         comprar.setOpaque(false);
         comprar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +147,17 @@ public class VentanaDeComprar extends javax.swing.JFrame {
                 comprarActionPerformed(evt);
             }
         });
-        getContentPane().add(comprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 90, -1));
+        getContentPane().add(comprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 80, 20));
+
+        volver.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        volver.setText("Volver");
+        volver.setOpaque(false);
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 80, 20));
 
         campo.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         campo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -149,10 +165,10 @@ public class VentanaDeComprar extends javax.swing.JFrame {
                 campoKeyTyped(evt);
             }
         });
-        getContentPane().add(campo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 200, 30));
+        getContentPane().add(campo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 200, 30));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoAzul.jpg"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 320));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -192,16 +208,20 @@ public class VentanaDeComprar extends javax.swing.JFrame {
                 }
             
             while(aux2 != 0){
-                int multi = 1000000, codigo = 0;
+                int multi = 10000000, codigo = 0;
                 Random rand = new Random();
+                boolean primero = false;
+                    //Generar códigos de 7 dígitos aleatorios.
                 while(multi != 1){
-                    codigo = codigo + (rand.nextInt(9)+1)*multi;
                     multi = multi/10;
+                    codigo = codigo + (rand.nextInt(9)+1)*multi;
+                    
                     if(multi == 1 && this.temp2.getArbolTickets().estaNodo(this.temp2.getArbolTickets().getRaiz(), codigo)){
                         multi = 1000000;
                         codigo = 0;
                     }
                 }
+                    
                 if(this.temp2  instanceof Sala2D){
                     aux = new Ticket(codigo, this.temp3, this.temp2, clien, true, false, false, fecha);
                 }else if(this.temp2 instanceof Sala3D){
@@ -262,6 +282,11 @@ public class VentanaDeComprar extends javax.swing.JFrame {
         this.texto3.setText("Precio: "+precion+" Bs.");
     }//GEN-LAST:event_numeroBoletosActionPerformed
 
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        new ManejarElementos();
+        this.dispose();
+    }//GEN-LAST:event_volverActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField campo;
     private javax.swing.JButton comprar;
@@ -269,6 +294,7 @@ public class VentanaDeComprar extends javax.swing.JFrame {
     private javax.swing.JLabel fondo;
     private javax.swing.JComboBox<String> numeroBoletos;
     private javax.swing.JLabel texto1;
+    private javax.swing.JLabel texto10;
     private javax.swing.JLabel texto2;
     private javax.swing.JLabel texto3;
     private javax.swing.JLabel texto4;
@@ -277,5 +303,6 @@ public class VentanaDeComprar extends javax.swing.JFrame {
     private javax.swing.JLabel texto7;
     private javax.swing.JLabel texto8;
     private javax.swing.JLabel texto9;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

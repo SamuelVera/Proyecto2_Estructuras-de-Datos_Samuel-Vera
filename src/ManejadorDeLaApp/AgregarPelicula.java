@@ -20,6 +20,7 @@ public class AgregarPelicula extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.temp = sala;
         this.texto3.setText("Sala número: "+this.temp.getNumero());
+        this.texto5.setText("Sucursal: "+this.temp.getSucursal().getUbicacion());
     }
 
     @SuppressWarnings("unchecked")
@@ -32,6 +33,7 @@ public class AgregarPelicula extends javax.swing.JFrame {
         texto2 = new javax.swing.JLabel();
         texto3 = new javax.swing.JLabel();
         texto4 = new javax.swing.JLabel();
+        texto5 = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
         accion = new javax.swing.JRadioButton();
         thriller = new javax.swing.JRadioButton();
@@ -65,11 +67,12 @@ public class AgregarPelicula extends javax.swing.JFrame {
         texto2.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         texto2.setText("Género:");
         getContentPane().add(texto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 90, 30));
-        getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 260, 30));
+        getContentPane().add(texto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 260, 20));
 
         texto4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         texto4.setText("Idioma:");
         getContentPane().add(texto4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        getContentPane().add(texto5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 314, 260, 20));
 
         campoNombre.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         getContentPane().add(campoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 280, 30));
@@ -299,6 +302,7 @@ public class AgregarPelicula extends javax.swing.JFrame {
     private javax.swing.JLabel texto2;
     private javax.swing.JLabel texto3;
     private javax.swing.JLabel texto4;
+    private javax.swing.JLabel texto5;
     private javax.swing.JRadioButton thriller;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables

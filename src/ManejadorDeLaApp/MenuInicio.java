@@ -82,20 +82,16 @@ public class MenuInicio <T> extends javax.swing.JFrame {
     public Sucursal incializarSucursal(String direccion, int dd, int ddd, int dx){
     
         Random rand = new Random();
-        int cont = 0, codigo = 0, multi = 1000;
-        boolean tempo = false;
-        do{
-            codigo = codigo + multi*(rand.nextInt(9)+1);
+        int cont = 0, codigo = 0, multi = 10000;
+        
+        while(multi!=1){
             multi = multi/10;
-            if(multi == 1){
-                if(!MenuInicio.sucursales.estaNodo(MenuInicio.sucursales.getRaiz(), codigo)){
-                    tempo = true;
-                }else{
-                    multi = 1000;
-                    codigo = 0;
-                }
+            codigo = codigo + multi*(rand.nextInt(9)+1);
+            if(multi == 1 && MenuInicio.sucursales.estaNodo(MenuInicio.sucursales.getRaiz(), codigo)){
+                multi = 1000;
+                codigo = 0;
             }
-        }while(tempo == false);
+        }
         
         Sucursal aux = new Sucursal(direccion, codigo);
         

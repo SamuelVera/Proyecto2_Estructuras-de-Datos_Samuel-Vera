@@ -108,7 +108,9 @@ public class Editar extends javax.swing.JFrame {
     
     //Método para editar la información de una sucursal
     private void editarSucursal(){
-        if(this.codigoValido()){
+        if(Integer.parseInt(this.campo1.getText())<= 0){
+            JOptionPane.showMessageDialog(rootPane, "CODIGO NEGATIVO","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
+        }else if(this.codigoValido()){
             this.aux = Integer.parseInt(this.campo1.getText());
             if(!MenuInicio.sucursales.estaNodo(MenuInicio.sucursales.getRaiz(), this.aux)){
                 Sucursal aux2 = new Sucursal(this.campo2.getText(),this.aux);
@@ -120,7 +122,7 @@ public class Editar extends javax.swing.JFrame {
                 new ManejarElementos();
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(rootPane, "YA ESTA REGISTRADO ESE CODIGO","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "YA ESTÁ REGISTRADO ESE CODIGO","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(rootPane, "LOS CODIGOS DEBEN SER DE 4 DIGITOS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
@@ -129,7 +131,9 @@ public class Editar extends javax.swing.JFrame {
     
     //Método para agregar una nueva sucursal al sistema
     private void agregarSucursal(){
-        if(this.codigoValido()){
+        if(Integer.parseInt(this.campo1.getText())<= 0){
+            JOptionPane.showMessageDialog(rootPane, "CODIGO NEGATIVO","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
+        }else if(this.codigoValido()){
                     int aux = Integer.parseInt(this.campo1.getText());
                     if(!MenuInicio.sucursales.estaNodo(MenuInicio.sucursales.getRaiz(), aux)){
                         Sucursal temp = new Sucursal(this.campo2.getText(),aux);
@@ -152,6 +156,8 @@ public class Editar extends javax.swing.JFrame {
         if(this.camposVacios() || this.salas.getSelection() == null){
             getToolkit().beep();
             JOptionPane.showMessageDialog(rootPane, "DEBE LLENAR LOS CAMPOS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
+        }else if(Integer.parseInt(this.campo1.getText()) <= 0){
+            JOptionPane.showMessageDialog(rootPane, "NÚMERO DE SALA NEGATIVO","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
             boolean pasa = true;
             int aux2 = Integer.parseInt(this.campo1.getText());
@@ -202,7 +208,7 @@ public class Editar extends javax.swing.JFrame {
         //Método en el que se modifica el precio de los tickets
     private void modificarPrecio(){
         if(this.camposVacios()){
-            JOptionPane.showMessageDialog(rootPane, "COMPLETE LOS CAMPOS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "LLENE LOS CAMPOS ANTES DE PROCEDER","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
             double precio2D, precio3D, precio4D;
             precio2D = Double.valueOf(this.campo1.getText());
@@ -346,7 +352,7 @@ public class Editar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        if(this.clave != 4){//Volver a la ventana de manejo de sucursales/salas/película
+        if(this.clave != 3){//Volver a la ventana de manejo de sucursales/salas/película
             new ManejarElementos();
         }else{//Volver al menu de inicio
             new MenuInicio();
@@ -357,7 +363,7 @@ public class Editar extends javax.swing.JFrame {
     private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
         if(this.camposVacios()){
             getToolkit().beep();
-            JOptionPane.showMessageDialog(rootPane, "LOS LLENE LOS CAMPOS ANTES DE PROCEDER","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "LLENE LOS CAMPOS ANTES DE PROCEDER","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }else{
             if(this.clave == 0){
                 this.editarSucursal();//Editar sucursal
@@ -406,7 +412,7 @@ public class Editar extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();
             
-            JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO NÚMEROS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO LETRAS","    ¡¡ERROR!!",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_campo2KeyTyped
 
